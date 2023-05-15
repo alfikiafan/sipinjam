@@ -11,8 +11,17 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('table', function (Blueprint $table) {
-            $table->id();
+        Schema::create('unit_admins', function (Blueprint $table) {
+            $table->id('unit_admin_id')->primary();
+            $table->foreign('unit_id')->references('unit_id')->on('units');
+            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->timestamps();
+        });
+
+        Schema::create('units', function (Blueprint $table) {
+            $table->id('unit_id')->primary();
+            $table->string('name', 50);
+            $table->string('location', 50);
             $table->timestamps();
         });
     }
