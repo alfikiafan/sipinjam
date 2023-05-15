@@ -66,7 +66,7 @@ return new class extends Migration
             $table->string('serial_number', 50);
             $table->string('photo', 100);
             $table->string('description', 500);
-            $table->enum('status', ['pending','waiting', 'approved', 'rejected', 'canceled'])->default('pending');
+            $table->enum('status', ['pending','avaible', 'used', 'not on loan', 'canceled'])->default('pending');
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');;
             $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade');;
         });
