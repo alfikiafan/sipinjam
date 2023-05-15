@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->id('user_id')->primary();
+            $table->increments('user_id')->primary();
             $table->string('name', 100);
             $table->string('email', 50);
             $table->string('role', 50);
@@ -22,28 +22,28 @@ return new class extends Migration
         });
 
         Schema::create('administrators', function (Blueprint $table) {
-            $table->id('administrator_id')->primary();
+            $table->increments('administrator_id')->primary();
             $table->string('name', 100);
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('unit_admins', function (Blueprint $table) {
-            $table->id('unit_admin_id')->primary();
+            $table->increments('unit_admin_id')->primary();
             $table->foreign('unit_id')->references('unit_id')->on('units')->onDelete('cascade');
             $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('units', function (Blueprint $table) {
-            $table->id('unit_id')->primary();
+            $table->increments('unit_id')->primary();
             $table->string('name', 100);
             $table->string('location', 100);
             $table->timestamps();
         });
 
         Schema::create('bookings', function (Blueprint $table) {
-            $table->id('booking_id')->primary();
+            $table->increments('booking_id')->primary();
             $table->date('start_date');
             $table->date('end_date');
             $table->enum('status', ['pending','waiting', 'approved', 'rejected', 'canceled'])->default('pending');
@@ -53,14 +53,14 @@ return new class extends Migration
         });
 
         Schema::create('usage', function (Blueprint $table) {
-            $table->id('usage_id')->primary();
+            $table->increments('usage_id')->primary();
             $table->string('note_text', 500);
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('items', function (Blueprint $table) {
-            $table->id('item_id')->primary();
+            $table->increments('item_id')->primary();
             $table->string('name', 100);
             $table->string('brand', 50);
             $table->string('serial_number', 50);
@@ -72,7 +72,7 @@ return new class extends Migration
         });
 
         Schema::create('categories', function (Blueprint $table) {
-            $table->id('categories_id')->primary();
+            $table->increments('categories_id')->primary();
             $table->string('name');
         });
 
