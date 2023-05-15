@@ -13,8 +13,8 @@ return new class extends Migration
     {
         Schema::create('unit_admins', function (Blueprint $table) {
             $table->id('unit_admin_id')->primary();
-            $table->foreign('unit_id')->references('unit_id')->on('units');
-            $table->foreign('user_id')->references('user_id')->on('users');
+            $table->foreign('unit_id')->references('unit_id')->on('units')->onDelete('cascade');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
 
@@ -24,6 +24,24 @@ return new class extends Migration
             $table->string('location', 50);
             $table->timestamps();
         });
+
+        Schema::create('administrators', function (Blueprint $table) {
+            $table->integer('administrator_id')->primary();
+            $table->string('name', 50);
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        Schema::create('users', function (Blueprint $table) {
+            $table->integer('user_id')->primary();
+            $table->string('name');
+            $table->string('email');
+            $table->string('role');
+            $table->string('no_telp');
+            $table->string('password');
+            $table->timestamps();
+        });
+
     }
 
     /**
