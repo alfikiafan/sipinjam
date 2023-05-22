@@ -37,6 +37,12 @@
                   @enderror
                 </div>
                 <div class="mb-3">
+                  <input type="text" class="form-control" placeholder="Nomor Telepon" name="telephone" id="telephone" aria-label="Nomor Telepon" aria-describedby="name" value="{{ old('name') }}">
+                  @error('name')
+                    <p class="text-danger text-xs mt-2">{{ $message }}</p>
+                  @enderror
+                </div>
+                <div class="mb-3">
                   <input type="password" class="form-control" placeholder="Kata Sandi" name="password" id="password" aria-label="Kata Sandi" aria-describedby="password-addon">
                   @error('password')
                     <p class="text-danger text-xs mt-2">{{ $message }}</p>

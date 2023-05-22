@@ -23,8 +23,9 @@ class RegisterController extends Controller
             'agreement' => ['accepted']
         ]);
         $attributes['password'] = bcrypt($attributes['password'] );
+        $attributes['role'] = 'peminjam';
 
-        session()->flash('success', 'Your account has been created.');
+        session()->flash('Berhasil', 'Akun Anda berhasil dibuat.');
         $user = User::create($attributes);
         Auth::login($user); 
         return redirect('/dashboard');
