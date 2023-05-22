@@ -25,7 +25,7 @@
               <form role="form text-left" method="POST" action="/register">
                 @csrf
                 <div class="mb-3">
-                  <input type="text" class="form-control" placeholder="Name" name="name" id="name" aria-label="Name" aria-describedby="name" value="{{ old('name') }}">
+                  <input type="text" class="form-control" placeholder="Nama" name="name" id="name" aria-label="Nama" aria-describedby="name" value="{{ old('name') }}">
                   @error('name')
                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                   @enderror
@@ -37,7 +37,7 @@
                   @enderror
                 </div>
                 <div class="mb-3">
-                  <input type="password" class="form-control" placeholder="Password" name="password" id="password" aria-label="Password" aria-describedby="password-addon">
+                  <input type="password" class="form-control" placeholder="Kata Sandi" name="password" id="password" aria-label="Kata Sandi" aria-describedby="password-addon">
                   @error('password')
                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                   @enderror
