@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\RegisterController;
 use App\Http\Controllers\SessionsController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,3 +34,6 @@ Route::post('/login', [SessionsController::class, 'store'])->name('login.store')
 
 // Logout
 Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
+
+// Dashboard
+Route::get('/dashboard', [HomeController::class, 'home'])->name('dashboard');
