@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('email', 50);
             $table->string('role', 50)->default('peminjam');
             $table->string('no_telp', 15);
-            $table->string('password', 20);
+            $table->string('password');
             $table->timestamps();
         });
         
