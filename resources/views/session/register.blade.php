@@ -3,13 +3,14 @@
 @section('content')
 
   <section class="min-vh-100 mb-8">
+    <br>
     <div class="page-header align-items-start min-vh-50 pt-5 pb-11 mx-3 border-radius-lg" style="background-image: url('../assets/img/curved-images/curved14.jpg');">
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-5 text-center mx-auto">
-            <h1 class="text-white mb-2 mt-5">Welcome!</h1>
-            <p class="text-lead text-white">Use these awesome forms to login or create new account in your project for free.</p>
+            <h1 class="text-white mb-2 mt-5">Selamat Datang</h1>
+            <p class="text-lead text-white">Jika belum memiliki akun, silahkan daftar pada kolom di bawah ini!</p>
           </div>
         </div>
       </div>
