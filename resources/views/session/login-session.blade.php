@@ -39,9 +39,6 @@
                   </form>
                 </div>
                 <div class="card-footer text-center pt-0 px-lg-2 px-1">
-                <small class="text-muted">Lupa password?
-                  <a href="/login/forgot-password" class="text-info text-gradient font-weight-bold">Di sini</a>
-                </small>
                   <p class="mb-4 text-sm mx-auto">
                     Tidak punya akun?
                     <a href="register" class="text-info text-gradient font-weight-bold">Daftar</a>
