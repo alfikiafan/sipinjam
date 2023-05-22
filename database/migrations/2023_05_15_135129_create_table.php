@@ -12,7 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->increments('user_id');
+            $table->increments('user_id')->primary();
             $table->string('name', 100);
             $table->string('email', 50);
             $table->string('role', 50);
@@ -20,71 +20,62 @@ return new class extends Migration
             $table->string('password', 20);
             $table->timestamps();
         });
-        
+
+        Schema::create('administrators', function (Blueprint $table) {
+            $table->increments('administrator_id')->primary();
+            $table->string('name', 100);
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        Schema::create('unit_admins', function (Blueprint $table) {
+            $table->increments('unit_admin_id')->primary();
+            $table->foreign('unit_id')->references('unit_id')->on('units')->onDelete('cascade');
+            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+
         Schema::create('units', function (Blueprint $table) {
-            $table->increments('unit_id');
+            $table->increments('unit_id')->primary();
             $table->string('name', 100);
             $table->string('location', 100);
             $table->timestamps();
         });
 
-        Schema::create('categories', function (Blueprint $table) {
-            $table->increments('categories_id');
-            $table->string('name', 100);
+        Schema::create('bookings', function (Blueprint $table) {
+            $table->increments('booking_id')->primary();
+            $table->date('start_date');
+            $table->date('end_date');
+            $table->enum('status', ['pending','waiting', 'approved', 'rejected', 'canceled'])->default('pending');
+            $table->foreign('item_id')->references('id')->on('items')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+            $table->timestamps();
+        });
+
+        Schema::create('usage', function (Blueprint $table) {
+            $table->increments('usage_id')->primary();
+            $table->string('note_text', 500);
+            $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
             $table->timestamps();
         });
 
         Schema::create('items', function (Blueprint $table) {
-            $table->increments('item_id');
-            $table->unsignedInteger('categories_id');
-            $table->unsignedInteger('unit_id');
+            $table->increments('item_id')->primary();
             $table->string('name', 100);
             $table->string('brand', 50);
             $table->string('serial_number', 50);
             $table->string('photo', 100);
             $table->string('description', 500);
-            $table->enum('status', ['pending', 'available', 'used', 'not on loan', 'canceled'])->default('pending');
-            $table->foreign('categories_id')->references('categories_id')->on('categories')->onDelete('cascade');
-            $table->foreign('unit_id')->references('unit_id')->on('units')->onDelete('cascade');
-            $table->timestamps();
+            $table->enum('status', ['pending','avaible', 'used', 'not on loan', 'canceled'])->default('pending');
+            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');;
+            $table->foreign('unit_id')->references('id')->on('unit')->onDelete('cascade');;
         });
 
-        Schema::create('administrators', function (Blueprint $table) {
-            $table->increments('administrator_id');
-            $table->unsignedInteger('user_id');
-            $table->string('name', 100);
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->timestamps();
+        Schema::create('categories', function (Blueprint $table) {
+            $table->increments('categories_id')->primary();
+            $table->string('name');
         });
-        
-        Schema::create('unit_admins', function (Blueprint $table) {
-            $table->increments('unit_admin_id');
-            $table->unsignedInteger('unit_id');
-            $table->unsignedInteger('user_id');
-            $table->foreign('unit_id')->references('unit_id')->on('units')->onDelete('cascade');
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->timestamps();
-        });
-        
-        Schema::create('bookings', function (Blueprint $table) {
-            $table->increments('booking_id');
-            $table->unsignedInteger('item_id');
-            $table->unsignedInteger('user_id');
-            $table->date('start_date');
-            $table->date('end_date');
-            $table->enum('status', ['pending', 'waiting', 'approved', 'rejected', 'canceled'])->default('pending');
-            $table->foreign('item_id')->references('item_id')->on('items')->onDelete('cascade');
-            $table->foreign('user_id')->references('user_id')->on('users')->onDelete('cascade');
-            $table->timestamps();
-        });
-        
-        Schema::create('usage', function (Blueprint $table) {
-            $table->increments('usage_id');
-            $table->unsignedInteger('booking_id');
-            $table->string('note_text', 500);
-            $table->foreign('booking_id')->references('booking_id')->on('bookings')->onDelete('cascade');
-            $table->timestamps();
-        });
+
     }
 
     /**
