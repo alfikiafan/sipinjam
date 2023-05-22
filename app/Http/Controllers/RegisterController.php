@@ -23,12 +23,13 @@ class RegisterController extends Controller
             'password' => ['required', 'min:5', 'max:20'],
             'agreement' => ['accepted']
         ]);
-        $attributes['password'] = bcrypt($attributes['password'] );
+        $attributes['password'] = bcrypt($attributes['password']);
         $attributes['role'] = 'peminjam';
 
         session()->flash('Berhasil', 'Akun Anda berhasil dibuat.');
         $user = User::create($attributes);
-        Auth::login($user); 
-        return redirect('/dashboard');
+        Auth::login($user);
+
+        return redirect()->route('dashboard');
     }
 }

@@ -2,7 +2,6 @@
 
 @section('auth')
 
-
     @if(\Request::is('static-sign-up')) 
         @include('layouts.navbars.guest.nav')
         @yield('content')
@@ -54,7 +53,5 @@
 
         @include('components.fixed-plugin')
     @endif
-
-    
 
 @endsection
