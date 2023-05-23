@@ -8,15 +8,14 @@
 
 @push('dashboard')
   <script>
+    setTimeout(function() {
+      var flashMessage = document.getElementById('success-message');
+      if (flashMessage) {
+          flashMessage.remove();
+      }
+    }, 2000);
     window.onload = function() {
       var ctx = document.getElementById("chart-bars").getContext("2d");
-
-      setTimeout(function() {
-        var flashMessage = document.getElementById('success-message');
-        if (flashMessage) {
-          flashMessage.remove();
-        }
-      }, 2000);
 
       new Chart(ctx, {
         type: "bar",

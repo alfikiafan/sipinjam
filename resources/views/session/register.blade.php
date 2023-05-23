@@ -3,13 +3,13 @@
 @section('content')
 
   <section class="min-vh-100 mb-4">
-    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 mx-3 border-radius-lg">
+    <div class="page-header align-items-start min-vh-50 pt-5 pb-11 mx-3 border-radius-lg" style="background-image: url('../assets/img/curved-images/register.png');>
       <span class="mask bg-gradient-dark opacity-6"></span>
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-5 text-center mx-auto">
-            <h1 class="text-white mb-2 mt-5">Selamat Datang</h1>
-            <p class="text-lead text-white">Jika belum memiliki akun, silahkan daftar pada kolom di bawah ini!</p>
+            <h1 class="text-white mb-2 mt-5">Sipinjam</h1>
+            <p class="text-lead text-white">Buat akun untuk mengajukan peminjaman barang secara online, mudah, dan aman.</p>
           </div>
         </div>
       </div>

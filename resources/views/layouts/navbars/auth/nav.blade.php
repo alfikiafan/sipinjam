@@ -11,7 +11,7 @@
         <div class="collapse navbar-collapse mt-sm-0 mt-2 me-md-0 me-sm-4 d-flex justify-content-end" id="navbar"> 
             <ul class="navbar-nav  justify-content-end">
             <li class="nav-item d-flex align-items-center">
-                <form action="{{ route('logout') }}" method="POST" style="display: inline;">
+                <form class="mb-0" action="{{ route('logout') }}" method="POST" style="display: inline;">
                     @csrf
                     <button type="submit" class="nav-link text-body font-weight-bold px-0" style="border: none; background: none;">
                         <i class="fa fa-user me-sm-1"></i>

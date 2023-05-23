@@ -12,7 +12,7 @@
       </span>
     </button>
     <div class="collapse navbar-collapse" id="navigation">
-      <ul class="navbar-nav mx-auto">
+      <ul class="navbar-nav ms-auto">
         @if (auth()->user())
             <li class="nav-item">
             <a class="nav-link d-flex align-items-center me-2 active" aria-current="page" href="{{ url('dashboard') }}">
