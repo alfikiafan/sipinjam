@@ -19,16 +19,15 @@ class RegisterController extends Controller
         $attributes = request()->validate([
             'name' => ['required', 'max:50'],
             'email' => ['required', 'email', 'max:50', Rule::unique('users', 'email')],
+            'no_telp' => ['required', 'string', 'max:50', Rule::unique('users', 'no_telp')],
             'password' => ['required', 'min:5', 'max:20'],
             'agreement' => ['accepted']
         ]);
-        $attributes['password'] = bcrypt($attributes['password'] );
+        $attributes['password'] = bcrypt($attributes['password']);
+        $attributes['role'] = 'peminjam';
 
-        
-
-        session()->flash('success', 'Your account has been created.');
+        session()->flash('success', 'Akun Anda berhasil dibuat. Silakan masukkan email dan password untuk masuk ke dalam sistem.');
         $user = User::create($attributes);
-        Auth::login($user); 
-        return redirect('/dashboard');
+        return redirect('/login')->with('success', 'Anda sudah dapat masuk dengan akun yang baru saja dibuat.');
     }
 }

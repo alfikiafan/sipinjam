@@ -15,9 +15,9 @@ return new class extends Migration
             $table->increments('user_id')->primary();
             $table->string('name', 100);
             $table->string('email', 50);
-            $table->string('role', 50);
+            $table->string('role', 50)->default('peminjam');
             $table->string('no_telp', 15);
-            $table->string('password', 20);
+            $table->string('password');
             $table->timestamps();
         });
 
@@ -83,13 +83,13 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('users');
-        Schema::dropIfExists('administrators');
-        Schema::dropIfExists('unit_admins');
-        Schema::dropIfExists('units');
-        Schema::dropIfExists('bookings');
         Schema::dropIfExists('usage');
+        Schema::dropIfExists('bookings');
+        Schema::dropIfExists('unit_admins');
+        Schema::dropIfExists('administrators');
         Schema::dropIfExists('items');
         Schema::dropIfExists('categories');
+        Schema::dropIfExists('units');
+        Schema::dropIfExists('users');
     }
 };
