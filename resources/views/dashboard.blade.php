@@ -1,5 +1,11 @@
 @extends('layouts.user_type.auth')
 
+@if(session('success'))
+    <div id="success-message" class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 @section('content')
 
   <div class="row">
@@ -621,6 +627,13 @@
   <script>
     window.onload = function() {
       var ctx = document.getElementById("chart-bars").getContext("2d");
+
+      setTimeout(function() {
+        var flashMessage = document.getElementById('success-message');
+        if (flashMessage) {
+          flashMessage.remove();
+        }
+      }, 2000);
 
       new Chart(ctx, {
         type: "bar",

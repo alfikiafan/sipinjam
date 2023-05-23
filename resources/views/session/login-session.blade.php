@@ -1,5 +1,11 @@
 @extends('layouts.user_type.guest')
 
+@if(session('success'))
+    <div id="success-message" class="alert alert-success">
+        {{ session('success') }}
+    </div>
+@endif
+
 @section('content')
 
   <main class="main-content  mt-0">
@@ -13,7 +19,7 @@
                   <h3 class="font-weight-bolder text-info text-gradient">Masuk</h3>
                 </div>
                 <div class="card-body">
-                  <form role="form" method="POST" action="/session">
+                  <form role="form" method="POST" action="/login">
                     @csrf
                     <label>Email</label>
                     <div class="mb-3">
@@ -56,5 +62,14 @@
       </div>
     </section>
   </main>
+  <script>
+        // Menghilangkan pesan flash setelah 2 detik
+        setTimeout(function() {
+            var flashMessage = document.getElementById('success-message');
+            if (flashMessage) {
+                flashMessage.remove();
+            }
+        }, 2000);
+    </script>
 
 @endsection

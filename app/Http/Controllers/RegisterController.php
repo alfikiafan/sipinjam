@@ -26,10 +26,8 @@ class RegisterController extends Controller
         $attributes['password'] = bcrypt($attributes['password']);
         $attributes['role'] = 'peminjam';
 
-        session()->flash('Berhasil', 'Akun Anda berhasil dibuat.');
+        session()->flash('success', 'Akun Anda berhasil dibuat. Silakan masukkan email dan password untuk masuk ke dalam sistem.');
         $user = User::create($attributes);
-        Auth::login($user);
-
-        return redirect()->route('dashboard');
+        return redirect('/login')->with('success', 'Anda sudah dapat masuk dengan akun yang baru saja dibuat.');
     }
 }
