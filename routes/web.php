@@ -17,7 +17,11 @@ use App\Http\Controllers\HomeController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    if (auth()->check()) {
+        return redirect('/dashboard');
+    } else {
+        return redirect('/login');
+    }
 });
 
 // Mengakses halaman pendaftaran
