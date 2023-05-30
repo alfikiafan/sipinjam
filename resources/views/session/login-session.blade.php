@@ -36,7 +36,7 @@
                       @enderror
                     </div>
                     <div class="form-check form-switch">
-                      <input class="form-check-input" type="checkbox" id="rememberMe" checked="">
+                      <input class="form-check-input" name="rememberMe" type="checkbox" id="rememberMe" checked="">
                       <label class="form-check-label" for="rememberMe">Ingat Saya</label>
                     </div>
                     <div class="text-center">

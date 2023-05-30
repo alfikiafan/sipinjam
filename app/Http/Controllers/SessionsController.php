@@ -5,7 +5,6 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
-
 class SessionsController extends Controller
 {
     public function create()
@@ -13,27 +12,28 @@ class SessionsController extends Controller
         return view('session.login-session');
     }
 
-    public function store()
+    public function store(Request $request)
     {
-        $attributes = request()->validate([
-            'email'=>'required|email',
-            'password'=>'required' 
+        $credentials = $request->validate([
+            'email' => 'required|email',
+            'password' => 'required',
         ]);
 
-        if(Auth::attempt($attributes))
-        {
-            session()->regenerate();
-            return redirect('dashboard')->with(['success'=>'Anda telah masuk ke sistem.']);
+        $remember = $request->has('rememberMe');
+
+        if (Auth::attempt($credentials, $remember)) {
+            $request->session()->regenerate();
+
+            return redirect('dashboard')->with(['success' => 'Anda telah masuk ke sistem.']);
         }
-        else
-        {
-            return back()->withErrors(['email'=>'Email atau kata sandi Anda tidak cocok.']);
-        }
+
+        return back()->withErrors(['email' => 'Email atau kata sandi Anda tidak cocok.']);
     }
-    
+
     public function destroy()
     {
         Auth::logout();
-        return redirect('/login')->with(['success'=>'Anda telah keluar dari sistem.']);
+
+        return redirect('/login')->with(['success' => 'Anda telah keluar dari sistem.']);
     }
 }
