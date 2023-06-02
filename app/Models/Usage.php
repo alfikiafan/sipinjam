@@ -9,7 +9,12 @@ class Usage extends Model
 {
     use HasFactory;
 
-    protected $fillable = ['booking_id', 'note_text'];
+    protected $fillable = [
+        'booking_id',
+        'note_text'
+    ];
+
+    protected $primaryKey = 'id';
 
     public function booking()
     {
