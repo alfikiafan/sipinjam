@@ -23,4 +23,6 @@ class Unit extends Model
     {
         return $this->belongsToMany(Administrator::class, 'unit_admins');
     }
+
+    protected $primaryKey = 'id';
 }

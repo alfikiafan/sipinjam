@@ -15,4 +15,6 @@ class Category extends Model
     {
         return $this->hasMany(Item::class);
     }
+
+    protected $primaryKey = 'id';
 }
