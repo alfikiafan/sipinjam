@@ -17,6 +17,8 @@ class Booking extends Model
         'status'
     ];
 
+    protected $primaryKey = 'id';
+
     public function item()
     {
         return $this->belongsTo(Item::class);
