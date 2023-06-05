@@ -16,5 +16,10 @@ class Category extends Model
         return $this->hasMany(Item::class);
     }
 
+    protected static function newFactory()
+    {
+        return \Database\Factories\CategoryFactory::new();
+    }
+
     protected $primaryKey = 'id';
 }

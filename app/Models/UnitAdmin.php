@@ -14,8 +14,6 @@ class UnitAdmin extends Model
         'user_id'
     ];
 
-    protected $primaryKey = 'id';
-
     public function unit()
     {
         return $this->belongsTo(Unit::class);
@@ -25,4 +23,11 @@ class UnitAdmin extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\UnitAdminFactory::new();
+    }
+
+    protected $primaryKey = 'id';
 }

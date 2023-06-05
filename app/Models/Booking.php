@@ -17,8 +17,6 @@ class Booking extends Model
         'status'
     ];
 
-    protected $primaryKey = 'id';
-
     public function item()
     {
         return $this->belongsTo(Item::class);
@@ -33,4 +31,11 @@ class Booking extends Model
     {
         return $this->hasOne(Usage::class);
     }
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\BookingFactory::new();
+    }
+
+    protected $primaryKey = 'id';
 }

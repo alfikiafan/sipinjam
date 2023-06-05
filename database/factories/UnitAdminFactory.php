@@ -20,10 +20,10 @@ class UnitAdminFactory extends Factory
     {
         return [
             'unit_id' => function () {
-                return \App\Models\Unit::factory()->create()->id;
+                return Unit::factory()->create()->id;
             },
             'user_id' => function () {
-                return \App\Models\User::factory()->create()->id;
+                return User::factory()->create()->id;
             },
         ];
     }

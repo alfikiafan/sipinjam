@@ -14,10 +14,15 @@ class Usage extends Model
         'note_text'
     ];
 
-    protected $primaryKey = 'id';
-
     public function booking()
     {
         return $this->belongsTo(Booking::class);
     }
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\UsageFactory::new();
+    }
+
+    protected $primaryKey = 'id';
 }

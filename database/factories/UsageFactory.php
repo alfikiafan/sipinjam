@@ -20,7 +20,7 @@ class UsageFactory extends Factory
     {
         return [
             'booking_id' => function () {
-                return \App\Models\Booking::factory()->create()->id;
+                return Booking::factory()->create()->id;
             },
             'note_text' => $this->faker->text(500),
         ];

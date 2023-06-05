@@ -24,5 +24,10 @@ class Unit extends Model
         return $this->belongsToMany(Administrator::class, 'unit_admins');
     }
 
+    protected static function newFactory()
+    {
+        return \Database\Factories\UnitFactory::new();
+    }
+
     protected $primaryKey = 'id';
 }

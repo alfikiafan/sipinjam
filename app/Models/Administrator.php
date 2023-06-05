@@ -14,8 +14,6 @@ class Administrator extends Model
         'name'
     ];
 
-    protected $primaryKey = 'id';
-
     public function user()
     {
         return $this->belongsTo(User::class);
@@ -25,4 +23,11 @@ class Administrator extends Model
     {
         return $this->belongsToMany(Unit::class, 'unit_admins');
     }
+
+    protected static function newFactory()
+    {
+        return \Database\Factories\AdministratorFactory::new();
+    }
+
+    protected $primaryKey = 'id';
 }

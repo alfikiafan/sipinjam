@@ -35,5 +35,10 @@ class Item extends Model
         return $this->hasMany(Booking::class);
     }
 
+    protected static function newFactory()
+    {
+        return \Database\Factories\ItemFactory::new();
+    }
+
     protected $primaryKey = 'id';
 }
