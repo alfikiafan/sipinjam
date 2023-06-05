@@ -17,7 +17,7 @@ class BookingManagementTest extends TestCase
         $booking = Booking::factory()->create(['status' => 'pending']);
 
         $response = $this->actingAs($unitAdmin)->put('/bookings/' . $booking->id . '/approval');
-        $response->assertStatus(302);
+        $response->assertStatus(200);
         $this->assertDatabaseHas('bookings', ['id' => $booking->id, 'status' => 'approved']);
     }
 }
