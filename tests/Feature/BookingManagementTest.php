@@ -1,0 +1,23 @@
+<?php
+
+namespace Tests\Feature;
+
+use Tests\TestCase;
+use App\Models\User;
+use App\Models\Booking;
+use Illuminate\Foundation\Testing\RefreshDatabase;
+
+class BookingManagementTest extends TestCase
+{
+    use RefreshDatabase;
+
+    public function testUnitAdminCanApproveBooking()
+    {
+        $unitAdmin = User::factory()->create(['role' => 'unit_admin']);
+        $booking = Booking::factory()->create(['status' => 'pending']);
+
+        $response = $this->actingAs($unitAdmin)->put('/bookings/' . $booking->id . '/approve');
+        $response->assertStatus(302);
+        $this->assertDatabaseHas('bookings', ['id' => $booking->id, 'status' => 'approved']);
+    }
+}
