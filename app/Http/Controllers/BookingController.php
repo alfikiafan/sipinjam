@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Booking;
 use Illuminate\Http\Request;
+use Illuminate\Http\Response;
 
 class BookingController extends Controller
 {
@@ -20,7 +21,6 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi inputan form
         $validatedData = $request->validate([
             'item_id' => 'required',
             'user_id' => 'required',
@@ -41,7 +41,6 @@ class BookingController extends Controller
 
     public function update(Request $request, Booking $booking)
     {
-        // Validasi inputan form
         $validatedData = $request->validate([
             'item_id' => 'required',
             'user_id' => 'required',
@@ -55,15 +54,15 @@ class BookingController extends Controller
         return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
     }
 
-        public function approve($id)
+    public function approval($id)
     {
         $booking = Booking::findOrFail($id);
-        
+    
         $booking->status = 'approved';
         $booking->save();
-        
-        return redirect()->route('bookings.index')->with('success', 'Booking approved successfully.');
-    }
+    
+        return response()->json(['message' => 'Booking approved successfully.']);
+    }    
 
     public function destroy(Booking $booking)
     {

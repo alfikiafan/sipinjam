@@ -67,7 +67,8 @@ Route::resource('items', ItemController::class);
 
 // Routes for Bookings
 Route::resource('bookings', BookingController::class);
-Route::put('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
+Route::put('/bookings/{booking}/approval', [BookingController::class, 'approval'])->name('bookings.approval');
+Route::get('/bookings/{booking}/approval', [BookingController::class, 'approval'])->name('bookings.approval');
 
 // Routes for Usages
 Route::resource('usages', UsageController::class);

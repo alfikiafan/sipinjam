@@ -5,6 +5,7 @@ namespace Tests\Feature;
 use Tests\TestCase;
 use App\Models\User;
 use App\Models\Item;
+use App\Models\Booking;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 
 class BookingTest extends TestCase
@@ -17,6 +18,7 @@ class BookingTest extends TestCase
             'role' => 'peminjam',
             'no_telp' => '081234567890'
         ]);
+
         $item = Item::factory()->create([
             'status' => 'available',
             'categories_id' => 1,
@@ -25,18 +27,25 @@ class BookingTest extends TestCase
             'brand' => 'brand',
         ]);
 
-        $response = $this->actingAs($user)->get('/bookings/create');
-        $response->assertStatus(200);
-
         $response = $this->actingAs($user)->post('/bookings', [
             'item_id' => $item->id,
             'start_date' => '2023-06-01',
             'end_date' => '2023-06-05',
+            'user_id' => $user->id,
+            'status' => 'pending',
         ]);
-        $response->assertStatus(302);
-        $this->assertDatabaseHas('bookings', ['item_id' => $item->id]);
 
-        $response = $this->actingAs($user)->get('/bookings/' . $item->id . '/approval');
+        $response->assertRedirect();
+
+        $this->assertDatabaseHas('bookings', [
+            'item_id' => $item->id,
+            'user_id' => $user->id,
+            'status' => 'pending',
+        ]);
+        
+        $booking = Booking::latest()->first();
+        
+        $response = $this->actingAs($user)->get('/bookings/' . $booking->id . '/approval');
         $response->assertStatus(200);
     }
 }
