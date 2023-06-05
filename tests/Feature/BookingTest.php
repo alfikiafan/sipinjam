@@ -13,8 +13,17 @@ class BookingTest extends TestCase
 
     public function testUserCanMakeBooking()
     {
-        $user = User::factory()->create(['role' => 'peminjam']);
-        $item = Item::factory()->create(['status' => 'available']);
+        $user = User::factory()->create([
+            'role' => 'peminjam',
+            'no_telp' => '081234567890'
+        ]);
+        $item = Item::factory()->create([
+            'status' => 'available',
+            'categories_id' => 1,
+            'unit_id' => 1,
+            'name' => 'Fulan',
+            'brand' => 'brand',
+        ]);
 
         $response = $this->actingAs($user)->get('/bookings/create');
         $response->assertStatus(200);
