@@ -21,16 +21,15 @@ class BookingController extends Controller
     public function store(Request $request)
     {
         // Validasi inputan form
-
-        $booking = new Booking([
-            'item_id' => $request->item_id,
-            'user_id' => $request->user_id,
-            'start_date' => $request->start_date,
-            'end_date' => $request->end_date,
-            'status' => $request->status,
+        $validatedData = $request->validate([
+            'item_id' => 'required',
+            'user_id' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'status' => 'required',
         ]);
 
-        $booking->save();
+        $booking = Booking::create($validatedData);
 
         return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
     }
@@ -43,15 +42,27 @@ class BookingController extends Controller
     public function update(Request $request, Booking $booking)
     {
         // Validasi inputan form
+        $validatedData = $request->validate([
+            'item_id' => 'required',
+            'user_id' => 'required',
+            'start_date' => 'required',
+            'end_date' => 'required',
+            'status' => 'required',
+        ]);
 
-        $booking->item_id = $request->item_id;
-        $booking->user_id = $request->user_id;
-        $booking->start_date = $request->start_date;
-        $booking->end_date = $request->end_date;
-        $booking->status = $request->status;
-        $booking->save();
+        $booking->update($validatedData);
 
         return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
+    }
+
+        public function approve($id)
+    {
+        $booking = Booking::findOrFail($id);
+        
+        $booking->status = 'approved';
+        $booking->save();
+        
+        return redirect()->route('bookings.index')->with('success', 'Booking approved successfully.');
     }
 
     public function destroy(Booking $booking)
