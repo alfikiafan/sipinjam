@@ -24,7 +24,7 @@ class RegisterController extends Controller
             'agreement' => ['accepted']
         ]);
         $attributes['password'] = bcrypt($attributes['password']);
-        $attributes['role'] = 'peminjam';
+        $attributes['role'] = 'borrower';
 
         session()->flash('success', 'Akun Anda berhasil dibuat. Silakan masukkan email dan password untuk masuk ke dalam sistem.');
         $user = User::create($attributes);

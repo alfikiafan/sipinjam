@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::table('users', function (Blueprint $table) {
             $table->string('phone');
-            $table->string('role')->default('peminjam');
+            $table->string('role')->default('borrower');
         });
     }
 

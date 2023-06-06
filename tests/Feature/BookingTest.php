@@ -15,7 +15,7 @@ class BookingTest extends TestCase
     public function testUserCanMakeBooking()
     {
         $user = User::factory()->create([
-            'role' => 'peminjam',
+            'role' => 'borrower',
             'phone' => '081234567890'
         ]);
 

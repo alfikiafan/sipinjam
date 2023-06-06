@@ -12,7 +12,7 @@ class UserProfileTest extends TestCase
 
     public function testUserCanCompleteProfile()
     {
-        $user = User::factory()->create(['role' => 'peminjam']);
+        $user = User::factory()->create(['role' => 'borrower']);
 
         $response = $this->actingAs($user)->get('/profile');
         $response->assertStatus(200);
