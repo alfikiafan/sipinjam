@@ -19,7 +19,7 @@ class UserSeeder extends Seeder
             'id' => 1,
             'name' => 'admin',
             'email' => 'admin@email.com',
-            'no_telp' => '080123456789',
+            'phone' => '080123456789',
             'password' => Hash::make('secret'),
             'created_at' => now(),
             'updated_at' => now()

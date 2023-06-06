@@ -16,7 +16,7 @@ class BookingTest extends TestCase
     {
         $user = User::factory()->create([
             'role' => 'peminjam',
-            'no_telp' => '081234567890'
+            'phone' => '081234567890'
         ]);
 
         $item = Item::factory()->create([

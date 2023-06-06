@@ -13,7 +13,7 @@ class BookingManagementTest extends TestCase
 
     public function testUnitAdminCanApproveBooking()
     {
-        $unitAdmin = User::factory()->create(['role' => 'unit_admin', 'no_telp' => '081234567890']);
+        $unitAdmin = User::factory()->create(['role' => 'unit_admin', 'phone' => '081234567890']);
         $booking = Booking::factory()->create(['status' => 'pending']);
 
         $response = $this->actingAs($unitAdmin)->put('/bookings/' . $booking->id . '/approval');

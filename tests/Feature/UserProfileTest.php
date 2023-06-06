@@ -19,7 +19,7 @@ class UserProfileTest extends TestCase
 
         $response = $this->actingAs($user)->put('/profile', [
             'name' => 'John Doe',
-            'no_telp' => '123456789',
+            'phone' => '123456789',
         ]);
         $response->assertStatus(302);
         $this->assertDatabaseHas('users', ['id' => $user->id, 'name' => 'John Doe']);
