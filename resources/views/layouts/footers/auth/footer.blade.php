@@ -5,7 +5,7 @@
                 <div class="copyright text-center text-sm text-muted text-lg-start">
                     © <script>
                         document.write(new Date().getFullYear())
-                    </script>, Dibuat dengan <i class="fa fa-heart"></i> oleh <strong>Kelompok 4</strong>
+                    </script>, Dibuat </i> oleh <strong>Kelompok 4</strong>
                 </div>
             </div>
         </div>

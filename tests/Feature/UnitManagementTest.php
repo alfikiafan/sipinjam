@@ -13,7 +13,7 @@ class UnitManagementTest extends TestCase
 
     public function testAdminCanManageUnits()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
+        $admin = User::factory()->create(['role' => 'administrator']);
         $unit = Unit::factory()->create();
 
         $response = $this->actingAs($admin)->get('/units');

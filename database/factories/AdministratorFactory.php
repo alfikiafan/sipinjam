@@ -22,7 +22,6 @@ class AdministratorFactory extends Factory
             'user_id' => function () {
                 return User::factory()->create()->id;
             },
-            'name' => $this->faker->name,
         ];
     }
 }

@@ -13,7 +13,7 @@ class CategoryManagementTest extends TestCase
 
     public function testAdminCanManageCategories()
     {
-        $admin = User::factory()->create(['role' => 'admin']);
+        $admin = User::factory()->create(['role' => 'administrator']);
         $category = Category::factory()->create();
 
         $response = $this->actingAs($admin)->get('/categories');
