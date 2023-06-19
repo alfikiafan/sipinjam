@@ -20,12 +20,12 @@ class ItemFactory extends Factory
      */
     public function definition(): array
     {
-        static $id = 1;
         $faker = Faker::create('id_ID');
+        $categoryIds = Category::pluck('id')->toArray();
+        $unitIds = Unit::pluck('id')->toArray();
         return [
-            'id' => $id++,
-            'categories_id' => Category::factory()->create()->id,
-            'unit_id' => Unit::factory()->create()->id,
+            'categories_id' => $faker->randomElement($categoryIds),
+            'unit_id' => $faker->randomElement($unitIds),
             'name' => $this->faker->word,
             'brand' => $this->faker->word,
             'serial_number' => $this->faker->unique()->randomNumber(),

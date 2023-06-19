@@ -18,10 +18,8 @@ class UnitFactory extends Factory
      */
     public function definition(): array
     {
-        static $id = 1;
         $faker = Faker::create('id_ID');
         return [
-            'id' => $id++,
             'name' => $this->faker->word(),
             'location' => $this->faker->word(),
         ];

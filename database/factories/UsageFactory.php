@@ -19,13 +19,10 @@ class UsageFactory extends Factory
      */
     public function definition(): array
     {
-        static $id = 1;
         $faker = Faker::create('id_ID');
+        $bookingIds = Booking::pluck('id')->toArray();
         return [
-            'id' => $id++,
-            'booking_id' => function () {
-                return Booking::factory()->create()->id;
-            },
+            'booking_id' => $faker->randomElement($bookingIds),
             'note_text' => $this->faker->text(500),
         ];
     }
