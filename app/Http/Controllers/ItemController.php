@@ -12,7 +12,8 @@ class ItemController extends Controller
     {
         $user = Auth::user();
         if ($user->role === 'unitadmin') {
-            $items = Item::all();
+            $unitId = Auth::user()->unit_id;
+            $items = Item::where('unit_id', $unitId)->get();
             return view('unitadmin.items.index', compact('items'));
         } elseif ($user->role === 'borrower') {
             return view('borrower.items.index');

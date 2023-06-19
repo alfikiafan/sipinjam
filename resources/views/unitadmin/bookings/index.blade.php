@@ -15,51 +15,50 @@
               <table class="table align-items-center mb-0">
                 <thead>
                   <tr>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
-                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">User</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Start Date</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">End Date</th>
-                    <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                    <th class="text-uppercase text-xxs font-weight-bolder opacity-7">ID</th>
+                    <th class="text-uppercase text-xxs font-weight-bolder opacity-7">Item</th>
+                    <th class="text-uppercase text-xxs font-weight-bolder opacity-7">Borrower</th>
+                    <th class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">Status</th>
+                    <th class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">Start Date</th>
+                    <th class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">End Date</th>
+                    <th class="text-center text-uppercase text-xxs font-weight-bolder opacity-7">Actions</th>
                   </tr>
                 </thead>
                 <tbody>
                   @foreach($bookings as $booking)
                   <tr>
                     <td>
+                      <p class="text-xs font-weight-bold mb-0 ps-3">{{ $booking->id }}</p>
+                    </td>
+                    <td>
                       <div class="d-flex align-items-center">
-                        <img src="../assets/img/item-image.jpg" class="avatar avatar-sm me-3" alt="item-image">
+                        <img src="{{ $booking->item->photo }}" class="avatar avatar-sm me-3" alt="item-image">
                         <div class="d-flex flex-column">
-                          <h6 class="mb-0 text-sm">{{ $booking-> }}</h6>
-                          <p class="text-xs text-secondary mb-0">Category</p>
+                          <h6 class="mb-0 text-sm">{{ $booking->item->name }}</h6>
+                          <p class="text-xs text-secondary mb-0">{{ $booking->item->Category->name }}</p>
                         </div>
                       </div>
                     </td>
                     <td>
-                      <p class="text-xs font-weight-bold mb-0">User Name</p>
-                      <p class="text-xs text-secondary mb-0">Email</p>
+                      <p class="text-xs font-weight-bold mb-0">{{ $booking->user->name }}</p>
+                      <p class="text-xs text-secondary mb-0">{{ $booking->user->email }}</p>
                     </td>
                     <td class="align-middle text-center">
-                      <span class="badge bg-success badge-sm">Approved</span>
+                      <span class="badge bg-success badge-sm">{{ $booking->status }}</span>
                     </td>
                     <td class="align-middle text-center">
-                      <span class="text-xs font-weight-bold text-secondary">Start Date</span>
+                      <span class="text-xs font-weight-bold">{{ $booking->start_date }}</span>
                     </td>
                     <td class="align-middle text-center">
-                      <span class="text-xs font-weight-bold text-secondary">End Date</span>
+                      <span class="text-xs font-weight-bold">{{ $booking->end_date }}</span>
                     </td>
-                    <td class="align-middle">
-                      <a href="{{ route('bookings.edit', $booking->id) }}" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Edit booking">
-                        Edit
+                      <td class="align-middle">
+                      <a href="" class="text-success font-weight-bold button-icon d-inline-flex align-items-center justify-content-center" data-toggle="tooltip" data-original-title="Approve Booking">
+                        <i class="fas fa-check-circle"></i>
                       </a>
-                      <form action="{{ route('bookings.destroy', $booking->id) }}" method="POST" class="d-inline">
-                        @csrf
-                        @method('DELETE')
-                        <button type="submit" class="text-secondary font-weight-bold text-xs" data-toggle="tooltip" data-original-title="Delete booking">
-                          Delete
-                        </button>
-                      </form>
+                      <a href="" class="text-danger font-weight-bold button-icon d-inline-flex align-items-center justify-content-center" data-toggle="tooltip" data-original-title="Reject Booking">
+                        <i class="fas fa-times-circle"></i>
+                      </a>
                     </td>
                   </tr>
                   @endforeach

@@ -31,7 +31,7 @@ class ItemFactory extends Factory
             'name' => $this->faker->word,
             'brand' => $this->faker->word,
             'serial_number' => $this->faker->unique()->randomNumber(),
-            'photo' => 'default.jpg',
+            'photo' => 'storage/img/default.jpg',
             'quantity' => $quantity,
             'status' => $status,
         ];

@@ -18,7 +18,6 @@ class HomeController extends Controller
         } elseif ($user->role === 'borrower') {
             return view('borrower.dashboard', compact('user'));
         } else {
-            // Handle jika peran pengguna tidak dikenali
             abort(403, 'Forbidden');
         }
     }
