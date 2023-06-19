@@ -23,6 +23,8 @@ class ItemFactory extends Factory
         $faker = Faker::create('id_ID');
         $categoryIds = Category::pluck('id')->toArray();
         $unitIds = Unit::pluck('id')->toArray();
+        $quantity = $faker->numberBetween(0, 100);
+        $status = ($quantity === 0) ? 'used' : $faker->randomElement(['available', 'not on loan']);
         return [
             'categories_id' => $faker->randomElement($categoryIds),
             'unit_id' => $faker->randomElement($unitIds),
@@ -30,8 +32,8 @@ class ItemFactory extends Factory
             'brand' => $this->faker->word,
             'serial_number' => $this->faker->unique()->randomNumber(),
             'photo' => 'default.jpg',
-            'quantity' => $this->faker->numberBetween(1, 100),
-            'status' => $faker->randomElement(['pending', 'available', 'used', 'not on loan']),
+            'quantity' => $quantity,
+            'status' => $status,
         ];
     }
 }

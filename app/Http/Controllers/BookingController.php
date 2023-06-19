@@ -5,18 +5,26 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
     public function index()
-    {
-        $bookings = Booking::all();
-        return view('unitadmin.bookings.index', compact('bookings'));
+    {   
+        $user = Auth::user();
+        if ($user->role === 'unitadmin') {
+            $bookings = Booking::all();
+            return view('unitadmin.bookings.index', compact('bookings'));
+        } elseif ($user->role === 'borrower') {
+            return view('borrower.bookings.index');
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function create()
     {
-        return view('bookings.create');
+        return view('borrower.bookings.create');
     }
 
     public function store(Request $request)
@@ -31,12 +39,7 @@ class BookingController extends Controller
 
         $booking = Booking::create($validatedData);
 
-        return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
-    }
-
-    public function edit(Booking $booking)
-    {
-        return view('bookings.edit', compact('booking'));
+        return redirect()->route('borrower.dashboard')->with('success', 'Booking created successfully.');
     }
 
     public function update(Request $request, Booking $booking)

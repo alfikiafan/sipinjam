@@ -10,6 +10,16 @@ class HomeController extends Controller
     public function home()
     {
         $user = Auth::user();
-        return view('dashboard', compact('user'));
+        
+        if ($user->role === 'administrator') {
+            return view('administrator.dashboard', compact('user'));
+        } elseif ($user->role === 'unitadmin') {
+            return view('unitadmin.dashboard', compact('user'));
+        } elseif ($user->role === 'borrower') {
+            return view('borrower.dashboard', compact('user'));
+        } else {
+            // Handle jika peran pengguna tidak dikenali
+            abort(403, 'Forbidden');
+        }
     }
 }

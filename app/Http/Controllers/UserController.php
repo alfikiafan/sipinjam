@@ -7,20 +7,10 @@ use Illuminate\Http\Request;
 
 class UserController extends Controller
 {
-    public function index()
-    {
-        $search = $request->input('search');
+    public function index() {
+        $users = User::all();
 
-        if ($search) {
-            $users = User::where('id', 'like', "%$search%")
-                ->orWhere('name', 'like', "%$search%")
-                ->orWhere('email', 'like', "%$search%")
-                ->orWhere('role', 'like', "%$search%")
-                ->orWhere('phone', 'like', "%$search%")
-                ->paginate(8);
-        } else {
-            $users = User::paginate(8);
-        }
+        return view('users.index', compact('users'));
     }
 
     public function create()

@@ -16,7 +16,7 @@ class UsageController extends Controller
 
         Usage::create($validatedData);
 
-        return redirect()->route('usages.index')->with('success', 'Usage created successfully.');
+        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage created successfully.');
     }
 
     public function update(Request $request, Usage $usage)
@@ -28,13 +28,13 @@ class UsageController extends Controller
 
         $usage->update($validatedData);
 
-        return redirect()->route('usages.index')->with('success', 'Usage updated successfully.');
+        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage updated successfully.');
     }
 
     public function destroy(Usage $usage)
     {
         $usage->delete();
 
-        return redirect()->route('usages.index')->with('success', 'Usage deleted successfully.');
+        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage deleted successfully.');
     }
 }

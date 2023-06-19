@@ -30,6 +30,11 @@ Route::get('/', function () {
     }
 });
 
+// Rute dashboard
+Route::middleware(['auth'])->group(function () {
+    Route::get('/dashboard', [HomeController::class, 'home'])->name('dashboard');
+});
+
 // Rute pendaftaran
 Route::get('/register', [RegisterController::class, 'create'])->name('register.create');
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
@@ -42,10 +47,7 @@ Route::post('/login', [SessionsController::class, 'store'])->name('login.store')
 Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
 // Rute administrator
-Route::middleware('administrator')->group(function () {
-    // Rute dashboard
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
-
+Route::middleware('auth', 'administrator')->group(function () {
     // Rute untuk manajemen admin unit
     Route::get('/adminunits', [UserController::class, 'index'])->name('administrator.adminunits.index');
     Route::post('/adminunits', [UserController::class, 'store'])->name('administrator.adminunits.store');
@@ -72,10 +74,7 @@ Route::middleware('administrator')->group(function () {
 });
 
 // Rute unit admin
-Route::middleware('unitadmin')->group(function () {
-    // Rute dashboard
-    Route::get('/dashboard', [HomeController::class, 'index'])->name('unitadmin.dashboard');
-
+Route::middleware('auth', 'unitadmin')->group(function () {
     // Rute untuk manajemen item
     Route::get('/items', [ItemController::class, 'index'])->name('unitadmin.items.index');
     Route::post('/items', [ItemController::class, 'store'])->name('unitadmin.items.store');
@@ -99,17 +98,15 @@ Route::middleware('unitadmin')->group(function () {
 });
 
 // Rute borrower
-Route::middleware('unitadmin')->group(function () {
-    // Rute dashboard
-    Route::get('/dashboard', [DashboardController::class, 'index'])->name('borrower.dashboard.index');
-
+Route::middleware('auth', 'borrower')->group(function () {
     // Rute untuk melengkapi profil
     Route::get('/profile', [UserController::class, 'edit'])->name('borrower.profile.edit');
     Route::get('/profile/{user}/edit', [UserController::class, 'editProfile'])->name('borrower.profile.edit');
     Route::put('/profile/{user}', [UserController::class, 'updateProfile'])->name('borrower.profile.update');
 
     // Rute untuk mengajukan booking
-    Route::get('/bookings', [BookingController::class, 'create'])->name('borrower.bookings.create');
+    Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');
+    Route::get('/bookings/create', [BookingController::class, 'create'])->name('borrower.bookings.create');
     Route::post('/bookings', [BookingController::class, 'store'])->name('borrower.bookings.store');
     
     // Rute untuk melihat ketersediaan barang

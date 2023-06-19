@@ -10,12 +10,12 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
-        return view('units.index', compact('units'));
+        return view('administrator.units.index', compact('units'));
     }
 
     public function create()
     {
-        return view('units.create');
+        return view('administrator.units.create');
     }
 
     public function store(Request $request)
@@ -29,12 +29,12 @@ class UnitController extends Controller
 
         $unit->save();
 
-        return redirect()->route('units.index')->with('success', 'Unit created successfully.');
+        return redirect()->route('administrator.units.index')->with('success', 'Unit created successfully.');
     }
 
     public function edit(Unit $unit)
     {
-        return view('units.edit', compact('unit'));
+        return view('administrator.units.edit', compact('unit'));
     }
 
     public function update(Request $request, Unit $unit)
@@ -45,13 +45,13 @@ class UnitController extends Controller
         $unit->location = $request->location;
         $unit->save();
 
-        return redirect()->route('units.index')->with('success', 'Unit updated successfully.');
+        return redirect()->route('administrator.units.index')->with('success', 'Unit updated successfully.');
     }
 
     public function destroy(Unit $unit)
     {
         $unit->delete();
 
-        return redirect()->route('units.index')->with('success', 'Unit deleted successfully.');
+        return redirect()->route('administrator.units.index')->with('success', 'Unit deleted successfully.');
     }
 }

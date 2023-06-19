@@ -4,13 +4,21 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
     public function index()
     {
-        $items = Item::all();
-        return view('items.index', compact('items'));
+        $user = Auth::user();
+        if ($user->role === 'unitadmin') {
+            $items = Item::all();
+            return view('unitadmin.items.index', compact('items'));
+        } elseif ($user->role === 'borrower') {
+            return view('borrower.items.index');
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function create()

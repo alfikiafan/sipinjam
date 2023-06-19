@@ -2,6 +2,6 @@
 
 @section('content')
 
-dashboard admin unit
+bookings/create borrower
 
 @endsection
