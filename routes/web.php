@@ -6,8 +6,6 @@ use App\Http\Controllers\SessionsController;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\UnitController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UnitAdminController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UsageController;
@@ -59,15 +57,12 @@ Route::resource('units', UnitController::class);
 // Routes for Admins
 Route::resource('admins', AdminController::class);
 
-// Routes for Unit Admins
-Route::resource('unit_admins', UnitAdminController::class);
-
 // Routes for Items
 Route::resource('items', ItemController::class);
 
 // Routes for Bookings
 Route::resource('bookings', BookingController::class);
-Route::view('/booking', 'unit-admin.bookings.index');
+Route::view('/booking', 'unitadmin.bookings.index');
 
 // Routes for Usages
 Route::resource('usages', UsageController::class);
