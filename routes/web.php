@@ -30,42 +30,92 @@ Route::get('/', function () {
     }
 });
 
-// Mengakses halaman pendaftaran
+// Rute pendaftaran
 Route::get('/register', [RegisterController::class, 'create'])->name('register.create');
-
-// Menyimpan data pendaftaran
 Route::post('/register', [RegisterController::class, 'store'])->name('register.store');
 
-// Mengakses halaman login
+// Rute login
 Route::get('/login', [SessionsController::class, 'create'])->name('login.create');
-
-// Menyimpan data login
 Route::post('/login', [SessionsController::class, 'store'])->name('login.store');
 
-// Logout
+// Rute logout
 Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
-// Dashboard
-Route::get('/dashboard', [HomeController::class, 'home'])->name('dashboard');
+// Rute administrator
+Route::middleware('administrator')->group(function () {
+    // Rute dashboard
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard');
 
-// Routes for Categories
-Route::resource('categories', CategoryController::class);
+    // Rute untuk manajemen admin unit
+    Route::get('/adminunits', [UserController::class, 'index'])->name('administrator.adminunits.index');
+    Route::post('/adminunits', [UserController::class, 'store'])->name('administrator.adminunits.store');
+    Route::get('/adminunits/create', [UserController::class, 'create'])->name('administrator.adminunits.create');
+    Route::get('/adminunits/{adminunit}/edit', [UserController::class, 'edit'])->name('administrator.adminunits.edit');
+    Route::put('/adminunits/{adminunit}', [UserController::class, 'update'])->name('administrator.adminunits.update');
+    Route::delete('/adminunits/{adminunit}', [UserController::class, 'destroy'])->name('administrator.adminunits.destroy');
 
-// Routes for Units
-Route::resource('units', UnitController::class);
+    // Rute untuk manajemen unit
+    Route::get('/units', [UnitController::class, 'index'])->name('administrator.units.index');
+    Route::post('/units', [UnitController::class, 'store'])->name('administrator.units.store');
+    Route::get('/units/create', [UnitController::class, 'create'])->name('administrator.units.create');
+    Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('administrator.units.edit');
+    Route::put('/units/{unit}', [UnitController::class, 'update'])->name('administrator.units.update');
+    Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->name('administrator.units.destroy');
 
-// Routes for Admins
-Route::resource('admins', AdminController::class);
+    // Rute untuk manajemen kategori
+    Route::get('/categories', [CategoryController::class, 'index'])->name('administrator.categories.index');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('administrator.categories.store');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('administrator.categories.create');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('administrator.categories.edit');
+    Route::put('/categories/{category}', [CategoryController::class, 'update'])->name('administrator.categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('administrator.categories.destroy');
+});
 
-// Routes for Items
-Route::resource('items', ItemController::class);
+// Rute unit admin
+Route::middleware('unitadmin')->group(function () {
+    // Rute dashboard
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('unitadmin.dashboard');
 
-// Routes for Bookings
-Route::resource('bookings', BookingController::class);
-Route::view('/booking', 'unitadmin.bookings.index');
+    // Rute untuk manajemen item
+    Route::get('/items', [ItemController::class, 'index'])->name('unitadmin.items.index');
+    Route::post('/items', [ItemController::class, 'store'])->name('unitadmin.items.store');
+    Route::get('/items/create', [ItemController::class, 'create'])->name('unitadmin.items.create');
+    Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('unitadmin.items.edit');
+    Route::put('/items/{item}', [ItemController::class, 'update'])->name('unitadmin.items.update');
+    Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('unitadmin.items.destroy');
 
-// Routes for Usages
-Route::resource('usages', UsageController::class);
+    // Rute untuk menampilkan daftar booking dan approval peminjaman
+    Route::get('/bookings', [BookingController::class, 'index'])->name('unitadmin.bookings.index');
+    Route::post('/bookings', [ItemController::class, 'store'])->name('unitadmin.bookings.store');
+    Route::put('/bookings/{booking}', [BookingController::class, 'update'])->name('unitadmin.bookings.update');
+    Route::get('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('unitadmin.bookings.approve');
 
-// Routes for Users
-Route::resource('users', UserController::class);
+    // Rute untuk melihat daftar penggunaan barang, dan mengembalikan barang
+    Route::get('/usages', [UsageController::class, 'index'])->name('unitadmin.usages.index');
+    Route::get('/usages/{usage}', [UsageController::class, 'show'])->name('unitadmin.usages.show');
+    Route::put('/usages/{usage}', [UsageController::class, 'update'])->name('unitadmin.usages.update');
+    Route::get('usages/{usage}/return', [UsageController::class, 'return'])->name('unitadmin.usages.return');
+    Route::delete('/usages/{usage}', [UsageController::class, 'destroy'])->name('unitadmin.usages.destroy');
+});
+
+// Rute borrower
+Route::middleware('unitadmin')->group(function () {
+    // Rute dashboard
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('borrower.dashboard.index');
+
+    // Rute untuk melengkapi profil
+    Route::get('/profile', [UserController::class, 'edit'])->name('borrower.profile.edit');
+    Route::get('/profile/{user}/edit', [UserController::class, 'editProfile'])->name('borrower.profile.edit');
+    Route::put('/profile/{user}', [UserController::class, 'updateProfile'])->name('borrower.profile.update');
+
+    // Rute untuk mengajukan booking
+    Route::get('/bookings', [BookingController::class, 'create'])->name('borrower.bookings.create');
+    Route::post('/bookings', [BookingController::class, 'store'])->name('borrower.bookings.store');
+    
+    // Rute untuk melihat ketersediaan barang
+    Route::get('/items', [ItemController::class, 'index'])->name('borrower.items.index');
+    Route::get('/items/{item}', [ItemController::class, 'show'])->name('borrower.items.show');
+
+    // Rute untuk mencetak bukti peminjaman
+    Route::get('/bookings/{booking}/print', [BookingController::class, 'print'])->name('borrower.bookings.print');
+});

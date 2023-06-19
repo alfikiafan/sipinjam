@@ -29,7 +29,7 @@ class ItemController extends Controller
             'brand' => $request->brand,
             'serial_number' => $request->serial_number,
             'photo' => $request->photo,
-            'description' => $request->description,
+            'quantity' => $request->quantity,
             'status' => $request->status,
         ]);
 
@@ -53,7 +53,7 @@ class ItemController extends Controller
         $item->brand = $request->brand;
         $item->serial_number = $request->serial_number;
         $item->photo = $request->photo;
-        $item->description = $request->description;
+        $item->quantity = $request->quantity;
         $item->status = $request->status;
         $item->save();
 

@@ -30,8 +30,8 @@ class ItemFactory extends Factory
             'brand' => $this->faker->word,
             'serial_number' => $this->faker->unique()->randomNumber(),
             'photo' => 'default.jpg',
-            'description' => $this->faker->sentence,
-            'status' => $faker->randomElement(['pending', 'available', 'used', 'not on loan', 'cancelled']),
+            'quantity' => $this->faker->numberBetween(1, 100),
+            'status' => $faker->randomElement(['pending', 'available', 'used', 'not on loan']),
         ];
     }
 }

@@ -16,7 +16,7 @@ class Item extends Model
         'brand', 
         'serial_number', 
         'photo', 
-        'description', 
+        'quantity', 
         'status'
     ];
 

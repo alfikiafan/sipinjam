@@ -17,9 +17,9 @@ return new class extends Migration
             $table->unsignedBigInteger('unit_id');
             $table->string('name', 100);
             $table->string('brand', 50);
-            $table->string('serial_number', 50);
+            $table->string('serial_number', 50)->nullable();
             $table->string('photo', 100);
-            $table->string('description', 500);
+            $table->unsignedInteger('quantity');
             $table->string('status');
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');

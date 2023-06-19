@@ -16,6 +16,7 @@
                 <thead>
                   <tr>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
+                    <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
                     <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7 ps-2">User</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Status</th>
                     <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Start Date</th>
@@ -30,7 +31,7 @@
                       <div class="d-flex align-items-center">
                         <img src="../assets/img/item-image.jpg" class="avatar avatar-sm me-3" alt="item-image">
                         <div class="d-flex flex-column">
-                          <h6 class="mb-0 text-sm">Item Name</h6>
+                          <h6 class="mb-0 text-sm">{{ $booking-> }}</h6>
                           <p class="text-xs text-secondary mb-0">Category</p>
                         </div>
                       </div>
