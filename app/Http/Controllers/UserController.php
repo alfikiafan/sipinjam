@@ -9,8 +9,18 @@ class UserController extends Controller
 {
     public function index()
     {
-        $users = User::all();
-        return view('users.index', compact('users'));
+        $search = $request->input('search');
+
+        if ($search) {
+            $users = User::where('id', 'like', "%$search%")
+                ->orWhere('name', 'like', "%$search%")
+                ->orWhere('email', 'like', "%$search%")
+                ->orWhere('role', 'like', "%$search%")
+                ->orWhere('phone', 'like', "%$search%")
+                ->paginate(8);
+        } else {
+            $users = User::paginate(8);
+        }
     }
 
     public function create()
