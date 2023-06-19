@@ -10,10 +10,14 @@ use Illuminate\Support\Facades\Auth;
 class BookingController extends Controller
 {
     public function index()
-    {   
+    {
         $user = Auth::user();
         if ($user->role === 'unitadmin') {
-            $bookings = Booking::all();
+            $unitId = Auth::user()->unit_id;
+            $bookings = Booking::whereHas('item', function ($query) use ($unitId) {
+                $query->where('unit_id', $unitId);
+            })->get();
+            
             return view('unitadmin.bookings.index', compact('bookings'));
         } elseif ($user->role === 'borrower') {
             return view('borrower.bookings.index');

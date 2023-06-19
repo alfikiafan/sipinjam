@@ -9,6 +9,9 @@ class SessionsController extends Controller
 {
     public function create()
     {
+        if (auth()->check()) {
+            return redirect('/dashboard');
+        }
         return view('session.login-session');
     }
 

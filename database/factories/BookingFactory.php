@@ -30,7 +30,7 @@ class BookingFactory extends Factory
             'user_id' => $faker->randomElement($userIds),
             'start_date' => $startDateTime->format('Y-m-d'),
             'end_date' => $endDateTime->format('Y-m-d'),
-            'status' => $faker->randomElement(['pending', 'waiting', 'approved', 'rejected', 'cancelled'])
+            'status' => $faker->randomElement(['pending', 'approved', 'rejected', 'cancelled'])
         ];
     }
 }
