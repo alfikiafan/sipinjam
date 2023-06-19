@@ -4,9 +4,22 @@ namespace App\Http\Controllers;
 
 use App\Models\Usage;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class UsageController extends Controller
 {
+    public function index()
+    {
+        $unitId = Auth::user()->unit_id;
+        $usages = Usage::whereHas('booking', function ($query) use ($unitId) {
+            $query->whereHas('item', function ($query) use ($unitId) {
+                $query->where('unit_id', $unitId);
+            });
+        })->latest()->paginate(20);
+    
+        return view('unitadmin.usages.index', compact('usages'));
+    }
+
     public function store(Request $request)
     {
         $validatedData = $request->validate([
