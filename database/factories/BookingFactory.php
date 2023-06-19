@@ -6,6 +6,7 @@ use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Booking;
 use App\Models\Item;
 use App\Models\User;
+use Faker\Factory as Faker;
 
 /**
  * @extends \Illuminate\Database\Eloquent\Factories\Factory<\App\Models\Booking>
@@ -19,7 +20,10 @@ class BookingFactory extends Factory
      */
     public function definition(): array
     {
+        static $id = 1;
+        $faker = Faker::create('id_ID');
         return [
+            'id' => $id++,
             'item_id' => function () {
                 return Item::factory()->create()->id;
             },
@@ -28,7 +32,7 @@ class BookingFactory extends Factory
             },
             'start_date' => $this->faker->date(),
             'end_date' => $this->faker->date(),
-            'status' => 'pending',
+            'status' => $faker->randomElement(['pending', 'waiting', 'approved', 'rejected', 'cancelled'])
         ];
     }
 }

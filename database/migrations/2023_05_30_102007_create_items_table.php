@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('serial_number', 50);
             $table->string('photo', 100);
             $table->string('description', 500);
-            $table->enum('status', ['pending', 'available', 'used', 'not on loan', 'canceled'])->default('pending');
+            $table->string('status');
             $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->timestamps();

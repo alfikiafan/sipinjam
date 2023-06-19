@@ -20,20 +20,13 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        User::factory()->count(5)->create();
-
-        Unit::factory()->count(5)->create();
-
-        Category::factory()->count(10)->create();
-
-        Item::factory()->count(20)->create();
-
-        Administrator::factory()->count(5)->create();
-
-        UnitAdmin::factory()->count(5)->create();
-
-        Booking::factory()->count(20)->create();
-
-        Usage::factory()->count(50)->create();
+        $this->call([
+            UnitSeeder::class,
+            UserSeeder::class,
+            CategorySeeder::class,
+            ItemSeeder::class,
+            BookingSeeder::class,
+            UsageSeeder::class,
+        ]);
     }
 }

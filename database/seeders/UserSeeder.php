@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class UserSeeder extends Seeder
 {
@@ -15,14 +16,12 @@ class UserSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('users')->insert([
-            'id' => 1,
-            'name' => 'admin',
-            'email' => 'admin@email.com',
-            'phone' => '080123456789',
-            'password' => Hash::make('secret'),
-            'created_at' => now(),
-            'updated_at' => now()
-        ]);
+        $administratorCount = 2;
+        $unitadminCount = 10;
+        $borrowerCount = 20;
+
+        User::factory()->count($administratorCount)->create(['role' => 'administrator']);
+        User::factory()->count($unitadminCount)->create(['role' => 'unitadmin']);
+        User::factory()->count($borrowerCount)->create(['role' => 'borrower']);
     }
 }

@@ -19,9 +19,9 @@ class Unit extends Model
         return $this->hasMany(Item::class);
     }
 
-    public function Administrator()
+    public function users()
     {
-        return $this->belongsToMany(Administrator::class, 'unit_admins');
+        return $this->hasMany(User::class);
     }
 
     protected static function newFactory()

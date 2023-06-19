@@ -49,5 +49,10 @@ class User extends Authenticatable
         return \Database\Factories\UserFactory::new();
     }
 
+    public function unit()
+    {
+        return $this->belongsTo(Unit::class);
+    }
+
     protected $primaryKey = 'id';
 }
