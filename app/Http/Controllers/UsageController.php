@@ -10,7 +10,8 @@ class UsageController extends Controller
 {
     public function index()
     {
-        $unitId = Auth::user()->unit_id;
+        $user = auth()->user();
+        $unitId = $user->unit_id;
         $usages = Usage::whereHas('booking', function ($query) use ($unitId) {
             $query->whereHas('item', function ($query) use ($unitId) {
                 $query->where('unit_id', $unitId);

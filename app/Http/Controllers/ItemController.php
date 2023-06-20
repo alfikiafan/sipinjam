@@ -4,18 +4,17 @@ namespace App\Http\Controllers;
 
 use App\Models\Item;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 
 class ItemController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        if ($user->role === 'unitadmin') {
-            $unitId = Auth::user()->unit_id;
+        $user = auth()->user();
+        if ($user->can('unitadmin')) {
+            $unitId = $user->unit_id;
             $items = Item::where('unit_id', $unitId)->get();
             return view('unitadmin.items.index', compact('items'));
-        } elseif ($user->role === 'borrower') {
+        } elseif ($user->can('borrower')) {
             return view('borrower.items.index');
         } else {
             abort(403, 'Forbidden');

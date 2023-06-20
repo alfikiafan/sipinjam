@@ -5,21 +5,20 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Auth;
 
 class BookingController extends Controller
 {
     public function index()
     {
-        $user = Auth::user();
-        if ($user->role === 'unitadmin') {
-            $unitId = Auth::user()->unit_id;
+        $user = auth()->user();
+        if($user->can('unitadmin')) {
+            $unitId = $user->unit_id;
             $bookings = Booking::whereHas('item', function ($query) use ($unitId) {
                 $query->where('unit_id', $unitId);
             })->get();
             
             return view('unitadmin.bookings.index', compact('bookings'));
-        } elseif ($user->role === 'borrower') {
+        } elseif ($user->can('borrower')) {
             return view('borrower.bookings.index');
         } else {
             abort(403, 'Forbidden');

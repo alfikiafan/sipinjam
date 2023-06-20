@@ -676,7 +676,7 @@ window.addEventListener("resize", navbarColorOnResize);
 function navbarColorOnResize() {
   if (sidenav) {
     if (window.innerWidth > 1200) {
-      if (referenceButtons.classList.contains('active') && referenceButtons.getAttribute('data-class') === 'bg-transparent') {
+      if (referenceButtons) {
         sidenav.classList.remove('bg-white');
       } else {
         sidenav.classList.add('bg-white');
@@ -1472,3 +1472,10 @@ var soft = {
   }
 
 }
+
+// Add current year to the page
+document.addEventListener("DOMContentLoaded", function() {
+  const yearElement = document.getElementById('currentYear');
+  const currentYear = new Date().getFullYear();
+  yearElement.textContent = currentYear;
+});
