@@ -3,7 +3,7 @@
 @section('content')
 @include('components.notifications')
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
-  <div class="container-fluid py-0">
+  <div class="container-fluid px-3">
     <div class="row">
       <div class="col-12">
         <div class="card mb-4">

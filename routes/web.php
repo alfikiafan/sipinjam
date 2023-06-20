@@ -104,7 +104,7 @@ Route::middleware('auth', 'borrower')->group(function () {
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
 
         // Rute untuk manajemen item (unit admin)
-        Route::get('/items', [ItemController::class, 'index'])->name('unitadmin.items.index');
+        Route::get('/items', [ItemController::class, 'index'])->name('items.index');
         Route::post('/items', [ItemController::class, 'store'])->name('unitadmin.items.store');
         Route::get('/items/create', [ItemController::class, 'create'])->name('unitadmin.items.create');
         Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('unitadmin.items.edit');
