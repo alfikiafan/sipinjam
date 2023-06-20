@@ -5,7 +5,6 @@ namespace App\Http\Middleware;
 use Closure;
 use Illuminate\Http\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Illuminate\Support\Facades\Auth;
 
 class UnitAdminOrBorrower
 {
@@ -16,7 +15,7 @@ class UnitAdminOrBorrower
      */
     public function handle(Request $request, Closure $next): Response
     {
-        $user = Auth::user();
+        $user = auth()->user();
 
         if ($user->role === 'unitadmin' || $user->role === 'borrower') {
             return $next($request);

@@ -8,9 +8,13 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index() {
+        if(auth()->user()->can('borrower')) {
         $users = User::all();
 
-        return view('users.index', compact('users'));
+        return view('borrower.users.index', compact('users'));
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function create()
@@ -37,7 +41,11 @@ class UserController extends Controller
 
     public function edit(User $user)
     {
-        return view('users.edit', compact('user'));
+        if(auth()->user()->can('borrower')) {
+        return view('borrower.profile.edit', compact('user'));
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function update(Request $request, User $user)
