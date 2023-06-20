@@ -19,18 +19,20 @@ class BookingFactory extends Factory
      * @return array<string, mixed>
      */
     public function definition(): array
-    {
+    {        
         $faker = Faker::create('id_ID');
         $itemIds = Item::pluck('id')->toArray();
         $userIds = User::pluck('id')->toArray();
-        $startDateTime = $faker->dateTimeBetween('2023-01-01', '2023-12-30');
-        $endDateTime = $faker->dateTimeBetween($startDateTime, '2023-12-31');
+        $startDateTime = $faker->dateTimeBetween('2023-07-01', '2023-11-30');
+        $endDateTime = clone $startDateTime;
+        $endDateTime->modify('+1 month');
+        
         return [
             'item_id' => $faker->randomElement($itemIds),
             'user_id' => $faker->randomElement($userIds),
             'start_date' => $startDateTime->format('Y-m-d'),
             'end_date' => $endDateTime->format('Y-m-d'),
-            'status' => $faker->randomElement(['pending', 'approved', 'rejected', 'cancelled'])
-        ];
+            'status' => $faker->randomElement(['pending', 'cancelled', 'approved', 'rejected'])
+        ];        
     }
 }

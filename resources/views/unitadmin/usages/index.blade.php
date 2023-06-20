@@ -15,12 +15,13 @@
             <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">ID</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Booking ID</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Item</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Start Date</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">End Date</th>
-                        <th class="text-center text-uppercase text-secondary text-xxs font-weight-bolder opacity-7">Actions</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">ID</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Booking ID</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Item</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Start Date</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">End Date</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Due Date</th>
+                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,10 +31,10 @@
                             <p class="text-xs font-weight-bold mb-0 ps-3">{{ $usage->id }}</p>
                         </td>
                         <td>
-                            <p class="text-xs font-weight-bold mb-0">{{ $usage->booking_id }}</p>
+                            <p class="text-xs font-weight-bold mb-0 ps-3">{{ $usage->booking_id }}</p>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center">
+                            <div class="d-flex align-items-center ps-3">
                                 <img src="{{ $usage->booking->item->photo }}" class="avatar avatar-sm me-3" alt="usage-image">
                                 <div class="d-flex flex-column">
                                     <h6 class="mb-0 text-sm">{{ $usage->booking->item->name }}</h6>
@@ -41,15 +42,19 @@
                                 </div>
                             </div>
                         </td>
-                        <td class="align-middle text-center">
-                            <span class="text-xs font-weight-bold">{{ $usage->booking->start_date }}</span>
+                        <td class="align-middle">
+                            <span class="text-xs font-weight-bold ps-3">{{ $usage->booking->start_date }}</span>
                         </td>
-                        <td class="align-middle text-center">
-                            <span class="text-xs font-weight-bold">{{ $usage->booking->end_date }}</span>
+                        <td class="align-middle">
+                            <span class="text-xs font-weight-bold ps-3">{{ $usage->booking->end_date }}</span>
+                        </td>
+                        <td class="align-middle">
+                            <span class="text-xs font-weight-bold ps-3">{{ $usage->due_date }}</span>
                         </td>
                         <td class="align-middle">
                             <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                            <a class="btn btn-link text-danger text-gradient px-3 mb-0" href="javascript:;"><i class="far fa-trash-alt me-2"></i>Delete</a>
+                            <a class="btn btn-link text-info text-gradient px-3 mb-0" href="javascript:;"><i class="fas fa-eye text-info me-2" aria-hidden="true"></i>View</a>
+                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-arrow-left text-dark me-2" aria-hidden="true"></i>Return</a>
                         </td>
                     </tr>
                     @endforeach

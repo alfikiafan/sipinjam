@@ -17,7 +17,8 @@ class ItemController extends Controller
             $items = Item::where('unit_id', $unitId)->get();
             return view('unitadmin.items.index', compact('items'));
         } elseif ($user->can('borrower')) {
-            return view('borrower.items.index');
+            $items = Item::where('status', 'available')->get();
+            return view('borrower.items.index', compact('items'));
         } else {
             abort(403, 'Forbidden');
         }
@@ -65,9 +66,9 @@ class ItemController extends Controller
         $success = $item->save();
 
         if ($success) {
-            return redirect('/items')->with('success', 'Item created successfully.');
+            return redirect()->route('items.index')->with('success', 'Item has been created.');
         } else {
-            return redirect('/items')->with('error', 'Item failed to create.');
+            return redirect()->route('items.index')->with('error', 'Item failed to create.');
         }
     }
 

@@ -20,7 +20,7 @@
                 <p class="d-inline-block">Brands: {{ $items->pluck('brand')->unique()->count() }}</p>
               </div>
               <div class="ml-auto p-0">
-                <a href="{{ route('unitadmin.items.create') }}" class="btn btn-primary m-0">Add Item</a>
+                <a href="{{ route('items.create') }}" class="btn btn-primary m-0">Add Item</a>
               </div>
             </div>
           </div>
@@ -66,8 +66,8 @@
                       <span class="badge bg-success badge-sm">{{ $item->status }}</span>
                     </td>
                       <td class="align-middle">
-                      <a class="btn btn-link text-dark px-3 mb-0" href="{{ route('unitadmin.items.edit', ['item' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                      <form action="{{ route('unitadmin.items.destroy', ['item' => $item->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                      <a class="btn btn-link text-dark px-3 mb-0" href="{{ route('items.edit', ['item' => $item->id]) }}"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
+                      <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                         @csrf
                         @method('DELETE')
                         <button type="submit" class="btn btn-link text-danger text-gradient px-3 mb-0"><i class="far fa-trash-alt me-2"></i>Delete</button>

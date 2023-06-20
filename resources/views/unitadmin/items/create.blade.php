@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('unitadmin.items.store') }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
     @csrf
 
     <div class="row">

@@ -25,6 +25,8 @@ class UsageController extends Controller
     {
         $validatedData = $request->validate([
             'booking_id' => 'required',
+            'status' => 'required',
+            'due_date' => 'required',
             'note_text' => 'required',
         ]);
 
@@ -37,6 +39,8 @@ class UsageController extends Controller
     {
         $validatedData = $request->validate([
             'booking_id' => 'required',
+            'status' => 'required',
+            'due_date' => 'required',
             'note_text' => 'required',
         ]);
 
@@ -45,10 +49,18 @@ class UsageController extends Controller
         return redirect()->route('unitadmin.usages.index')->with('success', 'Usage updated successfully.');
     }
 
-    public function destroy(Usage $usage)
+    // Fungsi untuk mengembalikan barang
+    public function return(Request $request, Usage $usage)
     {
-        $usage->delete();
+        $validatedData = $request->validate([
+            'booking_id' => 'required',
+            'status' => 'required',
+            'due_date' => 'required',
+            'note_text' => 'required',
+        ]);
 
-        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage deleted successfully.');
+        $usage->update($validatedData);
+
+        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage updated successfully.');
     }
 }

@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('unitadmin.items.update', $item->id) }}" enctype="multipart/form-data">
+<form method="POST" action="{{ route('items.update', $item->id) }}" enctype="multipart/form-data">
     @csrf
     @method('PUT')
     <div class="row">
