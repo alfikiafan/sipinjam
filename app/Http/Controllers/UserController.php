@@ -8,13 +8,7 @@ use Illuminate\Http\Request;
 class UserController extends Controller
 {
     public function index() {
-        if(auth()->user()->can('borrower')) {
-        $users = User::all();
-
-        return view('borrower.users.index', compact('users'));
-        } else {
-            abort(403, 'Forbidden');
-        }
+        //
     }
 
     public function create()

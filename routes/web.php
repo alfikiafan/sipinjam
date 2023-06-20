@@ -10,6 +10,8 @@ use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UsageController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\UnitAdminController;
+use App\Http\Controllers\ProfileController;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,12 +52,12 @@ Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 Route::middleware('auth', 'administrator')->group(function () {
 
     // Rute untuk manajemen admin unit
-    Route::get('/unitadmins', [UserController::class, 'index'])->name('administrator.unitadmins.index');
-    Route::post('/unitadmins', [UserController::class, 'store'])->name('administrator.unitadmins.store');
-    Route::get('/unitadmins/create', [UserController::class, 'create'])->name('administrator.unitadmins.create');
-    Route::get('/unitadmins/{unitadmin}/edit', [UserController::class, 'edit'])->name('administrator.unitadmins.edit');
-    Route::put('/unitadmins/{unitadmin}', [UserController::class, 'update'])->name('administrator.unitadmins.update');
-    Route::delete('/unitadmins/{unitadmin}', [UserController::class, 'destroy'])->name('administrator.unitadmins.destroy');
+    Route::get('/unitadmins', [UnitAdminController::class, 'index'])->name('administrator.unitadmins.index');
+    Route::post('/unitadmins', [UnitAdminController::class, 'store'])->name('administrator.unitadmins.store');
+    Route::get('/unitadmins/create', [UnitAdminController::class, 'create'])->name('administrator.unitadmins.create');
+    Route::get('/unitadmins/{unitadmin}/edit', [UnitAdminController::class, 'edit'])->name('administrator.unitadmins.edit');
+    Route::put('/unitadmins/{unitadmin}', [UnitAdminController::class, 'update'])->name('administrator.unitadmins.update');
+    Route::delete('/unitadmins/{unitadmin}', [UnitAdminController::class, 'destroy'])->name('administrator.unitadmins.destroy');
 
     // Rute untuk manajemen unit
     Route::get('/units', [UnitController::class, 'index'])->name('administrator.units.index');
@@ -88,9 +90,11 @@ Route::middleware('auth', 'unitadmin')->group(function () {
 // Rute borrower saja
 Route::middleware('auth', 'borrower')->group(function () {
     // Rute untuk melengkapi profil
-    Route::get('/profile', [UserController::class, 'edit'])->name('borrower.profile.edit');
-    Route::get('/profile/{user}/edit', [UserController::class, 'editProfile'])->name('borrower.profile.edit');
-    Route::put('/profile/{user}', [UserController::class, 'updateProfile'])->name('borrower.profile.update');
+    Route::get('/profile', [ProfileController::class, 'index'])->name('borrower.profile.index');
+    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('borrower.profile.edit');
+    Route::put('/profile', [ProfileController::class, 'update'])->name('borrower.profile.update');
+    Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('borrower.profile.changePassword');
+    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('borrower.profile.updatePassword');    
 
     // Rute untuk mencetak bukti peminjaman
     Route::get('/bookings/{booking}/print', [BookingController::class, 'print'])->name('borrower.bookings.print');
