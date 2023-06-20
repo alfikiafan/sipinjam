@@ -19,6 +19,7 @@ class BookingController extends Controller
             
             return view('unitadmin.bookings.index', compact('bookings'));
         } elseif ($user->can('borrower')) {
+            $bookings = Booking::where('user_id', $user->id)->get();
             return view('borrower.bookings.index');
         } else {
             abort(403, 'Forbidden');
@@ -32,17 +33,20 @@ class BookingController extends Controller
 
     public function store(Request $request)
     {
-        $validatedData = $request->validate([
-            'item_id' => 'required',
-            'user_id' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'status' => 'required',
-        ]);
-
-        $booking = Booking::create($validatedData);
-
-        return redirect()->route('borrower.dashboard')->with('success', 'Booking created successfully.');
+        $user = auth()->user();
+        if($user->can('borrower')) {
+            $validatedData = $request->validate([
+                'item_id' => 'required',
+                'user_id' => 'required',
+                'start_date' => 'required',
+                'end_date' => 'required',
+                'status' => 'required',
+            ]);
+            $booking = Booking::create($validatedData);
+            return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function update(Request $request, Booking $booking)

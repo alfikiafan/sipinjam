@@ -24,7 +24,7 @@ class ItemFactory extends Factory
         $categoryIds = Category::pluck('id')->toArray();
         $unitIds = Unit::pluck('id')->toArray();
         $quantity = $faker->numberBetween(0, 100);
-        $status = ($quantity === 0) ? 'used' : $faker->randomElement(['available', 'not on loan']);
+        $status = ($quantity === 0) ? 'empty' : $faker->randomElement(['available', 'not available']);
         return [
             'categories_id' => $faker->randomElement($categoryIds),
             'unit_id' => $faker->randomElement($unitIds),

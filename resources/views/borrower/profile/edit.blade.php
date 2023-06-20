@@ -27,7 +27,8 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-dark">Save Changes</button>
+  <button type="submit" class="btn btn-dark me-3">Save Changes</button>
+  <a href="{{ route('borrower.profile.index') }}" class="btn btn-info">Cancel</a>
 </form>
 
 @endsection

@@ -14,6 +14,8 @@ return new class extends Migration
         Schema::create('usages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('booking_id');
+            $table->date('due_date');
+            $table->string('status');
             $table->string('note_text', 500);
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
             $table->timestamps();

@@ -100,29 +100,31 @@ Route::middleware('auth', 'borrower')->group(function () {
     Route::get('/bookings/{booking}/print', [BookingController::class, 'print'])->name('borrower.bookings.print');
 });
 
-// Rute yang digunakan bersama oleh unit admin dan borrower namun dengan view berbeda
+// Rute untuk item
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
+    // Rute untuk manajemen item (unit admin)
+    Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::post('/items', [ItemController::class, 'store'])->name('items.store');
+    Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
+    Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
+    Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
+    Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
 
-        // Rute untuk manajemen item (unit admin)
-        Route::get('/items', [ItemController::class, 'index'])->name('unitadmin.items.index');
-        Route::post('/items', [ItemController::class, 'store'])->name('unitadmin.items.store');
-        Route::get('/items/create', [ItemController::class, 'create'])->name('unitadmin.items.create');
-        Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('unitadmin.items.edit');
-        Route::put('/items/{item}', [ItemController::class, 'update'])->name('unitadmin.items.update');
-        Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('unitadmin.items.destroy');
+    // Rute untuk melihat ketersediaan barang (borrower)
+    // Route::get('/items', [ItemController::class, 'index'])->name('borrower.items.index');
+    // Route::get('/items/{item}', [ItemController::class, 'show'])->name('borrower.items.show');
+});
 
-        // Rute untuk menampilkan daftar booking dan approval peminjaman (unit admin)
-        Route::get('/bookings', [BookingController::class, 'index'])->name('unitadmin.bookings.index');
-        Route::post('/bookings', [BookingController::class, 'store'])->name('unitadmin.bookings.store');
-        Route::put('/bookings/{booking}', [BookingController::class, 'update'])->name('unitadmin.bookings.update');
-        Route::get('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('unitadmin.bookings.approve');
+// Rute untuk booking
+Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
+    // Rute untuk menampilkan daftar booking dan approval peminjaman (unit admin)
+    Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
+    Route::put('/bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
+    Route::get('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
 
-        // Rute untuk mengajukan booking (borrower)
-        Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');
-        Route::get('/bookings/create', [BookingController::class, 'create'])->name('borrower.bookings.create');
-        Route::post('/bookings', [BookingController::class, 'store'])->name('borrower.bookings.store');
-        
-        // Rute untuk melihat ketersediaan barang (borrower)
-        Route::get('/items', [ItemController::class, 'index'])->name('borrower.items.index');
-        Route::get('/items/{item}', [ItemController::class, 'show'])->name('borrower.items.show');
+    // Rute untuk mengajukan booking (borrower)
+    // Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');
+    // Route::get('/bookings/create', [BookingController::class, 'create'])->name('borrower.bookings.create');
+    // Route::post('/bookings', [BookingController::class, 'store'])->name('borrower.bookings.store');
 });
