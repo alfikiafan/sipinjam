@@ -48,7 +48,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="photo">Photo</label>
-                <input type="file" class="form-control" id="photo" name="photo" required>
+                <input type="file" class="form-control" id="photo" name="photo">
                 @error('photo')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -67,7 +67,7 @@
                 <select class="form-control" id="status" name="status" required>
                     <option value="">Select Status</option>
                     <option value="available" {{ old('status', $item->status) == 'available' ? 'selected' : '' }}>Available</option>
-                    <option value="not on loan" {{ old('status', $item->status) == 'not on loan' ? 'selected' : '' }}>Not on Loan</option>
+                    <option value="not available" {{ old('status', $item->status) == 'not available' ? 'selected' : '' }}>Not Available</option>
                 </select>
                 @error('status')
                     <div class="text-danger">{{ $message }}</div>

@@ -8,20 +8,22 @@
       <div class="col-12">
         <div class="card mb-4">
           <div class="card-header pb-0">
-            <h6>Usage List</h6>
+            <h6 class="m-0">Usages table</h6>
+            <p class="text-sm">Review all bookings that you have approved.</p>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
                 <thead>
                     <tr>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">ID</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Booking ID</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Item</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Start Date</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">End Date</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Due Date</th>
-                        <th class="text-uppercase text-secondary text-xxs font-weight-bolder">Actions</th>
+                        <th class="text-secondary text-xxs font-weight-bolder pe-2">ID</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">Book ID</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">Item</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">Status</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">Start Date</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">End Date</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">Due Date</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">Actions</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -31,10 +33,10 @@
                             <p class="text-xs font-weight-bold mb-0 ps-3">{{ $usage->id }}</p>
                         </td>
                         <td>
-                            <p class="text-xs font-weight-bold mb-0 ps-3">{{ $usage->booking_id }}</p>
+                            <p class="text-xs font-weight-bold mb-0">{{ $usage->booking_id }}</p>
                         </td>
                         <td>
-                            <div class="d-flex align-items-center ps-3">
+                            <div class="d-flex align-items-center">
                                 <img src="{{ $usage->booking->item->photo }}" class="avatar avatar-sm me-3" alt="usage-image">
                                 <div class="d-flex flex-column">
                                     <h6 class="mb-0 text-sm">{{ $usage->booking->item->name }}</h6>
@@ -43,18 +45,38 @@
                             </div>
                         </td>
                         <td class="align-middle">
-                            <span class="text-xs font-weight-bold ps-3">{{ $usage->booking->start_date }}</span>
+                          @if ($usage->status === 'awaiting use')
+                            <span class="badge bg-primary badge-sm">{{ $usage->status }}</span>
+                          @elseif ($usage->status === 'used')
+                            <span class="badge bg-info badge-sm">{{ $usage->status }}</span>
+                          @elseif ($usage->status === 'returned')
+                            <span class="badge bg-success badge-sm">{{ $usage->status }}</span>
+                          @else
+                            <span class="badge bg-danger badge-sm">{{ $usage->status }}</span>
+                          @endif
                         </td>
                         <td class="align-middle">
-                            <span class="text-xs font-weight-bold ps-3">{{ $usage->booking->end_date }}</span>
+                            <span class="text-xs font-weight-bold">{{ $usage->booking->start_date }}</span>
                         </td>
                         <td class="align-middle">
-                            <span class="text-xs font-weight-bold ps-3">{{ $usage->due_date }}</span>
+                            <span class="text-xs font-weight-bold">{{ $usage->booking->end_date }}</span>
                         </td>
                         <td class="align-middle">
-                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-pencil-alt text-dark me-2" aria-hidden="true"></i>Edit</a>
-                            <a class="btn btn-link text-info text-gradient px-3 mb-0" href="javascript:;"><i class="fas fa-eye text-info me-2" aria-hidden="true"></i>View</a>
-                            <a class="btn btn-link text-dark px-3 mb-0" href="javascript:;"><i class="fas fa-arrow-left text-dark me-2" aria-hidden="true"></i>Return</a>
+                            <span class="text-xs font-weight-bold">{{ $usage->due_date }}</span>
+                        </td>
+                        <td>
+                          <div class="d-flex align-items-center">
+                            <a href="" class="me-2">
+                              <button type="button" class="btn btn-action btn-info mb-0">
+                                <i class="fas fa-eye"></i>
+                              </button>
+                            </a>
+                            <a href="">
+                              <button type="button" class="btn btn-action btn-primary mb-0">
+                                <i class="fas fa-pencil-alt"></i>
+                              </button>
+                            </a>
+                          </div>
                         </td>
                     </tr>
                     @endforeach
