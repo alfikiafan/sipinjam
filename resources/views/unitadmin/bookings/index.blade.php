@@ -1,6 +1,10 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
+@php
+  $status = request('status');
+@endphp
 
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
   <div class="container-fluid px-3">
@@ -12,6 +16,14 @@
             <p class="text-sm">View all bookings made by borrowers for your unit.</p>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
+            <div class="btn-group mb-2">
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ empty($status) ? 'tab-active' : '' }}" href="{{ route('bookings.index') }}">All Bookings</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'pending' ? 'tab-active' : '' }}" href="{{ route('bookings.index', ['status' => 'pending']) }}">Pending</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'approved' ? 'tab-active' : '' }}" href="{{ route('bookings.index', ['status' => 'approved']) }}">Approved</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'rejected' ? 'tab-active' : '' }}" href="{{ route('bookings.index', ['status' => 'rejected']) }}">Rejected</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'cancelled' ? 'tab-active' : '' }}" href="{{ route('bookings.index', ['status' => 'cancelled']) }}">Cancelled</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'expired' ? 'tab-active' : '' }}" href="{{ route('bookings.index', ['status' => 'expired']) }}">Expired</a>
+            </div>
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>
@@ -34,7 +46,7 @@
                     </td>
                     <td>
                       <div class="d-flex">
-                        <img src="{{ $booking->item->photo }}" class="avatar avatar-sm me-3" alt="item-image">
+                        <img src="{{ asset($booking->item->photo) }}" class="avatar avatar-sm me-3" alt="item-image">
                         <div class="d-flex flex-column">
                           <h6 class="mb-0 text-sm">{{ $booking->item->name }}</h6>
                           <p class="text-xs text-secondary mb-0">{{ $booking->item->Category->name }}</p>
@@ -69,12 +81,12 @@
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
-                        <a href="{{ route('bookings.approve', ['booking' => $booking->id]) }}" class="me-2">
-                          <button type="button" class="btn btn-action btn-success mb-0" onclick="return confirm('Are you sure to approve this booking?')">
+                        <a href="{{ route('bookings.approve.show', ['booking' => $booking->id]) }}">
+                          <button type="button" class="btn btn-action btn-success mb-0 me-2">
                             <i class="fas fa-check"></i>
                           </button>
                         </a>
-                        <a href="{{ route('bookings.reject', ['booking' => $booking->id]) }}" class="me-2">
+                        <a href="{{ route('bookings.reject', ['booking' => $booking->id]) }}">
                           <button type="button" class="btn btn-action btn-danger mb-0" onclick="return confirm('Are you sure to reject this booking?')">
                           <i class="fas fa-times"></i>
                           </button>

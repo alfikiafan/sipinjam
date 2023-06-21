@@ -20,6 +20,18 @@ class Item extends Model
         'status'
     ];
 
+    public function rules()
+    {
+        return [
+            'serial_number' => 'unique:items',
+            'quantity' => function ($attribute, $value, $fail) {
+                if ($this->serial_number && $value != 1) {
+                    $fail('If the item has a serial number, the quantity must be 1.');
+                }
+            },
+        ];
+    }
+
     public function Category()
     {
         return $this->belongsTo(Category::class, 'categories_id');

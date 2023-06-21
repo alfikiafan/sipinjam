@@ -1,6 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
 
 <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
     @csrf
@@ -9,7 +10,7 @@
         <div class="col-md-6">
             <div class="form-group">
                 <label for="categories_id">Category</label>
-                <select class="form-control @error('categories_id') is-invalid @enderror" id="categories_id" name="categories_id" required>
+                <select class="form-control @error('categories_id') is-invalid @enderror" id="categories_id" name="categories_id">
                     <option value="">Select Category</option>
                     @foreach ($categories as $category)
                         <option value="{{ $category->id }}">{{ $category->name }}</option>
@@ -38,7 +39,7 @@
 
             <div class="form-group">
                 <label for="serial_number">Serial Number</label>
-                <input type="text" class="form-control @error('serial_number') is-invalid @enderror" id="serial_number" name="serial_number" required>
+                <input type="text" class="form-control @error('serial_number') is-invalid @enderror" id="serial_number" name="serial_number">
                 @error('serial_number')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -56,7 +57,7 @@
 
             <div class="form-group">
                 <label for="quantity">Quantity</label>
-                <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" required>
+                <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" min="0" @if(old('serial_number')) value="1" readonly @endif>
                 @error('quantity')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -67,7 +68,7 @@
                 <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required>
                     <option value="">Select Status</option>
                     <option value="available">Available</option>
-                    <option value="not on loan">Not on Loan</option>
+                    <option value="not available">Not Available</option>
                 </select>
                 @error('status')
                     <div class="invalid-feedback">{{ $message }}</div>

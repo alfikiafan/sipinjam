@@ -11,6 +11,8 @@ class Usage extends Model
 
     protected $fillable = [
         'booking_id',
+        'status',
+        'due_date',
         'note_text'
     ];
 

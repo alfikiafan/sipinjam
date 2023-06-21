@@ -1,6 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
 
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
   <div class="container-fluid px-3">
@@ -37,7 +38,7 @@
                         </td>
                         <td>
                             <div class="d-flex align-items-center">
-                                <img src="{{ $usage->booking->item->photo }}" class="avatar avatar-sm me-3" alt="usage-image">
+                                <img src="{{ asset($usage->booking->item->photo) }}" class="avatar avatar-sm me-3" alt="usage-image">
                                 <div class="d-flex flex-column">
                                     <h6 class="mb-0 text-sm">{{ $usage->booking->item->name }}</h6>
                                     <p class="text-xs text-secondary mb-0">{{ $usage->booking->item->Category->name }}</p>

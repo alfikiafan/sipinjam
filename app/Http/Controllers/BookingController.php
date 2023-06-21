@@ -8,17 +8,24 @@ use Illuminate\Http\Response;
 
 class BookingController extends Controller
 {
-    public function index()
+    public function index($status = null)
     {
         $user = auth()->user();
-        if($user->can('unitadmin')) {
+        if ($user->can('unitadmin')) {
             $unitId = $user->unit_id;
             $bookings = Booking::whereHas('item', function ($query) use ($unitId) {
                 $query->where('unit_id', $unitId);
-            })->get();
-            
+            });
+        
+            if ($status) {
+                $bookings->where('status', $status);
+            }
+        
+            $bookings = $bookings->get();
+        
             return view('unitadmin.bookings.index', compact('bookings'));
-        } elseif ($user->can('borrower')) {
+        }
+         elseif ($user->can('borrower')) {
             $bookings = Booking::where('user_id', $user->id)->get();
             return view('borrower.bookings.index');
         } else {
@@ -62,31 +69,5 @@ class BookingController extends Controller
         $booking->update($validatedData);
 
         return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
-    }
-
-    public function approve(Booking $booking)
-    {
-        $user = auth()->user();
-        if($user->can('unitadmin')) {
-            $booking->status = 'approved';
-            $booking->save();
-            
-            return redirect()->back();
-        } else {
-            abort(403, 'Forbidden');
-        }
-    }
-    
-    public function reject(Booking $booking)
-    {
-        $user = auth()->user();
-        if ($user->can('unitadmin')) {
-            $booking->status = 'rejected';
-            $booking->save();
-            
-            return redirect()->back();
-        } else {
-            abort(403, 'Forbidden');
-        }
     }
 }

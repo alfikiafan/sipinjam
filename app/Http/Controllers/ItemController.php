@@ -42,11 +42,14 @@ class ItemController extends Controller
             'categories_id' => 'required',
             'name' => 'required',
             'brand' => 'required',
-            'serial_number' => 'required',
-            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'quantity' => 'required|integer',
-            'status' => 'required|in:available,not on loan',
+            'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
+            'status' => 'required|in:available,not available',
         ]);
+
+        if ($request->has('serial_number') && $request->filled('serial_number')) {
+            $request->merge(['quantity' => 1]);
+        }
 
         $unitId = auth()->user()->unit_id;
 
@@ -83,31 +86,34 @@ class ItemController extends Controller
         $user = auth()->user();
         $unitId = $user->unit_id;
     
-        // Validasi input
         $validatedData = $request->validate([
             'categories_id' => 'required',
             'name' => 'required',
             'brand' => 'required',
-            'serial_number' => 'required',
-            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'quantity' => 'required|integer',
-            'status' => 'required',
+            'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
+            'status' => 'required|in:available,not available',
         ]);
+
+        if ($request->has('serial_number') && $request->filled('serial_number')) {
+            $request->merge(['quantity' => 1]);
+        }
     
-        // Mengupdate data item
         $item->categories_id = $validatedData['categories_id'];
         $item->unit_id = $unitId;
         $item->name = $validatedData['name'];
         $item->brand = $validatedData['brand'];
-        $item->serial_number = $validatedData['serial_number'];
+
+        if ($request->has('serial_number')) {
+            $item->serial_number = $request->serial_number;
+        }
     
-        // Upload foto baru jika ada
         if ($request->hasFile('photo')) {
             $photoPath = $request->file('photo')->store('public/img/items');
             $item->photo = Storage::url($photoPath);
         }
     
-        $item->quantity = $validatedData['quantity'];
+        $item->quantity = $request->quantity;
         $item->status = $validatedData['status'];
         $item->save();
     

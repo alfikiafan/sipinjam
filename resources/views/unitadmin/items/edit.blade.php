@@ -1,6 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
 
 <form method="POST" action="{{ route('items.update', $item->id) }}" enctype="multipart/form-data">
     @csrf
@@ -38,7 +39,7 @@
 
             <div class="form-group">
                 <label for="serial_number">Serial Number</label>
-                <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{ old('serial_number', $item->serial_number) }}" required>
+                <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{ old('serial_number', $item->serial_number) }}">
                 @error('serial_number')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror
@@ -56,7 +57,7 @@
 
             <div class="form-group">
                 <label for="quantity">Quantity</label>
-                <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $item->quantity) }}" required>
+                <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $item->quantity) }}" min="0" required>
                 @error('quantity')
                     <div class="text-danger">{{ $message }}</div>
                 @enderror

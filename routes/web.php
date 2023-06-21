@@ -12,6 +12,7 @@ use App\Http\Controllers\UsageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnitAdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ApprovalController;
 
 /*
 |--------------------------------------------------------------------------
@@ -117,12 +118,16 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
 
 // Rute untuk booking
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
-    // Rute untuk menampilkan daftar booking dan approval peminjaman (unit admin)
+    // Rute untuk menampilkan daftar booking (unit admin)
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/{status?}', [BookingController::class, 'index'])->name('bookings.index');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::put('/bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
-    Route::get('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
-    Route::get('/bookings/{booking}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
+
+    // Rute untuk mengelola approval booking (unit admin)
+    Route::get('/bookings/{booking}/approve', [ApprovalController::class, 'show'])->name('bookings.approve.show');
+    Route::post('/bookings/{booking}', [ApprovalController::class, 'approve'])->name('bookings.approve');
+    Route::get('/bookings/{booking}/reject', [ApprovalController::class, 'reject'])->name('bookings.reject');
 
     // Rute untuk mengajukan booking (borrower)
     // Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');

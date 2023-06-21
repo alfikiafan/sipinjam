@@ -1,6 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
 
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
   <div class="container-fluid px-3">
@@ -46,7 +47,7 @@
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
-                        <img src="{{ $item->photo }}" class="avatar avatar-sm me-3" alt="item-image">
+                        <img src="{{ asset($item->photo) }}" class="avatar avatar-sm me-3" alt="item-image">
                         <div class="d-flex flex-column">
                           <h6 class="mb-0 text-sm">{{ $item->name }}</h6>
                           <p class="text-xs text-secondary mb-0">{{ $item->Category->name }}</p>
@@ -81,7 +82,7 @@
                         <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-action mb-0 ms-1 btn-danger" onclick="return confirm('Are you sure to delete this medicine?')">
+                            <button type="submit" class="btn btn-action mb-0 ms-1 btn-danger">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>

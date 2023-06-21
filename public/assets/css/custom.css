@@ -2,3 +2,14 @@
     padding: 0.25rem 0.5rem;
     font-size: 0.875rem;
 }
+
+.tab-active {
+    color: #CB0C9F !important;
+    box-shadow: none !important;
+}
+
+.text-normal {
+    text-transform: none;
+    font-weight: 700;
+    box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.11), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
+}
