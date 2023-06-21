@@ -15,6 +15,7 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('item_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedInteger('quantity');
             $table->date('start_date');
             $table->date('end_date');
             $table->string('status');

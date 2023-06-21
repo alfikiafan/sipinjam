@@ -26,10 +26,10 @@ class ItemFactory extends Factory
         $categoryIds = Category::pluck('id')->toArray();
         $unitIds = Unit::pluck('id')->toArray();
 
-        $hasSerialNumber = ($serialNumberCount >= 10) ? true : false;
+        $hasSerialNumber = ($serialNumberCount <= 10) ? false : true;
         $serialNumberCount++;
 
-        $serialNumber = $hasSerialNumber ? $faker->unique()->randomNumber() : null;
+        $serialNumber = $hasSerialNumber ? null : $faker->unique()->randomNumber();
         $quantity = $hasSerialNumber ? $faker->numberBetween(0, 100) : 1;
         $status = ($quantity === 0) ? 'empty' : $faker->randomElement(['available', 'not available']);
     

@@ -18,6 +18,7 @@
                   <tr>
                     <th class="text-xxs font-weight-bolder pe-2">ID</th>
                     <th class="text-xxs font-weight-bolder px-2">Item</th>
+                    <th class="text-xxs font-weight-bolder px-2">Quantity</th>
                     <th class="text-xxs font-weight-bolder px-2">Borrower</th>
                     <th class="text-xxs font-weight-bolder px-2">Status</th>
                     <th class="text-xxs font-weight-bolder px-2">Start Date</th>
@@ -39,6 +40,9 @@
                           <p class="text-xs text-secondary mb-0">{{ $booking->item->Category->name }}</p>
                         </div>
                       </div>
+                    </td>
+                    <td>
+                      <p class="text-xs font-weight-bold mb-0">{{ $booking->quantity }}</p>
                     </td>
                     <td>
                       <p class="text-xs font-weight-bold mb-0">{{ $booking->user->name }}</p>
