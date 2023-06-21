@@ -65,13 +65,13 @@
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
-                        <a href="" class="me-2">
-                          <button type="button" class="btn btn-action btn-success mb-0">
+                        <a href="{{ route('bookings.approve', ['booking' => $booking->id]) }}" class="me-2">
+                          <button type="button" class="btn btn-action btn-success mb-0" onclick="return confirm('Are you sure to approve this booking?')">
                             <i class="fas fa-check"></i>
                           </button>
                         </a>
-                        <a href="" class="me-2">
-                          <button type="button" class="btn btn-action btn-danger mb-0">
+                        <a href="{{ route('bookings.reject', ['booking' => $booking->id]) }}" class="me-2">
+                          <button type="button" class="btn btn-action btn-danger mb-0" onclick="return confirm('Are you sure to reject this booking?')">
                           <i class="fas fa-times"></i>
                           </button>
                         </a>

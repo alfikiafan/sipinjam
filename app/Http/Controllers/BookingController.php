@@ -64,20 +64,29 @@ class BookingController extends Controller
         return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
     }
 
-    public function approval($id)
+    public function approve(Booking $booking)
     {
-        $booking = Booking::findOrFail($id);
+        $user = auth()->user();
+        if($user->can('unitadmin')) {
+            $booking->status = 'approved';
+            $booking->save();
+            
+            return redirect()->back();
+        } else {
+            abort(403, 'Forbidden');
+        }
+    }
     
-        $booking->status = 'approved';
-        $booking->save();
-    
-        return response()->json(['message' => 'Booking approved successfully.']);
-    }    
-
-    public function destroy(Booking $booking)
+    public function reject(Booking $booking)
     {
-        $booking->delete();
-
-        return redirect()->route('bookings.index')->with('success', 'Booking deleted successfully.');
+        $user = auth()->user();
+        if ($user->can('unitadmin')) {
+            $booking->status = 'rejected';
+            $booking->save();
+            
+            return redirect()->back();
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 }

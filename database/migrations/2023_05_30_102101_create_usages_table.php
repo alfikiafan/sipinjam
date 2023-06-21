@@ -16,7 +16,7 @@ return new class extends Migration
             $table->unsignedBigInteger('booking_id');
             $table->date('due_date');
             $table->string('status');
-            $table->string('note_text', 500);
+            $table->string('note_text', 500)->nullable();
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
             $table->timestamps();
         });

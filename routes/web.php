@@ -122,6 +122,7 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::put('/bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
     Route::get('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
+    Route::get('/bookings/{booking}/reject', [BookingController::class, 'reject'])->name('bookings.reject');
 
     // Rute untuk mengajukan booking (borrower)
     // Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');
