@@ -9,12 +9,19 @@ use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
-    public function index()
+    public function index($status = null)
     {
         $user = auth()->user();
         if ($user->can('unitadmin')) {
             $unitId = $user->unit_id;
-            $items = Item::where('unit_id', $unitId)->get();
+            $items = Item::where('unit_id', $unitId);
+
+            if ($status) {
+                $items->where('status', $status);
+            }
+
+            $items = $items->get();
+
             return view('unitadmin.items.index', compact('items'));
         } elseif ($user->can('borrower')) {
             $items = Item::where('status', 'available')->get();

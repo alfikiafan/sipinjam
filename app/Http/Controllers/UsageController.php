@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UsageController extends Controller
 {
-    public function index()
+    public function index($status = null)
     {
         $user = auth()->user();
         $unitId = $user->unit_id;
@@ -16,8 +16,14 @@ class UsageController extends Controller
             $query->whereHas('item', function ($query) use ($unitId) {
                 $query->where('unit_id', $unitId);
             });
-        })->latest()->paginate(20);
-    
+        });
+        
+        if ($status) {
+            $usages->where('status', $status);
+        }
+
+        $usages = $usages->latest()->paginate(20);
+
         return view('unitadmin.usages.index', compact('usages'));
     }
 

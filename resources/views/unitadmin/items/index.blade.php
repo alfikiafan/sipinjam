@@ -3,6 +3,10 @@
 @section('content')
 @include('components.notifications')
 
+@php
+  $status = request('status');
+@endphp
+
 <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
   <div class="container-fluid px-3">
     <div class="row">
@@ -26,6 +30,12 @@
             </div>
           </div>
           <div class="card-body px-0 pt-0 pb-2">
+            <div class="btn-group mb-2">
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ empty($status) ? 'tab-active' : '' }}" href="{{ route('items.index') }}">All Items</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'available' ? 'tab-active' : '' }}" href="{{ route('items.index', ['status' => 'available']) }}">Available</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'not available' ? 'tab-active' : '' }}" href="{{ route('items.index', ['status' => 'not available']) }}">Not Available</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'empty' ? 'tab-active' : '' }}" href="{{ route('items.index', ['status' => 'empty']) }}">Empty</a>
+            </div>
             <div class="table-responsive p-0">
               <table class="table align-items-center mb-0">
                 <thead>

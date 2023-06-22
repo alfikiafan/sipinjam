@@ -82,6 +82,7 @@ Route::middleware('auth', 'unitadmin')->group(function () {
 
     // Rute untuk melihat daftar penggunaan barang, dan mengembalikan barang
     Route::get('/usages', [UsageController::class, 'index'])->name('unitadmin.usages.index');
+    Route::get('/usages/{status?}', [UsageController::class, 'index'])->name('unitadmin.usages.index');
     Route::get('/usages/{usage}', [UsageController::class, 'show'])->name('unitadmin.usages.show');
     Route::put('/usages/{usage}', [UsageController::class, 'update'])->name('unitadmin.usages.update');
     Route::get('usages/{usage}/return', [UsageController::class, 'return'])->name('unitadmin.usages.return');
@@ -105,6 +106,7 @@ Route::middleware('auth', 'borrower')->group(function () {
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     // Rute untuk manajemen item (unit admin)
     Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('/items/{status?}', [ItemController::class, 'index'])->name('items.index');
     Route::post('/items', [ItemController::class, 'store'])->name('items.store');
     Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
     Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
