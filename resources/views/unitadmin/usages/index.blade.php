@@ -22,6 +22,7 @@
               <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'awaiting use' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'awaiting use']) }}">Awaiting Use</a>
               <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'used' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'used']) }}">Used</a>
               <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'returned' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'returned']) }}">Returned</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'late' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'late']) }}">Late</a>
               <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'expired' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'expired']) }}">Expired</a>
             </div>
             <div class="table-responsive p-0">
@@ -63,8 +64,10 @@
                             <span class="badge bg-info badge-sm">{{ $usage->status }}</span>
                           @elseif ($usage->status === 'returned')
                             <span class="badge bg-success badge-sm">{{ $usage->status }}</span>
-                          @else
+                          @elseif ($usage->status === 'expired')
                             <span class="badge bg-danger badge-sm">{{ $usage->status }}</span>
+                          @else
+                            <span class="badge bg-warning badge-sm">{{ $usage->status }}</span>
                           @endif
                         </td>
                         <td class="align-middle">

@@ -57,6 +57,14 @@
           <span class="nav-link-text ms-1 {{ (Request::is('units') ? 'text-dark' : 'text-white') }}">Units</span>
         </a>
       </li>
+      <li class="nav-item">
+        <a class="nav-link {{ (Request::is('profile') ? 'active' : '') }}" href="{{ url('profile') }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i style="font-size: 1rem;" class="fas fa-lg fa-user ps-2 pe-2 text-center text-dark {{ (Request::is('profile') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+            </div>
+            <span class="nav-link-text ms-1 {{ (Request::is('profile') ? 'text-dark' : 'text-white') }}">User Profile</span>
+        </a>
+      </li>
       @endcan
       @can('unitadmin')
       <li class="nav-item">
@@ -81,6 +89,14 @@
             <i style="font-size: 1rem;" class="fas fa-lg fa-chart-line ps-2 pe-2 text-center text-dark {{ (Request::is('usages') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
           </div>
           <span class="nav-link-text ms-1 {{ (Request::is('usages') ? 'text-dark' : 'text-white') }}">Usages</span>
+        </a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link {{ (Request::is('profile') ? 'active' : '') }}" href="{{ url('profile') }}">
+            <div class="icon icon-shape icon-sm shadow border-radius-md bg-white text-center me-2 d-flex align-items-center justify-content-center">
+              <i style="font-size: 1rem;" class="fas fa-lg fa-user ps-2 pe-2 text-center text-dark {{ (Request::is('profile') ? 'text-white' : 'text-dark') }} " aria-hidden="true"></i>
+            </div>
+            <span class="nav-link-text ms-1 {{ (Request::is('profile') ? 'text-dark' : 'text-white') }}">User Profile</span>
         </a>
       </li>
       @endcan
@@ -112,7 +128,7 @@
       @endcan
     </ul>
   </div>
-  <div class="sidenav-footer mt-3 mx-3 ">
+  <div class="sidenav-footer my-3 mx-3 ">
     <div class="card card-background shadow-none bg-gradient-dark" id="sidenavCard">
       <div class="card-body text-start p-3 w-100">
         <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">

@@ -18,6 +18,8 @@ class ReturnController extends Controller
                 return redirect()->back()->with('error', 'Cannot return an item that is still awaiting use.');
             } elseif ($usage->status == 'returned') {
                 return redirect()->back()->with('error', 'Cannot return an item that has already been returned.');
+            } elseif ($usage->status == 'expired') {
+                return redirect()->back()->with('error', 'You cannot return an item that has already expired. Don\'t worry about the quantity of items. The return process will happen automatically.');
             }
 
             if ($usage->booking->item->unit_id !== $unitId) {
@@ -38,13 +40,15 @@ class ReturnController extends Controller
                 return redirect()->back()->with('error', 'Cannot return an item that is still awaiting use.');
             } elseif ($usage->status == 'returned') {
                 return redirect()->back()->with('error', 'Cannot return an item that has already been returned.');
+            } elseif ($usage->status == 'expired') {
+                return redirect()->back()->with('error', 'You cannot return an item that has already expired. Don\'t worry about the quantity of items. The return process will happen automatically.');
             }
         
             $validatedData = $request->validate([
                 'note_text' => 'nullable|string',
             ]);
             
-            $usage->note_text = $validatedData['note_text'];            
+            $usage->note_text = $validatedData['note_text'];
             $usage->status = 'returned';
             $usage->save();
         

@@ -29,6 +29,7 @@ class UserFactory extends Factory
             'password' => bcrypt('password'),
             'role' => $faker->randomElement(['administrator', 'unitadmin', 'borrower']),
             'phone' => $faker->phoneNumber(),
+            'photo' => 'storage/img/avatar/default.png',
             'unit_id' => function (array $attributes) use (&$unitIdCounter) {
                 if ($attributes['role'] === 'unitadmin') {
                     $unitIdCounter++;

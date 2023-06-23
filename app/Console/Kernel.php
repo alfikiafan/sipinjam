@@ -4,6 +4,11 @@ namespace App\Console;
 
 use Illuminate\Console\Scheduling\Schedule;
 use Illuminate\Foundation\Console\Kernel as ConsoleKernel;
+use App\Http\Controllers\BookingController;
+use App\Http\Controllers\UsageController;
+use App\Models\Booking;
+use App\Models\Usage;
+use Carbon\Carbon;
 
 class Kernel extends ConsoleKernel
 {
@@ -12,7 +17,13 @@ class Kernel extends ConsoleKernel
      */
     protected function schedule(Schedule $schedule): void
     {
-        // $schedule->command('inspire')->hourly();
+        $schedule->call(function () {
+            $bookingController = new BookingController();
+            $bookingController->updateExpiredBookings();
+
+            $usageController = new UsageController();
+            $usageController->updateExpiredAndLateUsages();
+        })->dailyAt('00:10');
     }
 
     /**

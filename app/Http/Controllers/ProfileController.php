@@ -5,56 +5,67 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
     public function index()
     {
         $user = auth()->user();
-    
-        if ($user->can('borrower')) {
-            return view('borrower.profile.index', compact('user'));
-        } else {
-            abort(403, 'Forbidden');
-        }
+        return view('profile.index', compact('user'));
     }
 
     public function edit()
     {
-        if(auth()->user()->can('borrower')) {
-            $user = auth()->user();
-            return view('borrower.profile.edit', compact('user'));
-        } else {
-            abort(403, 'Forbidden');
-        }
+        $user = auth()->user();
+        return view('profile.edit', compact('user'));
     }
 
     public function update(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
-            'email' => 'email|required',
             'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'about_me' => 'max:500',
         ]);
-
+        
         $user = auth()->user();
-
-        $user->name = $request->name;
-        $user->email = $request->email;
-        $user->phone = $request->phone;
-
+        
+        $user->name = $validatedData['name'];
+        $user->phone = $validatedData['phone'];
+        $user->address = $validatedData['address'];
+        $user->city = $validatedData['city'];
+        $user->about_me = $validatedData['about_me'];
+        
         $user->save();
 
-        return redirect()->route('borrower.profile.index')->with('success', 'Profile updated successfully.');
+        return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $user = auth()->user();
+
+        if ($request->hasFile('photo')) {
+
+            if ($user->photo) {
+                Storage::delete(str_replace('storage/', 'public/', $user->photo));
+            }
+
+            $path = $request->file('photo')->store('public/img/avatar');
+            $filename = str_replace('public/', 'storage/', $path);
+            $user->photo = $filename;
+            $user->save();
+        }
+
+        return redirect()->back()->with('success', 'Photo profile updated successfully.');
     }
 
     public function changePassword(User $user)
     {
-        if(auth()->user()->can('borrower')) {
-            return view('borrower.profile.change-password', compact('user'));
-        } else {
-            abort(403, 'Forbidden');
-        }
+        return view('profile.change-password', compact('user'));
     }
 
     public function updatePassword(Request $request)
@@ -73,6 +84,6 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('borrower.profile.index')->with('success', 'Password changed successfully.');
+        return redirect()->route('profile.index')->with('success', 'Password changed successfully.');
     }
 }

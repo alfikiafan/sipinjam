@@ -67,9 +67,11 @@
                       @elseif ($booking->status === 'rejected')
                         <span class="badge bg-danger badge-sm">{{ $booking->status }}</span>
                       @elseif ($booking->status === 'cancelled')
-                        <span class="badge bg-secondary badge-sm">{{ $booking->status }}</span>
-                      @else
+                        <span class="badge bg-info badge-sm">{{ $booking->status }}</span>
+                      @elseif ($booking->status === 'approved')
                         <span class="badge bg-success badge-sm">{{ $booking->status }}</span>
+                      @else
+                        <span class="badge bg-danger badge-sm">{{ $booking->status }}</span>
                       @endif
                       </div>
                     </td>

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Carbon\Carbon;
 
 class BookingController extends Controller
 {
     public function index(Request $request)
-    {
+    {   
         $user = auth()->user();
 
         if ($user->can('unitadmin')) {
@@ -85,5 +86,19 @@ class BookingController extends Controller
         $booking->update($validatedData);
 
         return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
+    }
+
+    public function updateExpiredBookings()
+    {
+        $expiredBookings = Booking::where('status', 'pending')
+            ->whereDate('end_date', '<', Carbon::today()->toDateString())
+            ->get();
+
+        foreach ($expiredBookings as $booking) {
+            $booking->status = 'expired';
+            $booking->save();
+        }
+
+        return response()->json(['message' => 'Expired bookings updated successfully.']);
     }
 }

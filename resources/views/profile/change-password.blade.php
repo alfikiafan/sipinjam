@@ -3,7 +3,7 @@
 @section('content')
 
 <!-- Halaman Ganti Password -->
-<form method="POST" action="{{ route('borrower.profile.updatePassword') }}">
+<form method="POST" action="{{ route('profile.updatePassword') }}">
 @csrf
 @method('PUT')
 <div class="row">
@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-dark me-3">Change Password</button>
-  <a href="{{ route('borrower.profile.index') }}" class="btn btn-info">Cancel</a>
+  <button type="submit" class="btn bg-gradient-dark me-3">Change Password</button>
+  <a href="{{ route('profile.index') }}" class="btn btn-info">Cancel</a>
 </form>
 @endsection
