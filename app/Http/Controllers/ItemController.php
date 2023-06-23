@@ -65,11 +65,11 @@ class ItemController extends Controller
     public function store(Request $request)
     {
         $user = auth()->user();
-        $request->validate([
+        $validatedData = $request->validate([
             'category_id' => 'required',
             'name' => 'required',
             'brand' => 'required',
-            'quantity' => 'required|integer',
+            'quantity' => 'required|integer|min:1',
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required|in:available,not available',
         ]);
@@ -87,14 +87,14 @@ class ItemController extends Controller
         $photoPath = $request->file('photo')->store('public/img/items');
 
         $item = new Item([
-            'category_id' => $request->category_id,
+            'category_id' => $validatedData['category_id'],
             'unit_id' => $unitId,
-            'name' => $request->name,
-            'brand' => $request->brand,
+            'name' => $validatedData['name'],
+            'brand' => $validatedData['brand'],
             'serial_number' => $request->serial_number,
             'photo' => Storage::url($photoPath),
             'quantity' => $request->quantity,
-            'status' => $request->status,
+            'status' => $validatedData['status'],
         ]);
 
         $success = $item->save();

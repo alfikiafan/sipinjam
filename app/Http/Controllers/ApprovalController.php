@@ -41,7 +41,7 @@ class ApprovalController extends Controller
         }
         
         if ($user->can('unitadmin')) {
-            $request->validate([
+            $validatedData = $request->validate([
                 'due_date' => 'required|date',
                 'note_text' => 'nullable|string',
             ]);
@@ -52,8 +52,8 @@ class ApprovalController extends Controller
             $usage = Usage::create([
                 'booking_id' => $booking->id,
                 'status' => 'awaiting use',
-                'due_date' => $request->due_date,
-                'note_text' => $request->note_text,
+                'due_date' => $validatedData['due_date'],
+                'note_text' => $validatedData['note_text'],
             ]);
         
             $item = $booking->item;

@@ -57,7 +57,7 @@
 
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
-                    <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" min="0" @if(old('serial_number')) value="1" readonly @endif>
+                    <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" min="1" @if(old('serial_number')) value="1" readonly @endif>
                     @error('quantity')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
