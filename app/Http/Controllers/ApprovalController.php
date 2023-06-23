@@ -32,6 +32,8 @@ class ApprovalController extends Controller
 
     public function approve(Request $request, Booking $booking)
     {
+        $user = auth()->user();
+        $item = $booking->item;
         if ($booking->status !== 'pending') {
             return redirect()->back()->with('error', 'Cannot approve a booking that is not pending.');
         } elseif ($item->quantity < $booking->quantity) {

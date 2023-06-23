@@ -3,6 +3,6 @@
 @section('content')
 @include('components.notifications')
 
-dashboard admin unit
+
 
 @endsection
