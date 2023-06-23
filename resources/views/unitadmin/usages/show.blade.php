@@ -33,6 +33,7 @@
                 </p>
                 <p><strong>Category:</strong><br> {{ $usage->booking->item->category->name }}</p>
                 <p><strong>Borrower:</strong><br> {{ $usage->booking->user->name }}</p>
+                <p><strong>Quantity:</strong><br> {{ $usage->booking->quantity }}</p>
               </div>
               <div class="col-md-4">
                 <p><strong>Start Date:</strong><br> {{ $usage->booking->start_date }}</p>

@@ -5,11 +5,12 @@ namespace App\Http\Controllers;
 use App\Models\Usage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Carbon\Carbon;
 
 class UsageController extends Controller
 {
     public function index(Request $request)
-    {
+    {   
         $user = auth()->user();
         $unitId = $user->unit_id;
         $usages = Usage::whereHas('booking', function ($query) use ($unitId) {
@@ -88,5 +89,30 @@ class UsageController extends Controller
         $usage->save();
         
         return redirect()->route('usages.index')->with('success', 'Item in usage set as used successfully.');
+    }
+
+    public function updateExpiredAndLateUsages()
+    {
+        $expiredAndLateUsages = Usage::whereIn('status', ['awaiting use', 'used'])
+            ->whereDate('due_date', '<', Carbon::today()->toDateString())
+            ->get();
+
+        foreach ($expiredAndLateUsages as $usage) {
+            $booking = $usage->booking;
+            $item = $booking->item;
+
+            if ($usage->status === 'awaiting use') {
+                $usage->status = 'expired';
+                $usage->save();
+
+                $item->quantity += $booking->quantity;
+                $item->save();
+            } elseif ($usage->status === 'used') {
+                $usage->status = 'late';
+                $usage->save();
+            }
+        }
+
+        return response()->json(['message' => 'Expired and late usages updated successfully.']);
     }
 }
