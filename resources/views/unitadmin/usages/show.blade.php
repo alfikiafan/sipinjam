@@ -58,7 +58,7 @@
             </div>
             <p><strong>Note:</strong></p>
             <p class="text-sm">
-              {{ $usage->note_text }}
+              {{ $usage->note }}
             </p>
           </div>
           <hr>

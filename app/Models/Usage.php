@@ -13,7 +13,7 @@ class Usage extends Model
         'booking_id',
         'status',
         'due_date',
-        'note_text'
+        'note'
     ];
 
     public function booking()

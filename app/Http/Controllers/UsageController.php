@@ -50,7 +50,7 @@ class UsageController extends Controller
             'booking_id' => 'required',
             'status' => 'required',
             'due_date' => 'required',
-            'note_text' => 'required',
+            'note' => 'required',
         ]);
 
         Usage::create($validatedData);
@@ -67,7 +67,7 @@ class UsageController extends Controller
     {
         $validatedData = $request->validate([
             'due_date' => 'required',
-            'note_text' => 'nullable|string',
+            'note' => 'nullable|string',
         ]);
     
         $usage->update($validatedData);

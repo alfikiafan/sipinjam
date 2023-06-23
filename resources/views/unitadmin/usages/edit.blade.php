@@ -22,8 +22,8 @@
                         @enderror
                     </div>
                     <div class="mb-3">
-                        <label for="note_text" class="form-label">Note</label>
-                        <textarea class="form-control" id="note_text" name="note_text" rows="4">{{ $usage->note_text }}</textarea>
+                        <label for="note" class="form-label">Note</label>
+                        <textarea class="form-control" id="note" name="note" rows="4">{{ $usage->note }}</textarea>
                     </div>
                 </div>
             </div>

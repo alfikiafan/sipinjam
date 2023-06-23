@@ -31,7 +31,7 @@ class UsageFactory extends Factory
         return [
             'booking_id' => $selectedBookingId,
             'status' => $faker->randomElement(['awaiting use', 'used', 'returned']),
-            'note_text' => $faker->text(500),
+            'note' => $faker->text(500),
             'due_date' => $returnDate,
         ];
     }

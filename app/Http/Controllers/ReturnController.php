@@ -45,10 +45,10 @@ class ReturnController extends Controller
             }
         
             $validatedData = $request->validate([
-                'note_text' => 'nullable|string',
+                'note' => 'nullable|string',
             ]);
             
-            $usage->note_text = $validatedData['note_text'];
+            $usage->note = $validatedData['note'];
             $usage->status = 'returned';
             $usage->save();
         

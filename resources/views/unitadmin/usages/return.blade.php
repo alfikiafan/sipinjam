@@ -50,8 +50,8 @@
             @csrf
             @method('PUT')
             <div class="mb-4">
-              <label for="note_text" class="form-label">Note</label>
-              <textarea class="form-control" id="note_text" name="note_text" rows="4">{{ $usage->note_text }}</textarea>
+              <label for="note" class="form-label">Note</label>
+              <textarea class="form-control" id="note" name="note" rows="4">{{ $usage->note }}</textarea>
             </div>
             <button type="submit" class="btn bg-gradient-primary me-2">Return</button>
             <a href="{{ route('usages.index') }}" class="btn bg-gradient-info">Cancel</a>
