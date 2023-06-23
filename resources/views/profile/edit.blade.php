@@ -2,7 +2,7 @@
 
 @section('content')
 
-<form method="POST" action="{{ route('borrower.profile.update') }}">
+<form method="POST" action="{{ route('profile.update') }}">
   @csrf
   @method('PUT')
   <div class="row">
@@ -11,16 +11,6 @@
         <label for="name">Name</label>
         <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $user->name) }}" required>
       </div>
-    </div>
-    <div class="col-md-6">
-      <div class="form-group">
-        <label for="email">Email</label>
-        <input type="email" class="form-control" id="email" name="email" value="{{ old('email', $user->email) }}" required>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-6">
       <div class="form-group">
         <label for="phone">Phone</label>
         <input type="text" class="form-control" id="phone" name="phone" value="{{ old('phone', $user->phone) }}" required>
@@ -28,7 +18,7 @@
     </div>
   </div>
   <button type="submit" class="btn btn-dark me-3">Save Changes</button>
-  <a href="{{ route('borrower.profile.index') }}" class="btn btn-info">Cancel</a>
+  <a href="{{ route('profile.index') }}" class="btn btn-info">Cancel</a>
 </form>
 
 @endsection

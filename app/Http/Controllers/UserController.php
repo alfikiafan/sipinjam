@@ -36,7 +36,7 @@ class UserController extends Controller
     public function edit(User $user)
     {
         if(auth()->user()->can('borrower')) {
-        return view('borrower.profile.edit', compact('user'));
+        return view('profile.edit', compact('user'));
         } else {
             abort(403, 'Forbidden');
         }

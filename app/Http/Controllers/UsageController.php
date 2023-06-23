@@ -80,9 +80,11 @@ class UsageController extends Controller
         if ($usage->status == 'used') {
             return redirect()->back()->with('error', 'Item in this usage already set as used.');
         } elseif ($usage->status == 'returned') {
-            return redirect()->back()->with('error', 'Borrower need to book the item again.');
+            return redirect()->back()->with('error', 'Borrower need to book the item(s) again.');
         } else if ($usage->status == 'expired') {
-            return redirect()->back()->with('error', 'Borrower need to book the item again.');
+            return redirect()->back()->with('error', 'Borrower need to book the item(s) again.');
+        } else if ($usage->status == 'expired') {
+            return redirect()->back()->with('error', 'Borrower need to return the item(s) to you as soon as possible.');
         }
 
         $usage->status = 'used';

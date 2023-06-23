@@ -11,50 +11,35 @@ class ProfileController extends Controller
     public function index()
     {
         $user = auth()->user();
-    
-        if ($user->can('borrower')) {
-            return view('borrower.profile.index', compact('user'));
-        } else {
-            abort(403, 'Forbidden');
-        }
+        return view('profile.index', compact('user'));
     }
 
     public function edit()
     {
-        if(auth()->user()->can('borrower')) {
-            $user = auth()->user();
-            return view('borrower.profile.edit', compact('user'));
-        } else {
-            abort(403, 'Forbidden');
-        }
+        $user = auth()->user();
+        return view('profile.edit', compact('user'));
     }
 
     public function update(Request $request)
     {
         $request->validate([
             'name' => 'required',
-            'email' => 'email|required',
             'phone' => 'required',
         ]);
 
         $user = auth()->user();
 
         $user->name = $request->name;
-        $user->email = $request->email;
         $user->phone = $request->phone;
 
         $user->save();
 
-        return redirect()->route('borrower.profile.index')->with('success', 'Profile updated successfully.');
+        return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
     }
 
     public function changePassword(User $user)
     {
-        if(auth()->user()->can('borrower')) {
-            return view('borrower.profile.change-password', compact('user'));
-        } else {
-            abort(403, 'Forbidden');
-        }
+        return view('profile.change-password', compact('user'));
     }
 
     public function updatePassword(Request $request)
@@ -73,6 +58,6 @@ class ProfileController extends Controller
         $user->password = Hash::make($request->password);
         $user->save();
 
-        return redirect()->route('borrower.profile.index')->with('success', 'Password changed successfully.');
+        return redirect()->route('profile.index')->with('success', 'Password changed successfully.');
     }
 }
