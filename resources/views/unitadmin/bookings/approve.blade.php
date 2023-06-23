@@ -49,8 +49,8 @@
               <input type="date" class="form-control" id="due_date" name="due_date" required>
             </div>
             <div class="mb-3">
-              <label for="note_text" class="form-label">Note</label>
-              <textarea class="form-control" id="note_text" name="note_text" rows="4"></textarea>
+              <label for="note" class="form-label">Note</label>
+              <textarea class="form-control" id="note" name="note" rows="4"></textarea>
             </div>
             <div class="mt-4">
               <button type="submit" class="btn bg-gradient-primary me-2">Approve</button>

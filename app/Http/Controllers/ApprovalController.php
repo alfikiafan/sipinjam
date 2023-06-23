@@ -43,7 +43,7 @@ class ApprovalController extends Controller
         if ($user->can('unitadmin')) {
             $validatedData = $request->validate([
                 'due_date' => 'required|date',
-                'note_text' => 'nullable|string',
+                'note' => 'nullable|string',
             ]);
         
             $booking->status = 'approved';
@@ -53,7 +53,7 @@ class ApprovalController extends Controller
                 'booking_id' => $booking->id,
                 'status' => 'awaiting use',
                 'due_date' => $validatedData['due_date'],
-                'note_text' => $validatedData['note_text'],
+                'note' => $validatedData['note'],
             ]);
         
             $item = $booking->item;
