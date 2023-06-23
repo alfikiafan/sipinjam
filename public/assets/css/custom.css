@@ -34,15 +34,15 @@
     transition: opacity 0.3s ease;
 }
 
-.avatar:hover .edit-profile-btn {
+.avatar-profile:hover .edit-profile-btn {
     opacity: 1;
 }
 
-.avatar img.image-hover {
+.avatar-profile img.image-hover {
     transition: filter 0.3s ease;
 }
 
-.avatar:hover img.image-hover {
+.avatar-profile:hover img.image-hover {
     filter: brightness(50%);
 }
 

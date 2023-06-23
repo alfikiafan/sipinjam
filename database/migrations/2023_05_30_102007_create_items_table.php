@@ -13,7 +13,7 @@ return new class extends Migration
     {
         Schema::create('items', function (Blueprint $table) {
             $table->id();
-            $table->unsignedBigInteger('categories_id');
+            $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('unit_id');
             $table->string('name', 100);
             $table->string('brand', 50)->nullable();
@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('photo', 100)->nullable();  
             $table->unsignedInteger('quantity');
             $table->string('status');
-            $table->foreign('categories_id')->references('id')->on('categories')->onDelete('cascade');
+            $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->timestamps();
         });

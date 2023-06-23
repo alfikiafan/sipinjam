@@ -27,7 +27,7 @@ class SessionsController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect('dashboard')->with(['success' => 'Anda telah masuk ke sistem.']);
+            return redirect('dashboard')->with(['success' => 'Anda berhasil masuk ke sistem.']);
         }
 
         return back()->withErrors(['email' => 'Email atau kata sandi Anda tidak cocok.']);

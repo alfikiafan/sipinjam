@@ -3,7 +3,6 @@
 @section('content')
 @include('components.notifications')
 
-<main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
     <div class="container-fluid">
         <div class="page-header min-height-150 border-radius-xl mt-4" style="background-image: url('../assets/img/curved-images/curved0.jpg'); background-position-y: 50%;">
             <span class="mask bg-gradient-primary opacity-6"></span>
@@ -11,7 +10,7 @@
         <div class="card card-body blur shadow-blur mx-4 mt-n6">
             <div class="row gx-4">
                 <div class="col-auto">
-                    <div class="avatar avatar-xl position-relative">
+                    <div class="avatar avatar-xl position-relative avatar-profile">
                         <img src="{{ asset(Auth::user()->photo) }}" alt="..." class="w-100 border-radius-lg shadow-sm image-hover">
                         <label for="photo-upload" class="edit-profile-btn" id="edit-profile">
                             Change Image
@@ -32,11 +31,11 @@
         </div>
     </div>
     <div class="container-fluid py-4">
-        <div class="card">
-            <div class="card-header pb-0 px-3 ms-4">
+        <div class="card mx-4 mb-3">
+            <div class="card-header pb-0 px-3">
                 <h6 class="mb-0">Profile Information</h6>
             </div>
-            <div class="card-body p-3 ms-4">
+            <div class="card-body p-3">
                 <p class="text-sm">
                     {{ $user->about_me }}
                 </p>
@@ -55,6 +54,5 @@
         </div>
         @include('layouts.footers.auth.footer')
     </div>
-</main>
 
 @endsection

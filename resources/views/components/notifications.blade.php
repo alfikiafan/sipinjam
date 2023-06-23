@@ -15,7 +15,6 @@
 @endif
 
 <script>
-    // Auto hide success alert after 3 seconds
     var successAlert = document.getElementById('successAlert');
     if (successAlert) {
         setTimeout(function() {
@@ -23,7 +22,6 @@
         }, 3000);
     }
 
-    // Auto hide error alert after 3 seconds
     var errorAlert = document.getElementById('errorAlert');
     if (errorAlert) {
         setTimeout(function() {
