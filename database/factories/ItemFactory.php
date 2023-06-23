@@ -20,18 +20,26 @@ class ItemFactory extends Factory
      */
     public function definition(): array
     {
+        static $serialNumberCount = 0;
+    
         $faker = Faker::create('id_ID');
         $categoryIds = Category::pluck('id')->toArray();
         $unitIds = Unit::pluck('id')->toArray();
-        $quantity = $faker->numberBetween(0, 100);
+
+        $hasSerialNumber = ($serialNumberCount <= 10) ? false : true;
+        $serialNumberCount++;
+
+        $serialNumber = $hasSerialNumber ? null : $faker->unique()->randomNumber();
+        $quantity = $hasSerialNumber ? $faker->numberBetween(0, 100) : 1;
         $status = ($quantity === 0) ? 'empty' : $faker->randomElement(['available', 'not available']);
+    
         return [
             'categories_id' => $faker->randomElement($categoryIds),
             'unit_id' => $faker->randomElement($unitIds),
-            'name' => $this->faker->word,
-            'brand' => $this->faker->word,
-            'serial_number' => $this->faker->unique()->randomNumber(),
-            'photo' => 'storage/img/default.jpg',
+            'name' => $faker->word,
+            'brand' => $faker->word,
+            'serial_number' => $serialNumber,
+            'photo' => 'storage/img/items/default.jpg',
             'quantity' => $quantity,
             'status' => $status,
         ];

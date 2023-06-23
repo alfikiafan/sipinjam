@@ -1,14 +1,14 @@
 @if(session('success'))
-<div id="successAlert" class="position-fixed bg-success rounded right-3 text-sm py-2 px-4 ms-4" style="z-index: 9;">
+<div id="successAlert" class="position-fixed bg-success rounded right-3 text-sm py-2 px-4 ms-3" style="z-index: 9;">
     <p class="m-0 text-white">{{ session('success')}}</p>
 </div>
 @endif
 
-@if($errors->any())
+@if(session('error'))
     <div id="errorAlert" class="position-fixed bg-danger rounded right-3 text-sm py-2 px-4 ms-3" style="z-index: 9;">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li class="m-0 text-white px-2">{{ $error }}</li>
+        <ul class="m-0 p-0 text-white">
+            @foreach (explode('|', session('error')) as $error)
+                <li>{{ $error }}</li>
             @endforeach
         </ul>
     </div>

@@ -8,7 +8,7 @@ use Illuminate\Support\Facades\Auth;
 
 class UsageController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
         $user = auth()->user();
         $unitId = $user->unit_id;
@@ -16,9 +16,31 @@ class UsageController extends Controller
             $query->whereHas('item', function ($query) use ($unitId) {
                 $query->where('unit_id', $unitId);
             });
-        })->latest()->paginate(20);
-    
+        });
+        
+        $status = $request->query('status');
+
+        if ($status) {
+            $usages->where('status', $status);
+        }
+
+        $usages = $usages->latest()->paginate(20);
+
         return view('unitadmin.usages.index', compact('usages'));
+    }
+
+    public function show(Usage $usage)
+    {
+        $user = auth()->user();
+        if($user->can('unitadmin')) {
+            $unitId = $user->unit_id;
+            if ($usage->booking->item->unit_id !== $unitId) {
+                abort(403, 'Forbidden');
+            }
+            return view('unitadmin.usages.show', compact('usage'));
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function store(Request $request)
@@ -32,35 +54,39 @@ class UsageController extends Controller
 
         Usage::create($validatedData);
 
-        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage created successfully.');
+        return redirect()->route('usages.index')->with('success', 'Usage created successfully.');
+    }
+
+    public function edit(Usage $usage)
+    {
+        return view('unitadmin.usages.edit', compact('usage'));
     }
 
     public function update(Request $request, Usage $usage)
     {
         $validatedData = $request->validate([
-            'booking_id' => 'required',
-            'status' => 'required',
             'due_date' => 'required',
-            'note_text' => 'required',
+            'note_text' => 'nullable|string',
         ]);
-
+    
         $usage->update($validatedData);
-
-        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage updated successfully.');
+    
+        return redirect()->route('usages.index')->with('success', 'Usage updated successfully.');
     }
 
-    // Fungsi untuk mengembalikan barang
-    public function return(Request $request, Usage $usage)
+    public function setUsed(Request $request, Usage $usage)
     {
-        $validatedData = $request->validate([
-            'booking_id' => 'required',
-            'status' => 'required',
-            'due_date' => 'required',
-            'note_text' => 'required',
-        ]);
+        if ($usage->status == 'used') {
+            return redirect()->back()->with('error', 'Item in this usage already set as used.');
+        } elseif ($usage->status == 'returned') {
+            return redirect()->back()->with('error', 'Borrower need to book the item again.');
+        } else if ($usage->status == 'expired') {
+            return redirect()->back()->with('error', 'Borrower need to book the item again.');
+        }
 
-        $usage->update($validatedData);
-
-        return redirect()->route('unitadmin.usages.index')->with('success', 'Usage updated successfully.');
+        $usage->status = 'used';
+        $usage->save();
+        
+        return redirect()->route('usages.index')->with('success', 'Item in usage set as used successfully.');
     }
 }

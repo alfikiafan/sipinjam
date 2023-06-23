@@ -12,6 +12,8 @@ use App\Http\Controllers\UsageController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnitAdminController;
 use App\Http\Controllers\ProfileController;
+use App\Http\Controllers\ApprovalController;
+use App\Http\Controllers\ReturnController;
 
 /*
 |--------------------------------------------------------------------------
@@ -79,12 +81,17 @@ Route::middleware('auth', 'administrator')->group(function () {
 // Rute unit admin saja
 Route::middleware('auth', 'unitadmin')->group(function () {
 
-    // Rute untuk melihat daftar penggunaan barang, dan mengembalikan barang
-    Route::get('/usages', [UsageController::class, 'index'])->name('unitadmin.usages.index');
-    Route::get('/usages/{usage}', [UsageController::class, 'show'])->name('unitadmin.usages.show');
-    Route::put('/usages/{usage}', [UsageController::class, 'update'])->name('unitadmin.usages.update');
-    Route::get('usages/{usage}/return', [UsageController::class, 'return'])->name('unitadmin.usages.return');
-    Route::delete('/usages/{usage}', [UsageController::class, 'destroy'])->name('unitadmin.usages.destroy');
+    // Rute untuk melihat daftar penggunaan barang
+    Route::get('/usages', [UsageController::class, 'index'])->name('usages.index');
+    Route::get('/usages/{usage}/show', [UsageController::class, 'show'])->name('usages.show');
+
+    // Rute untuk mengedit usage atau set status menjadi "used"
+    Route::get('/usages/{usage}/edit', [UsageController::class, 'edit'])->name('usages.edit');
+    Route::put('/item/{usage}/set-used', [UsageController::class, 'setUsed'])->name('usages.set-used');
+
+    // Rute untuk mengembalikan barang
+    Route::get('usages/{usage}/return', [ReturnController::class, 'show'])->name('usages.return.show');
+    Route::put('usages/{usage}', [ReturnController::class, 'return'])->name('usages.return');
 });
 
 // Rute borrower saja
@@ -100,10 +107,10 @@ Route::middleware('auth', 'borrower')->group(function () {
     Route::get('/bookings/{booking}/print', [BookingController::class, 'print'])->name('borrower.bookings.print');
 });
 
-// Rute untuk item
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     // Rute untuk manajemen item (unit admin)
     Route::get('/items', [ItemController::class, 'index'])->name('items.index');
+    Route::get('/items/{item}/show', [ItemController::class, 'show'])->name('items.show');
     Route::post('/items', [ItemController::class, 'store'])->name('items.store');
     Route::get('/items/create', [ItemController::class, 'create'])->name('items.create');
     Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
@@ -113,18 +120,23 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     // Rute untuk melihat ketersediaan barang (borrower)
     // Route::get('/items', [ItemController::class, 'index'])->name('borrower.items.index');
     // Route::get('/items/{item}', [ItemController::class, 'show'])->name('borrower.items.show');
-});
 
-// Rute untuk booking
-Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
-    // Rute untuk menampilkan daftar booking dan approval peminjaman (unit admin)
+    // Rute untuk menampilkan daftar booking (unit admin)
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
+    Route::get('/bookings/{booking}/show', [BookingController::class, 'show'])->name('bookings.show');
     Route::post('/bookings', [BookingController::class, 'store'])->name('bookings.store');
     Route::put('/bookings/{booking}', [BookingController::class, 'update'])->name('bookings.update');
-    Route::get('/bookings/{booking}/approve', [BookingController::class, 'approve'])->name('bookings.approve');
+
+    // Rute untuk mengelola approval booking (unit admin)
+    Route::get('/bookings/{booking}/approve', [ApprovalController::class, 'show'])->name('bookings.approve.show');
+    Route::post('/bookings/{booking}', [ApprovalController::class, 'approve'])->name('bookings.approve');
+    Route::get('/bookings/{booking}/reject', [ApprovalController::class, 'reject'])->name('bookings.reject');
 
     // Rute untuk mengajukan booking (borrower)
     // Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');
     // Route::get('/bookings/create', [BookingController::class, 'create'])->name('borrower.bookings.create');
     // Route::post('/bookings', [BookingController::class, 'store'])->name('borrower.bookings.store');
+
+    // Rute untuk usage
+    Route::put('/usages/{usage}', [UsageController::class, 'update'])->name('usages.update');
 });
