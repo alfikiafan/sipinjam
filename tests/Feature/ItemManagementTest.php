@@ -25,7 +25,7 @@ class ItemManagementTest extends TestCase
         $response->assertStatus(200);
 
         $response = $this->actingAs($unitAdmin)->post('/units/' . $unit->id . '/items', [
-            'categories_id' => 1,
+            'category_id' => 1,
             'name' => 'New Item',
             'brand' => 'Item Brand',
             'serial_number' => 'ABC123',
@@ -39,7 +39,7 @@ class ItemManagementTest extends TestCase
         $response->assertStatus(200);
 
         $response = $this->actingAs($unitAdmin)->put('/units/' . $unit->id . '/items/' . $item->id, [
-            'categories_id' => 1,
+            'category_id' => 1,
             'name' => 'Updated Item',
             'brand' => 'Updated Brand',
             'serial_number' => 'XYZ789',

@@ -20,7 +20,7 @@
             <div>
               <h6 class="m-0 text-sm">Total number of:</h6>
               <p class="d-inline-block me-2 text-sm">Items: {{ $items->count() }}</p>
-              <p class="d-inline-block me-2 text-sm">Categories: {{ $items->pluck('categories_id')->unique()->count() }}</p>
+              <p class="d-inline-block me-2 text-sm">Categories: {{ $items->pluck('category_id')->unique()->count() }}</p>
               <p class="d-inline-block text-sm">Brands: {{ $items->pluck('brand')->unique()->count() }}</p>
             </div>
             <div class="ml-auto p-0">

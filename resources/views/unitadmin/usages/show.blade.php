@@ -48,6 +48,7 @@
               </p>
               <p><strong>Category:</strong><br> {{ $usage->booking->item->category->name }}</p>
               <p><strong>Quantity:</strong><br> {{ $usage->booking->quantity }}</p>
+              <p><strong>Booked At:</strong><br> {{ $usage->booking->created_at }}</p>
             </div>
             <div class="col-md-4">
               <p><strong>Start Date:</strong><br> {{ $usage->booking->start_date }}</p>

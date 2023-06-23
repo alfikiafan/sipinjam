@@ -9,14 +9,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="categories_id">Category</label>
-                    <select class="form-control @error('categories_id') is-invalid @enderror" id="categories_id" name="categories_id">
+                    <label for="category_id">Category</label>
+                    <select class="form-control @error('category_id') is-invalid @enderror" id="category_id" name="category_id">
                         <option value="">Select Category</option>
                         @foreach ($categories as $category)
                             <option value="{{ $category->id }}">{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    @error('categories_id')
+                    @error('category_id')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>

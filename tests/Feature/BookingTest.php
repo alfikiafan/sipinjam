@@ -21,7 +21,7 @@ class BookingTest extends TestCase
 
         $item = Item::factory()->create([
             'status' => 'available',
-            'categories_id' => 1,
+            'category_id' => 1,
             'unit_id' => 1,
             'name' => 'Fulan',
             'brand' => 'brand',

@@ -66,7 +66,7 @@ class ItemController extends Controller
     {
         $user = auth()->user();
         $request->validate([
-            'categories_id' => 'required',
+            'category_id' => 'required',
             'name' => 'required',
             'brand' => 'required',
             'quantity' => 'required|integer',
@@ -87,7 +87,7 @@ class ItemController extends Controller
         $photoPath = $request->file('photo')->store('public/img/items');
 
         $item = new Item([
-            'categories_id' => $request->categories_id,
+            'category_id' => $request->category_id,
             'unit_id' => $unitId,
             'name' => $request->name,
             'brand' => $request->brand,
@@ -118,7 +118,7 @@ class ItemController extends Controller
         $unitId = $user->unit_id;
     
         $validatedData = $request->validate([
-            'categories_id' => 'required',
+            'category_id' => 'required',
             'name' => 'required',
             'brand' => 'required',
             'quantity' => 'required|integer',
@@ -134,7 +134,7 @@ class ItemController extends Controller
             $request->merge(['status' => 'empty']);
         }
     
-        $item->categories_id = $validatedData['categories_id'];
+        $item->category_id = $validatedData['category_id'];
         $item->unit_id = $unitId;
         $item->name = $validatedData['name'];
         $item->brand = $validatedData['brand'];

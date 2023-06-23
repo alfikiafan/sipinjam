@@ -49,6 +49,7 @@
                 <p><strong>Quantity:</strong><br>{{ $booking->quantity }}</p>
               </div>
               <div class="col-md-4">
+                <p><strong>Created At:</strong><br>{{ $booking->created_at }}</p>
                 <p><strong>Start Date:</strong><br>{{ $booking->start_date }}</p>
                 <p><strong>End Date:</strong><br>{{ $booking->end_date }}</p>
               </div>

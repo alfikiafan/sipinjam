@@ -34,7 +34,7 @@ class ItemFactory extends Factory
         $status = ($quantity === 0) ? 'empty' : $faker->randomElement(['available', 'not available']);
     
         return [
-            'categories_id' => $faker->randomElement($categoryIds),
+            'category_id' => $faker->randomElement($categoryIds),
             'unit_id' => $faker->randomElement($unitIds),
             'name' => $faker->word,
             'brand' => $faker->word,

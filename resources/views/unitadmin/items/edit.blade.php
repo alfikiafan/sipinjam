@@ -14,14 +14,14 @@
         <div class="row">
             <div class="col-md-6">
                 <div class="form-group">
-                    <label for="categories_id">Category</label>
-                    <select class="form-control" id="categories_id" name="categories_id" required>
+                    <label for="category_id">Category</label>
+                    <select class="form-control" id="category_id" name="category_id" required>
                         <option value="">Select Category</option>
                         @foreach ($categories as $category)
-                            <option value="{{ $category->id }}" {{ $category->id == $item->categories_id ? 'selected' : '' }}>{{ $category->name }}</option>
+                            <option value="{{ $category->id }}" {{ $category->id == $item->category_id ? 'selected' : '' }}>{{ $category->name }}</option>
                         @endforeach
                     </select>
-                    @error('categories_id')
+                    @error('category_id')
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
