@@ -79,7 +79,7 @@
 
     <div class="row">
         <div class="col-md-12">
-            <button type="submit" class="btn btn-primary">Update Item</button>
+            <button type="submit" class="btn btn-primary me-2">Update Item</button>
             <a href="/items" class="btn btn-info">Cancel</a>
         </div>
     </div>

@@ -18,11 +18,11 @@
           </div>
           <div class="card-body px-0 pt-0 pb-2">
             <div class="btn-group mb-2">
-              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ empty($status) ? 'tab-active' : '' }}" href="{{ route('items.index') }}">All Items</a>
-              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'awaiting use' ? 'tab-active' : '' }}" href="{{ route('items.index', ['status' => 'awaiting use']) }}">Awaiting Use</a>
-              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'used' ? 'tab-active' : '' }}" href="{{ route('items.index', ['status' => 'used']) }}">Used</a>
-              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'returned' ? 'tab-active' : '' }}" href="{{ route('items.index', ['status' => 'empty']) }}">Returned</a>
-              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'expired' ? 'tab-active' : '' }}" href="{{ route('items.index', ['status' => 'expired']) }}">Expired</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ empty($status) ? 'tab-active' : '' }}" href="{{ route('usages.index') }}">All Usages</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'awaiting use' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'awaiting use']) }}">Awaiting Use</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'used' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'used']) }}">Used</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'returned' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'returned']) }}">Returned</a>
+              <a class="px-4 py-2 mb-0 btn btn-white text-normal {{ $status === 'expired' ? 'tab-active' : '' }}" href="{{ route('usages.index', ['status' => 'expired']) }}">Expired</a>
             </div>
             <div class="table-responsive p-0">
             <table class="table align-items-center mb-0">
@@ -31,7 +31,7 @@
                         <th class="text-secondary text-xxs font-weight-bolder pe-2">ID</th>
                         <th class="text-secondary text-xxs font-weight-bolder p-2">Book ID</th>
                         <th class="text-secondary text-xxs font-weight-bolder p-2">Item</th>
-                        <th class="text-secondary text-xxs font-weight-bolder p-2">Status</th>
+                        <th class="text-secondary text-xxs font-weight-bolder p-2">Item Status</th>
                         <th class="text-secondary text-xxs font-weight-bolder p-2">Start Date</th>
                         <th class="text-secondary text-xxs font-weight-bolder p-2">End Date</th>
                         <th class="text-secondary text-xxs font-weight-bolder p-2">Due Date</th>
@@ -78,14 +78,28 @@
                         </td>
                         <td>
                           <div class="d-flex align-items-center">
-                            <a href="" class="me-2">
-                              <button type="button" class="btn btn-action btn-info mb-0">
+                            <a href="{{ route('usages.show', ['usage' => $usage->id]) }}" class="me-2">
+                              <button type="button" class="btn btn-action btn-info mb-0" title="Show detail about this usage">
                                 <i class="fas fa-eye"></i>
                               </button>
                             </a>
-                            <a href="">
-                              <button type="button" class="btn btn-action btn-primary mb-0">
+                            <a href="{{ route('usages.edit', ['usage' => $usage->id]) }}" class="me-2">
+                              <button type="button" class="btn btn-action btn-primary mb-0" title="Edit this usage">
                                 <i class="fas fa-pencil-alt"></i>
+                              </button>
+                            </a>
+                            <div class="me-2">
+                              <form action="{{ route('usages.set-used', ['usage' => $usage->id]) }}" method="POST">
+                                  @csrf
+                                  @method('PUT')
+                                  <button type="submit" class="btn btn-action btn-warning mb-0" title="Set item(s) in this usage as &quot;used&quot;">
+                                      <i class="fas fa-check"></i>
+                                  </button>
+                              </form>
+                            </div>
+                            <a href="{{ route('usages.return.show', ['usage' => $usage->id]) }}">
+                              <button type="button" class="btn btn-action btn-success mb-0" title="Return item(s) in this usage">
+                              <i class="fas fa-arrow-rotate-left"></i>
                               </button>
                             </a>
                           </div>

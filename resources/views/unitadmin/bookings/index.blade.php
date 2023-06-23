@@ -81,13 +81,18 @@
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
+                        <a href="{{ route('bookings.show', ['booking' => $booking->id]) }}" class="me-2">
+                          <button type="button" class="btn btn-action btn-info mb-0" title="Show detail about this booking">
+                            <i class="fas fa-eye"></i>
+                          </button>
+                        </a>
                         <a href="{{ route('bookings.approve.show', ['booking' => $booking->id]) }}">
-                          <button type="button" class="btn btn-action btn-success mb-0 me-2">
+                          <button type="button" class="btn btn-action btn-success mb-0 me-2" title="Approve this booking">
                             <i class="fas fa-check"></i>
                           </button>
                         </a>
                         <a href="{{ route('bookings.reject', ['booking' => $booking->id]) }}">
-                          <button type="button" class="btn btn-action btn-danger mb-0" onclick="return confirm('Are you sure to reject this booking?')">
+                          <button type="button" class="btn btn-action btn-danger mb-0" title="Reject this booking" onclick="return confirm('Are you sure to reject this booking?')">
                           <i class="fas fa-times"></i>
                           </button>
                         </a>

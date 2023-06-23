@@ -84,15 +84,20 @@
                     </td>
                     <td>
                       <div class="d-flex align-items-center">
+                        <a href="{{ route('items.show', ['item' => $item->id]) }}" class="me-2">
+                          <button type="button" class="btn btn-action btn-info mb-0" title="Show detail about this item">
+                            <i class="fas fa-eye"></i>
+                          </button>
+                        </a>
                         <a href="{{ route('items.edit', ['item' => $item->id]) }}">
-                          <button type="button" class="btn btn-action btn-primary mb-0 me-1">
+                          <button type="button" class="btn btn-action btn-primary mb-0 me-1" title="Edit this item">
                             <i class="fas fa-pencil-alt"></i>
                           </button>
                         </a>
                         <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
                             @csrf
                             @method('DELETE')
-                            <button type="submit" class="btn btn-action mb-0 ms-1 btn-danger">
+                            <button type="submit" class="btn btn-action mb-0 ms-1 btn-danger" title="Delete this item">
                                 <i class="fas fa-trash"></i>
                             </button>
                         </form>

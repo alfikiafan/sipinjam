@@ -22,7 +22,7 @@
               <div class="col-md-6">
                 <p><strong>Start Date:</strong> {{ $booking->start_date }}</p>
                 <p><strong>End Date:</strong> {{ $booking->end_date }}</p>
-                <p><strong>Quantity:</strong> {{ $booking->item->quantity }}</p>
+                <p><strong>Quantity:</strong> {{ $booking->quantity }}</p>
                 <p><strong>Borrower:</strong> {{ $booking->user->name }}</p>
               </div>
             </div>
@@ -37,7 +37,8 @@
                 <label for="note_text" class="form-label">Note</label>
                 <textarea class="form-control" id="note_text" name="note_text" rows="4"></textarea>
               </div>
-              <button type="submit" class="btn btn-primary">Approve</button>
+              <button type="submit" class="btn btn-primary me-2">Approve</button>
+              <a href="{{ route('bookings.index') }}" class="btn btn-info">Cancel</a>
             </form>
           </div>
         </div>

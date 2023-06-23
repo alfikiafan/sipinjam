@@ -9,12 +9,15 @@ use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
 {
-    public function index($status = null)
+    public function index(Request $request)
     {
         $user = auth()->user();
+
         if ($user->can('unitadmin')) {
             $unitId = $user->unit_id;
             $items = Item::where('unit_id', $unitId);
+
+            $status = $request->query('status');
 
             if ($status) {
                 $items->where('status', $status);
@@ -22,9 +25,13 @@ class ItemController extends Controller
 
             $items = $items->get();
 
-            return view('unitadmin.items.index', compact('items'));
-        } elseif ($user->can('borrower')) {
+            return view('unitadmin.items.index', compact('items', 'status'));
+        }
+        elseif ($user->can('borrower')) {
+            $status = $request->query('status');
+
             $items = Item::where('status', 'available')->get();
+
             return view('borrower.items.index', compact('items'));
         } else {
             abort(403, 'Forbidden');
@@ -37,6 +44,19 @@ class ItemController extends Controller
         $categories = Category::all();
         if ($user->can('unitadmin')) {
             return view('unitadmin.items.create', compact('categories'));
+        } else {
+            abort(403, 'Forbidden');
+        }
+    }
+
+    public function show(Item $item) {
+        $user = auth()->user();
+        if($user->can('unitadmin')) {
+            $unitId = $user->unit_id;
+            if ($item->unit_id !== $unitId) {
+                abort(403, 'Forbidden');
+            }
+            return view('unitadmin.items.show', compact('item'));
         } else {
             abort(403, 'Forbidden');
         }

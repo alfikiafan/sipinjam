@@ -12,15 +12,27 @@ class ApprovalController extends Controller
 {
     public function show(Booking $booking)
     {
-        if ($booking->status != 'pending') {
-            return redirect()->back()->with('error', 'Cannot approve a booking that is not pending.');
+        $user = auth()->user();
+        if ($user->can('unitadmin')) {
+            $unitId = $user->unit_id;
+
+            if ($booking->status !== 'pending') {
+                return redirect()->back()->with('error', 'Cannot approve a booking that is not pending.');
+            }
+
+            if ($booking->item->unit_id !== $unitId) {
+                abort(403, 'Forbidden');
+            }
+
+            return view('unitadmin.bookings.approve', compact('booking'));
+        } else {
+            abort(403, 'Forbidden');
         }
-        return view('unitadmin.bookings.approve', compact('booking'));
     }
 
     public function approve(Request $request, Booking $booking)
     {
-        if ($booking->status != 'pending') {
+        if ($booking->status !== 'pending') {
             return redirect()->back()->with('error', 'Cannot approve a booking that is not pending.');
         } elseif ($item->quantity < $booking->quantity) {
             return redirect()->route('bookings.index')->with('error', 'Not enough items in stock.');
@@ -59,7 +71,7 @@ class ApprovalController extends Controller
     
     public function reject(Booking $booking)
     {
-        if ($booking->status != 'pending') {
+        if ($booking->status !== 'pending') {
             return redirect()->back()->with('error', 'Cannot approve a booking that is not pending.');
         }
 
