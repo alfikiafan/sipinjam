@@ -38,7 +38,7 @@
                 </div>
                 <div class="mb-3">
                   <input type="text" class="form-control" placeholder="Nomor Telepon" name="phone" id="phone" aria-label="Nomor Telepon" aria-describedby="phone" value="{{ old('telp') }}">
-                  @error('name')
+                  @error('phone')
                     <p class="text-danger text-xs mt-2">{{ $message }}</p>
                   @enderror
                 </div>

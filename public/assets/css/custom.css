@@ -13,3 +13,39 @@
     font-weight: 600;
     box-shadow: 0 1px 1px 0 rgba(0, 0, 0, 0.11), 0 1px 1px 0 rgba(0, 0, 0, 0.07);
 }
+
+.edit-profile-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    font-size: 14px;
+    text-decoration: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+.avatar:hover .edit-profile-btn {
+    opacity: 1;
+}
+
+.avatar img.image-hover {
+    transition: filter 0.3s ease;
+}
+
+.avatar:hover img.image-hover {
+    filter: brightness(50%);
+}
+
+.upload-input {
+    display: none;
+}

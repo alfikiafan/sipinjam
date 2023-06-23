@@ -15,6 +15,10 @@ return new class extends Migration
             $table->unsignedBigInteger('unit_id')->nullable();
             $table->string('phone')->nullable();
             $table->string('role')->default('borrower');
+            $table->string('photo')->nullable()->default('storage/img/avatar/default.png');
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('about_me', 500)->nullable();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
         });
     }

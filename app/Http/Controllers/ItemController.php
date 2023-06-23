@@ -78,6 +78,10 @@ class ItemController extends Controller
             $request->merge(['quantity' => 1]);
         }
 
+        if ($request->quantity == 0) {
+            $request->merge(['status' => 'empty']);
+        }
+
         $unitId = auth()->user()->unit_id;
 
         $photoPath = $request->file('photo')->store('public/img/items');
@@ -119,11 +123,15 @@ class ItemController extends Controller
             'brand' => 'required',
             'quantity' => 'required|integer',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
-            'status' => 'required|in:available,not available',
+            'status' => 'required|in:available,not available,empty',
         ]);
 
         if ($request->has('serial_number') && $request->filled('serial_number')) {
             $request->merge(['quantity' => 1]);
+        }
+
+        if ($request->quantity == 0) {
+            $request->merge(['status' => 'empty']);
         }
     
         $item->categories_id = $validatedData['categories_id'];
@@ -141,7 +149,7 @@ class ItemController extends Controller
         }
     
         $item->quantity = $request->quantity;
-        $item->status = $validatedData['status'];
+        $item->status = $request->status;
         $item->save();
     
         return redirect('/items')->with('success', 'Item updated successfully.');

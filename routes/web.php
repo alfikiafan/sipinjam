@@ -130,6 +130,7 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
     Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
     Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
     Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');    
 

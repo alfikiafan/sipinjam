@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use App\Models\User;
+use Illuminate\Support\Facades\Storage;
 
 class ProfileController extends Controller
 {
@@ -22,19 +23,44 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $request->validate([
+        $validatedData = $request->validate([
             'name' => 'required',
             'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'about_me' => 'max:500',
         ]);
-
+        
         $user = auth()->user();
-
-        $user->name = $request->name;
-        $user->phone = $request->phone;
-
+        
+        $user->name = $validatedData['name'];
+        $user->phone = $validatedData['phone'];
+        $user->address = $validatedData['address'];
+        $user->city = $validatedData['city'];
+        $user->about_me = $validatedData['about_me'];
+        
         $user->save();
 
         return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
+    }
+
+    public function updatePhoto(Request $request)
+    {
+        $user = auth()->user();
+
+        if ($request->hasFile('photo')) {
+
+            if ($user->photo) {
+                Storage::delete(str_replace('storage/', 'public/', $user->photo));
+            }
+
+            $path = $request->file('photo')->store('public/img/avatar');
+            $filename = str_replace('public/', 'storage/', $path);
+            $user->photo = $filename;
+            $user->save();
+        }
+
+        return redirect()->back()->with('success', 'Photo profile updated successfully.');
     }
 
     public function changePassword(User $user)

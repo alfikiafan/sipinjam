@@ -37,7 +37,7 @@
       </div>
     </div>
   </div>
-  <button type="submit" class="btn btn-dark me-3">Change Password</button>
+  <button type="submit" class="btn bg-gradient-dark me-3">Change Password</button>
   <a href="{{ route('profile.index') }}" class="btn btn-info">Cancel</a>
 </form>
 @endsection

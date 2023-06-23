@@ -11,15 +11,15 @@
       <ul class="navbar-nav justify-content-end">
         @can ('unitadmin')
         <li class="nav-item d-flex align-items-center px-3">
-          <a href="" class="nav-link text-body p-0">
+          <a href="{{ url('unit-info') }}" class="nav-link text-body p-0">
             <i class="fas fa-building me-sm-1"></i>
             <span class="text-sm d-none d-lg-inline-block">{{ Auth::user()->unit->name }}</span>
           </a>
         </li>
         @endcan
         <li class="nav-item d-flex align-items-center px-3">
-          <a href="" class="nav-link text-body p-0">
-            <i class="fa fa-user me-sm-1"></i>
+          <a href="{{ url('profile') }}" class="nav-link text-body p-0">
+            <img src="{{ asset(Auth::user()->photo) }}" class="avatar avatar-sm" alt="item-image">
             <span class="d-sm-inline d-none px-3 font-weight-bold">{{ Auth::user()->name }}</span>
             <span class="d-sm-inline d-none text-muted">({{ Auth::user()->role }})</span>
           </a>
