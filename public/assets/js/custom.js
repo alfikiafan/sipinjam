@@ -4,6 +4,8 @@ document.addEventListener("DOMContentLoaded", function() {
     const editProfile = document.getElementById('.edit-profile');
     const photoUpload = document.getElementById('photo-upload');
     const profileForm = document.getElementById('profile-form');
+    const yearElement = document.getElementById('currentYear');
+    const currentYear = new Date().getFullYear();
   
     if (aboutMe) {
         aboutMe.addEventListener('input', function() {
@@ -14,16 +16,20 @@ document.addEventListener("DOMContentLoaded", function() {
     }
     
     if (editProfile) {
-    editProfile.addEventListener('click', function(event) {
-        event.preventDefault();
-        photoUpload.click();
-    });
+        editProfile.addEventListener('click', function(event) {
+            event.preventDefault();
+            photoUpload.click();
+        });
     }
     
     if (photoUpload) {
-    photoUpload.addEventListener('change', function() {
-        profileForm.submit();
-    });
+        photoUpload.addEventListener('change', function() {
+            profileForm.submit();
+        });
+    }
+
+    if (currentYear) {
+        yearElement.textContent = currentYear;
     }
 });
   

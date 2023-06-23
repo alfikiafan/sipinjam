@@ -1,6 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
 
 <form method="POST" action="{{ route('profile.update') }}">
   @csrf
