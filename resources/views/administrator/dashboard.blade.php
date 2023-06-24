@@ -2,6 +2,8 @@
 
 @section('content')
 
+@include('components.notifications')
+
 dashboard administrator
 
 @endsection
