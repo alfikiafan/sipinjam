@@ -38,7 +38,7 @@
                                         <tr>
                                             <td>{{ $unit->id }}</td>
                                             <td>{{ $unit->name }}</td>
-                                            <td>{{ $unit->description }}</td>
+                                            <td>{{ $unit->location }}</td>
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <a href="{{ route('administrator.units.edit', ['unit' => $unit->id]) }}">

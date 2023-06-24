@@ -18,9 +18,9 @@
                     </div>
 
                     <div class="form-group">
-                        <label for="name">Unit Location</label>
-                        <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
-                        @error('name')
+                        <label for="location">Unit Location</label>
+                        <input type="text" class="form-control @error('location') is-invalid @enderror" id="location" name="location" required>
+                        @error('location')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
@@ -29,7 +29,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <button type="submit" class="btn bg-gradient-primary">Create Category</button>
+                    <button type="submit" class="btn bg-gradient-primary">Add Unit</button>
                     <a href="{{ route('administrator.units.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>
