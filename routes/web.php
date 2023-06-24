@@ -71,6 +71,7 @@ Route::middleware('auth', 'administrator')->group(function () {
 
     // Rute untuk manajemen unit
     Route::get('/units', [UnitController::class, 'index'])->name('administrator.units.index');
+    Route::get('/units/{unit}/show', [UnitController::class, 'show'])->name('administrator.units.show');
     Route::post('/units', [UnitController::class, 'store'])->name('administrator.units.store');
     Route::get('/units/create', [UnitController::class, 'create'])->name('administrator.units.create');
     Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('administrator.units.edit');
@@ -79,6 +80,7 @@ Route::middleware('auth', 'administrator')->group(function () {
 
     // Rute untuk manajemen kategori
     Route::get('/categories', [CategoryController::class, 'index'])->name('administrator.categories.index');
+    Route::get('/categories/{category}/show', [CategoryController::class, 'show'])->name('administrator.categories.show');
     Route::post('/categories', [CategoryController::class, 'store'])->name('administrator.categories.store');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('administrator.categories.create');
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('administrator.categories.edit');
