@@ -9,7 +9,6 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UsageController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnitAdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApprovalController;
@@ -62,12 +61,13 @@ Route::put('/profile/update-password', [ProfileController::class, 'updatePasswor
 Route::middleware('auth', 'administrator')->group(function () {
 
     // Rute untuk manajemen admin unit
-    Route::get('/unitadmins', [UnitAdminController::class, 'index'])->name('administrator.unitadmins.index');
-    Route::post('/unitadmins', [UnitAdminController::class, 'store'])->name('administrator.unitadmins.store');
-    Route::get('/unitadmins/create', [UnitAdminController::class, 'create'])->name('administrator.unitadmins.create');
-    Route::get('/unitadmins/{unitadmin}/edit', [UnitAdminController::class, 'edit'])->name('administrator.unitadmins.edit');
-    Route::put('/unitadmins/{unitadmin}/update', [UnitAdminController::class, 'update'])->name('administrator.unitadmins.update');
-    Route::delete('/unitadmins/{unitadmin}', [UnitAdminController::class, 'destroy'])->name('administrator.unitadmins.destroy');
+    Route::get('/unitadmins', [UnitAdminController::class, 'index'])->name('unitadmins.index');
+    Route::post('/unitadmins', [UnitAdminController::class, 'store'])->name('unitadmins.store');
+    Route::get('/unitadmins/create', [UnitAdminController::class, 'create'])->name('unitadmins.create');
+    Route::get('/unitadmins/{unitadmin}/show', [UnitAdminController::class, 'show'])->name('unitadmins.show');
+    Route::get('/unitadmins/{unitadmin}/edit', [UnitAdminController::class, 'edit'])->name('unitadmins.edit');
+    Route::put('/unitadmins/{unitadmin}/update', [UnitAdminController::class, 'update'])->name('unitadmins.update');
+    Route::delete('/unitadmins/{unitadmin}', [UnitAdminController::class, 'destroy'])->name('unitadmins.destroy');
 
     // Rute untuk manajemen unit
     Route::get('/units', [UnitController::class, 'index'])->name('administrator.units.index');
