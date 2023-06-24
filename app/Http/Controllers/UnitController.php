@@ -13,11 +13,14 @@ class UnitController extends Controller
         return view('administrator.units.index', compact('units'));
     }
 
-    public function show($id)
+    public function show(Unit $unit)
     {
-    $units = Unit::findOrFail($id);
-
-    return view('administrator.units.show', compact('units'));
+        $user = auth()->user();
+        if($user->can('administrator')) {
+            return view('administrator.units.show', compact('unit'));
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function create()

@@ -71,7 +71,7 @@ Route::middleware('auth', 'administrator')->group(function () {
 
     // Rute untuk manajemen unit
     Route::get('/units', [UnitController::class, 'index'])->name('administrator.units.index');
-    Route::get('/units/{unit}}/show', [UnitController::class, 'show'])->name('administrator.units.show');
+    Route::get('/units/{unit}/show', [UnitController::class, 'show'])->name('administrator.units.show');
     Route::post('/units', [UnitController::class, 'store'])->name('administrator.units.store');
     Route::get('/units/create', [UnitController::class, 'create'])->name('administrator.units.create');
     Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('administrator.units.edit');

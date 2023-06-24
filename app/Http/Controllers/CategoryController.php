@@ -13,11 +13,14 @@ class CategoryController extends Controller
         return view('administrator.categories.index', compact('categories'));
     }
 
-    public function show($id)
+    public function show(Category $category)
     {
-    $category = Category::findOrFail($id);
-
-    return view('administrator.categories.show', compact('category'));
+        $user = auth()->user();
+        if($user->can('administrator')) {
+            return view('administrator.categories.show', compact('category'));
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function create()

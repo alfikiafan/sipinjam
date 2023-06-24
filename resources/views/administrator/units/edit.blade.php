@@ -7,7 +7,7 @@
 <div class="mx-3 mb-3">
     <div class="mb-4">
     <h6 class="m-0">Edit Item</h6>
-    <p class="text-sm mb-0">Feel empowered to modify this item by changing its status, adjusting the quantity, or making any necessary edits to its details.</p>
+    <p class="text-sm mb-0">Edit unit detail</p>
     </div>
         <form method="POST" action="{{ route('administrator.units.update', $unit->id) }}">
             @csrf

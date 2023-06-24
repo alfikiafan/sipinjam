@@ -14,13 +14,13 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
-              <h5 class="mb-0 mt-2 d-inline-block">{{ $units->name }}</h5>
-              <h5 class="mb-0 mt-2 d-inline-block">{{ $units->location }}</h5>
+              <h5 class="mb-0 mt-2 d-inline-block">{{ $unit->name }}</h5>
               <p class="d-inline-block"></p>
-              <p class="m-0 d-inline-block">(ID: {{ $units->id }})</p>
+              <p class="m-0 d-inline-block">(ID: {{ $unit->id }})</p>
             </div>
             <div class="col-md-4">
-              <p><strong>Added at:</strong><br> {{ $units->created_at }}</p>
+                <p><strong>Location</strong><br> {{ $unit->location }}</p>
+                <p><strong>Added at:</strong><br> {{ $unit->created_at }}</p>
             </div>
           </div>
           <hr>

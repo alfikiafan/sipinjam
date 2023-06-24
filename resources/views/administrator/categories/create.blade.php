@@ -1,7 +1,6 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
 @include('components.notifications')
 
     <div class="mx-3 mb-3">
