@@ -4,7 +4,11 @@
 
 @include('components.notifications')
 
-    <div class="mx-3 mb-3">
+<div class="mx-3 mb-3">
+    <div class="mb-4">
+    <h6 class="m-0">Edit Item</h6>
+    <p class="text-sm mb-0">Feel empowered to modify this item by changing its status, adjusting the quantity, or making any necessary edits to its details.</p>
+    </div>
         <form method="POST" action="{{ route('administrator.units.update', $unit->id) }}">
             @csrf
             @method('PUT')
@@ -24,8 +28,12 @@
                 @enderror
             </div>
 
-            <button type="submit" class="btn bg-gradient-primary">Update Unit</button>
-            <a href="{{ route('administrator.units.index') }}" class="btn bg-gradient-info">Cancel</a>
+            <div class="row mt-3">
+                <div class="col-md-12">
+                    <button type="submit" class="btn bg-gradient-primary">Create Category</button>
+                    <a href="{{ route('administrator.units.index') }}" class="btn bg-gradient-info">Cancel</a>
+                </div>
+            </div>
         </form>
     </div>
 
