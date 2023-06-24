@@ -1,8 +1,9 @@
-extends('layouts.user_type.auth')
+@extends('layouts.user_type.auth')
 
 @section('content')
 
-categories/create administrator
+@include('components.notifications')
+
     <div class="mx-3 mb-3">
         <form method="POST" action="{{ route('administrator.categories.store') }}">
             @csrf

@@ -50,6 +50,14 @@ Route::post('/login', [SessionsController::class, 'store'])->name('login.store')
 // Rute logout
 Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
+// Rute untuk melengkapi profil
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
+Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+
 // Rute administrator saja
 Route::middleware('auth', 'administrator')->group(function () {
 
@@ -132,14 +140,6 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     Route::get('/bookings/{booking}/approve', [ApprovalController::class, 'show'])->name('bookings.approve.show');
     Route::post('/bookings/{booking}', [ApprovalController::class, 'approve'])->name('bookings.approve');
     Route::get('/bookings/{booking}/reject', [ApprovalController::class, 'reject'])->name('bookings.reject');
-
-    // Rute untuk melengkapi profil
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
-    Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');    
 
     // Rute untuk mengajukan booking (borrower)
     // Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');

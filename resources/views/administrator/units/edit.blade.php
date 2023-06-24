@@ -2,7 +2,8 @@
 
 @section('content')
 
-units/{unit}/edit administrator
+@include('components.notifications')
+
     <div class="mx-3 mb-3">
         <form method="POST" action="{{ route('administrator.units.update', $unit->id) }}">
             @csrf
