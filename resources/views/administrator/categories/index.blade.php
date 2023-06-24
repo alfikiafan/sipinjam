@@ -43,7 +43,11 @@
                                                 <span class="text-xs font-weight-bold">{{ $category->name }}</span>
                                             </td>                                              
                                             <td class="align-middle">
-                                                <span class="text-xs font-weight-bold">{{ $category->item->quantity ?? 'N/A' }}</span>
+                                                @if ($category->item)
+                                                    <span class="text-xs font-weight-bold">{{  $category->item->quantity }}</span>
+                                                @else
+                                                <span class="text-xs font-weight-bold">N/A</span>
+                                                @endif                                            
                                             </td>                                            
                                             <td>
                                                 <div class="d-flex align-items-center">
