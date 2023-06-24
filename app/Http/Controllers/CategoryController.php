@@ -13,6 +13,13 @@ class CategoryController extends Controller
         return view('administrator.categories.index', compact('categories'));
     }
 
+    public function show($id)
+    {
+    $category = Category::findOrFail($id);
+
+    return view('administrator.categories.show', compact('category'));
+    }
+
     public function create()
     {
         return view('administrator.categories.create');

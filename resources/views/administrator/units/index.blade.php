@@ -36,11 +36,22 @@
                                 <tbody>
                                     @foreach ($units as $unit)
                                         <tr>
-                                            <td>{{ $unit->id }}</td>
-                                            <td>{{ $unit->name }}</td>
-                                            <td>{{ $unit->location }}</td>
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">{{ $unit->id }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">{{ $unit->name }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">{{ $unit->location }}</span>
+                                            </td>
                                             <td>
                                                 <div class="d-flex align-items-center">
+                                                    <a href="{{ route('administrator.units.show', ['unit' => $unit->id]) }}" class="me-2">
+                                                        <button type="button" class="btn btn-action btn-info mb-0" title="Show detail about this item">
+                                                        <i class="fas fa-eye"></i>
+                                                        </button>
+                                                    </a>
                                                     <a href="{{ route('administrator.units.edit', ['unit' => $unit->id]) }}">
                                                         <button type="button" class="btn btn-action btn-primary mb-0 me-1" title="Edit this unit">
                                                             <i class="fas fa-pencil-alt"></i>

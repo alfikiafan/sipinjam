@@ -13,6 +13,13 @@ class UnitController extends Controller
         return view('administrator.units.index', compact('units'));
     }
 
+    public function show($id)
+    {
+    $units = Unit::findOrFail($id);
+
+    return view('administrator.units.show', compact('units'));
+    }
+
     public function create()
     {
         return view('administrator.units.create');

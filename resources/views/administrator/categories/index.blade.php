@@ -29,16 +29,29 @@
                                     <tr>
                                         <th class="text-secondary text-xxs font-weight-bolder pe-3">ID</th>
                                         <th class="text-secondary text-xxs font-weight-bolder px-2">Name</th>
+                                        <th class="text-secondary text-xxs font-weight-bolder px-2">Number of Items</th>
                                         <th class="text-secondary text-xxs font-weight-bolder px-2">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
                                         <tr>
-                                            <td>{{ $category->id }}</td>
-                                            <td>{{ $category->name }}</td>
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">{{ $category->id }}</span>
+                                            </td>                                              
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">{{ $category->name }}</span>
+                                            </td>                                              
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">{{ $category->item->quantity ?? 'N/A' }}</span>
+                                            </td>                                            
                                             <td>
                                                 <div class="d-flex align-items-center">
+                                                    <a href="{{ route('administrator.categories.show', ['category' => $category->id]) }}" class="me-2">
+                                                        <button type="button" class="btn btn-action btn-info mb-0" title="Show detail about this item">
+                                                        <i class="fas fa-eye"></i>
+                                                        </button>
+                                                    </a>
                                                     <a href="{{ route('administrator.categories.edit', ['category' => $category->id]) }}">
                                                         <button type="button" class="btn btn-action btn-primary mb-0 me-1" title="Edit this category">
                                                             <i class="fas fa-pencil-alt"></i>
