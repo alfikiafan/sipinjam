@@ -1,15 +1,23 @@
 <!DOCTYPE html>
 <html lang="en">
     <head>
+        <title>Item Loan Authorization</title>
         <meta charset="UTF-8">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <style>
+            * {
+                margin-top: 5px;
+                padding: 0;
+            }
+
             body {
                 font-family: 'Roboto', sans-serif;
+                line-height: 1.4;
             }
 
             .center-align {
                 text-align: center;
+                line-height: 1.25;
             }
 
             .blue-heading {
@@ -31,17 +39,32 @@
             .list-items li {
                 font-size: 12pt;
             }
+
+            .mb-0 {
+                margin-bottom: 0 !important;
+            }
+
+            .mt-0 {
+                margin-top: 0 !important;
+            }
         </style>
     </head>
     <body>
-        <p class="center-align">
+        <p class="center-align mb-0">
             <img src="data:image/png;base64,{{ base64_encode(file_get_contents(public_path('assets/img/sipinjam.png'))) }}" width="152" height="88" alt="">
         </p>
-        <p class="center-align">
+        <p class="center-align mb-0">
             <strong>Unit: {{ $unit }}</strong>
         </p>
-        <p class="center-align blue-heading text-bold">
+        <p class="center-align mt-0">
+            <strong>Location: {{ $unitLocation }}</strong>
+        </p>
+        <hr>
+        <p class="center-align blue-heading text-bold mb-0">
             ITEM LOAN AUTHORIZATION
+        </p>
+        <p class="center-align mt-0">
+            <strong>Usage ID: {{ $usageId }}</strong>
         </p>
         <p>
             The admin unit has approved the borrower on behalf of:
@@ -71,7 +94,10 @@
                 <strong>Name:</strong> {{ $itemName }}
             </li>
             <li>
-                <strong>Item ID:</strong> {{ $itemName }}
+                <strong>Item ID:</strong> {{ $itemId }}
+            </li>
+            <li>
+                <strong>Booking ID:</strong> {{ $bookId }}
             </li>
             <li>
                 <strong>Borrowed amount:</strong> {{ $quantity }}
@@ -86,7 +112,7 @@
                 <strong>Return date:</strong> {{ $dueDate }}
             </li>
             <li>
-                <strong>Usage note:</strong> {{ $usageNote }}
+                <strong>Usage note:</strong><br> {{ $usageNote }}
             </li>
         </ul>
         <p>
@@ -94,7 +120,7 @@
         </p>
         <ul class="list-items">
             <li>
-                <strong>Admin unit:</strong> {{ $adminUnit }}
+                <strong>Admin unit:</strong>
             </li>
             <li>
                 <strong>Name:</strong> {{ $adminName }}

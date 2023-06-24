@@ -31,22 +31,32 @@
                 @endif
                 <p><strong>Category:</strong><br>{{ $booking->item->category->name }}</p>
                 <p><strong>Quantity:</strong><br>{{ $booking->quantity }}</p>
-                <p><strong>Created At:</strong><br>{{ $booking->created_at }}</p>
+                <p><strong>Admin Unit:</strong><br>
+                  <span>
+                    @php
+                        $usage = App\Models\Usage::where('booking_id', $booking->id)->first();
+                        $user = App\Models\User::find($usage->user_id);
+                    @endphp
+                    @if ($user)
+                        {{ $user->name }}
+                    @endif
+                </span>
+                </p>
               </div>
               <div class="col-md-4">
+                <p><strong>Created At:</strong><br>{{ $booking->created_at }}</p>
                 <p><strong>Start Date:</strong><br>{{ $booking->start_date }}</p>
                 <p><strong>End Date:</strong><br>{{ $booking->end_date }}</p>
                 <p><strong>Due Date:</strong><br>
-                    <span>
-                        @if ($booking->usages)
-                            @foreach ($booking->usages as $usage)
-                                @if ($usage->booking_id === $booking->id)
-                                    {{ $usage->due_date }}
-                                @endif
-                            @endforeach
-                        @endif
-                    </span>
-                </p>
+                  <span>
+                      @php
+                          $usage = App\Models\Usage::where('booking_id', $booking->id)->first();
+                      @endphp
+                      @if ($usage)
+                          {{ $usage->due_date }}
+                      @endif
+                  </span>
+              </p>
               </div>
             </div>
             <hr>

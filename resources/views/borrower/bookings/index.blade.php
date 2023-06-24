@@ -107,12 +107,12 @@
                             <i class="fas fa-eye"></i>
                             </button>
                         </a>
-                        <a href="{{ route('bookings.print-approval', ['booking' => $booking->id]) }}" target="blank">
-                            <button type="button" class="btn btn-action btn-success mb-0 me-2" title="Print this booking approval">
+                        <a href="{{ route('bookings.approval', ['booking' => $booking->id]) }}" class="me-2" target="blank">
+                            <button type="button" class="btn btn-action btn-success mb-0" title="Print this booking approval">
                             <i class="fas fa-print"></i>
                             </button>
                         </a>
-                        <a href="">
+                        <a href="{{ route('bookings.cancel', ['booking' => $booking->id]) }}">
                             <button type="button" class="btn btn-action btn-danger mb-0" title="Cancel this booking" onclick="return confirm('Are you sure to cancel this booking?')">
                             <i class="fas fa-times"></i>
                             </button>

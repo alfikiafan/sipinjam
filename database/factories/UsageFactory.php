@@ -5,6 +5,7 @@ namespace Database\Factories;
 use Illuminate\Database\Eloquent\Factories\Factory;
 use App\Models\Usage;
 use App\Models\Booking;
+use App\Models\User;
 use Faker\Factory as Faker;
 use Carbon\Carbon;
 
@@ -26,13 +27,17 @@ class UsageFactory extends Factory
         $selectedBookingId = $faker->randomElement($bookingIds);
         $selectedBooking = Booking::find($selectedBookingId);
         $endDate = $selectedBooking->end_date;
-        $returnDate = Carbon::parse($endDate)->addDays(7);
+        $dueDate = Carbon::parse($endDate)->addDays(7);
+        $userId = User::whereHas('unit', function ($query) use ($selectedBooking) {
+            $query->where('unit_id', $selectedBooking->item->unit_id);
+        })->pluck('id')->toArray();
         
         return [
             'booking_id' => $selectedBookingId,
+            'user_id' => $faker->randomElement($userId),
             'status' => $faker->randomElement(['awaiting use', 'used', 'returned']),
             'note' => $faker->text(500),
-            'due_date' => $returnDate,
+            'due_date' => $dueDate,
         ];
     }
 }

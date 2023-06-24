@@ -101,8 +101,11 @@ Route::middleware('auth', 'borrower')->group(function () {
     // Rute untuk mengajukan peminjaman
     Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
 
+    // Rute untuk menolak peminjaman
+    Route::get('/bookings/{booking}/cancel', [ApprovalController::class, 'cancel'])->name('bookings.cancel');
+
     // Rute untuk mencetak bukti peminjaman
-    Route::get('/bookings/approval', [ApprovalController::class, 'generateApprovalLetter'])->name('bookings.print-approval');
+    Route::get('/bookings/{booking}/approval', [ApprovalController::class, 'generateApprovalLetter'])->name('bookings.approval');
 });
 
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {

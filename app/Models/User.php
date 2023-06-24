@@ -54,5 +54,10 @@ class User extends Authenticatable
         return $this->belongsTo(Unit::class);
     }
 
+    public function usages()
+    {
+        return $this->hasMany(Usage::class);
+    }
+
     protected $primaryKey = 'id';
 }

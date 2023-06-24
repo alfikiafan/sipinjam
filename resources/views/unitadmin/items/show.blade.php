@@ -14,9 +14,11 @@
         <div class="card-body">
           <div class="row">
             <div class="col-md-4">
-              <img src="{{ asset($item->photo) }}" alt="Item Photo" class="img-fluid rounded mb-2" style="max-height: 150px; width: auto;">
-              <h5 class="m-0">{{ $item->name }}</h5>
-              <p>{{ $item->serial_number }}</p>
+              <img src="{{ asset($item->photo) }}" alt="Item Photo" class="img-fluid rounded mb-2" style="max-height: 150px; width: auto;"><br>
+              <h5 class="mb-0 mt-2 d-inline-block">{{ $item->name }}</h5>
+              <p class="d-inline-block"></p>
+              <p class="m-0 d-inline-block">(ID: {{ $item->id }})</p>
+              <p class="m-0">Serial: {{ $item->serial_number }}</p>
             </div>
             <div class="col-md-4">
               <p><strong>Status:</strong><br>

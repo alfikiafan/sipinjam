@@ -14,10 +14,12 @@ return new class extends Migration
         Schema::create('usages', function (Blueprint $table) {
             $table->id();
             $table->unsignedBigInteger('booking_id');
+            $table->unsignedBigInteger('user_id');
             $table->date('due_date');
             $table->string('status');
-            $table->string('note', 500)->nullable();
+            $table->string('note', 300)->nullable();
             $table->foreign('booking_id')->references('id')->on('bookings')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();
         });
     }
