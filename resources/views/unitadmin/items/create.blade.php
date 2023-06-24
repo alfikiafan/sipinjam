@@ -4,6 +4,10 @@
 @include('components.notifications')
 
 <div class="mx-3 mb-3">
+    <div class="mb-4">
+        <h6 class="m-0">Add New Item</h6>
+        <p class="text-sm mb-0">Easily expand your inventory by adding a new item to your unit.</p>
+    </div>
     <form method="POST" action="{{ route('items.store') }}" enctype="multipart/form-data">
         @csrf
         <div class="row">
