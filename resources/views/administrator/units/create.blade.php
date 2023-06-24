@@ -26,5 +26,4 @@ units/create administrator
             <a href="{{ route('administrator.units.index') }}" class="btn bg-gradient-info">Cancel</a>
         </form>
     </div>
-
 @endsection
