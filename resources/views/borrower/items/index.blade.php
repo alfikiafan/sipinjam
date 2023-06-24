@@ -24,7 +24,7 @@
             <table class="table align-items-center mb-0">
               <thead>
                 <tr>
-                  <th class="text-secondary text-xxs font-weight-bolder pe-3">ID</th>
+                  <th class="text-secondary text-xxs font-weight-bolder pe-3">Unit</th>
                   <th class="text-secondary text-xxs font-weight-bolder px-2">Item</th>
                   <th class="text-secondary text-xxs font-weight-bolder px-2">Brand</th>
                   <th class="text-secondary text-xxs font-weight-bolder px-2">Serial Number</th>
@@ -36,7 +36,7 @@
                 @foreach($items as $item)
                 <tr>
                   <td>
-                    <p class="text-xs font-weight-bold mb-0 ps-3">{{ $item->id }}</p>
+                    <p class="text-xs font-weight-bold mb-0 ps-3">{{ $item->Unit->name }}</p>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
@@ -63,8 +63,8 @@
                           <i class="fas fa-eye"></i>
                         </button>
                       </a>
-                      <a href="{{ route('items.edit', ['item' => $item->id]) }}">
-                        <button type="button" class="btn btn-action btn-primary mb-0 me-1" title="Edit this item">
+                      <a href="{{ route('bookings.unit', ['item' => $item->id]) }}">
+                        <button type="button" class="btn btn-action btn-primary mb-0 me-1" title="Booking this item">
                           <i class="fas fa-plus"></i>
                         </button>
                       </a>

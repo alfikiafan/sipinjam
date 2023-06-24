@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Booking;
+use App\Models\Unit;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
@@ -66,37 +68,46 @@ class BookingController extends Controller
         return view('borrower.bookings.create');
     }
 
-    public function store(Request $request)
+    public function booking_unit(Item $item)
     {
         $user = auth()->user();
         if($user->can('borrower')) {
-            $validatedData = $request->validate([
-                'item_id' => 'required',
-                'user_id' => 'required',
-                'start_date' => 'required',
-                'end_date' => 'required',
-                'status' => 'required',
-            ]);
-            $booking = Booking::create($validatedData);
-            return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+
+
+            return view('borrower.bookings.create', compact('item'));
         } else {
             abort(403, 'Forbidden');
         }
     }
 
-    public function update(Request $request, Booking $booking)
+    public function store(Request $request)
     {
+        $user = auth()->user();
+    if ($user->can('borrower')) {
         $validatedData = $request->validate([
             'item_id' => 'required',
-            'user_id' => 'required',
-            'start_date' => 'required',
-            'end_date' => 'required',
-            'status' => 'required',
+            'quantity' => 'required|numeric',
+            'start_date' => 'required|date',
+            'end_date' => 'required|date|after:start_date',
         ]);
 
-        $booking->update($validatedData);
+        // Check if start_date is greater than end_date
+        if (strtotime($validatedData['start_date']) > strtotime($validatedData['end_date'])) {
+            return back()->withErrors('Start date must be before the end date.')->withInput();
+        }
 
-        return redirect()->route('bookings.index')->with('success', 'Booking updated successfully.');
+        $validatedData['status'] = 'pending';
+        $validatedData['user_id'] = $user->id;
+
+        $booking = new Booking($validatedData);
+        if ($booking->save()) {
+            return redirect()->route('bookings.index')->with('success', 'Booking created successfully.');
+        } else {
+            return back()->withErrors('Failed to create booking. Please try again.');
+        }
+    } else {
+        abort(403, 'Forbidden');
+    }
     }
 
     public function updateExpiredBookings()
