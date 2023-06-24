@@ -44,20 +44,6 @@ class UsageController extends Controller
         }
     }
 
-    public function store(Request $request)
-    {
-        $validatedData = $request->validate([
-            'booking_id' => 'required',
-            'status' => 'required',
-            'due_date' => 'required',
-            'note' => 'required',
-        ]);
-
-        Usage::create($validatedData);
-
-        return redirect()->route('usages.index')->with('success', 'Usage created successfully.');
-    }
-
     public function edit(Usage $usage)
     {
         return view('unitadmin.usages.edit', compact('usage'));

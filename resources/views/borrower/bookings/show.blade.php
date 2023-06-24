@@ -12,29 +12,11 @@
           <p class="text-sm mb-0">Show detail the booking</p>
         </div>
         <div class="card-body">
-          <div class="row gx-4">
-            <p class="text-dark"><strong>Borrower:</strong></p>
-              <div class="col-auto">
-                  <div class="avatar avatar-xl position-relative">
-                      <img src="{{ asset($booking->user->photo) }}" alt="..." class="w-100 border-radius-lg shadow-sm image-hover">
-                  </div>
-              </div>
-              <div class="col-auto my-auto">
-                  <div class="h-100 me-3">
-                      <p class="mb-1"><strong>{{ $booking->user->name }}</strong> (ID: {{ $booking->user->id }})</p>
-                      <p class="mb-0 text-sm">{{ $booking->user->email }}</p>
-                      <p class="mb-0 text-sm">{{ $booking->user->phone }}</p>
-                  </div>
-              </div>
-          </div>
-          <hr>
           <div class="row">
             <div class="col-md-4">
-              <img src="{{ asset($booking->item->photo) }}" alt="Item Photo" class="img-fluid rounded" style="max-height: 150px; width: auto;"><br>
-              <h5 class="mb-0 mt-2 d-inline-block">{{ $booking->item->name }}</h5>
-              <p class="d-inline-block"></p>
-              <p class="m-0 d-inline-block">(ID: {{ $booking->item->id }})</p>
-              <p class="m-0">Serial: {{ $booking->item->serial_number }}</p>
+              <img src="{{ asset($booking->item->photo) }}" alt="Item Photo" class="img-fluid rounded" style="max-height: 150px; width: auto;">
+              <h5 class="m-0">{{ $booking->item->name }}</h5>
+              <p>{{ $booking->item->serial_number }}</p>
             </div>
             <div class="col-md-4">
               <p><strong>Status:</strong><br>
@@ -49,11 +31,32 @@
                 @endif
                 <p><strong>Category:</strong><br>{{ $booking->item->category->name }}</p>
                 <p><strong>Quantity:</strong><br>{{ $booking->quantity }}</p>
+                <p><strong>Admin Unit:</strong><br>
+                  <span>
+                    @php
+                        $usage = App\Models\Usage::where('booking_id', $booking->id)->first();
+                        $user = App\Models\User::find($usage->user_id);
+                    @endphp
+                    @if ($user)
+                        {{ $user->name }}
+                    @endif
+                </span>
+                </p>
               </div>
               <div class="col-md-4">
                 <p><strong>Created At:</strong><br>{{ $booking->created_at }}</p>
                 <p><strong>Start Date:</strong><br>{{ $booking->start_date }}</p>
                 <p><strong>End Date:</strong><br>{{ $booking->end_date }}</p>
+                <p><strong>Due Date:</strong><br>
+                  <span>
+                      @php
+                          $usage = App\Models\Usage::where('booking_id', $booking->id)->first();
+                      @endphp
+                      @if ($usage)
+                          {{ $usage->due_date }}
+                      @endif
+                  </span>
+              </p>
               </div>
             </div>
             <hr>

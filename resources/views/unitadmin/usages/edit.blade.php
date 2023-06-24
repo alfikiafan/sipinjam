@@ -23,14 +23,15 @@
                     </div>
                     <div class="mb-3">
                         <label for="note" class="form-label">Note</label>
-                        <textarea class="form-control" id="note" name="note" rows="4">{{ $usage->note }}</textarea>
+                        <textarea class="form-control" id="note" name="note" rows="4" maxlength="300">{{ $usage->note }}</textarea>
+                        <small id="character_count" class="form-text text-muted">Type to check remaining character</small>
                     </div>
                 </div>
             </div>
             <div class="col-md-5 ms-4">
-                <p class="text-sm text-dark"><strong>Item:</strong><br> {{ $usage->booking->item->name }}</p>
+                <p class="text-sm text-dark"><strong>Item:</strong><br> {{ $usage->booking->item->name }} (ID: {{ $usage->booking->item->id }})</p>
                 <p class="text-sm text-dark"><strong>Serial Number:</strong><br> {{ $usage->booking->item->serial_number }}</p>
-                <p class="text-sm text-dark"><strong>Borrower:</strong><br> {{ $usage->booking->user->name }}</p>
+                <p class="text-sm text-dark"><strong>Borrower:</strong><br> {{ $usage->booking->user->name }} (ID: {{ $usage->booking->user->id }})</p>
                 <p class="text-sm text-dark"><strong>Quantity:</strong><br> {{ $usage->booking->quantity }}</p>
             </div>
         </div>

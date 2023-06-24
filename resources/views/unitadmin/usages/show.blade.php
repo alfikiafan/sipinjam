@@ -21,7 +21,7 @@
               </div>
               <div class="col-auto my-auto">
                   <div class="h-100 me-3">
-                      <p class="mb-1"><strong>{{ $usage->booking->user->name }}</strong></p>
+                      <p class="mb-1"><strong>{{ $usage->booking->user->name }}</strong> (ID: {{ $usage->booking->user->id }})</p>
                       <p class="mb-0 text-sm">{{ $usage->booking->user->email }}</p>
                       <p class="mb-0 text-sm">{{ $usage->booking->user->phone }}</p>
                   </div>
@@ -30,9 +30,11 @@
           <hr>
           <div class="row">
             <div class="col-md-4">
-              <img src="{{ asset($usage->booking->item->photo) }}" alt="Item Photo" class="img-fluid rounded mb-2" style="max-height: 150px; width: auto;">
-              <h5 class="m-0">{{ $usage->booking->item->name }}</h5>
-              <p>{{ $usage->booking->item->serial_number }}</p>
+              <img src="{{ asset($usage->booking->item->photo) }}" alt="Item Photo" class="img-fluid rounded mb-2" style="max-height: 150px; width: auto;"><br>
+              <h5 class="mb-0 mt-2 d-inline-block">{{ $usage->booking->item->name }}</h5>
+              <p class="d-inline-block"></p>
+              <p class="m-0 d-inline-block">(ID: {{ $usage->booking->item->id }})</p>
+              <p class="m-0">Serial: {{ $usage->booking->item->serial_number }}</p>
             </div>
             <div class="col-md-4">
               <p><strong>Item Status:</strong><br>
@@ -57,9 +59,7 @@
               <p><strong>Approved at:</strong><br> {{ $usage->created_at }}</p>
             </div>
             <p><strong>Note:</strong></p>
-            <p class="text-sm">
-              {{ $usage->note }}
-            </p>
+            <p>{{ $usage->note }}</p>
           </div>
           <hr>
           

@@ -5,8 +5,11 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Usage;
 use App\Models\Item;
+use App\Models\Unit;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use PDF;
 
 class ApprovalController extends Controller
 {
@@ -41,6 +44,8 @@ class ApprovalController extends Controller
         }
         
         if ($user->can('unitadmin')) {
+
+            $unitAdminId = $user->id;
             $validatedData = $request->validate([
                 'due_date' => 'required|date',
                 'note' => 'nullable|string',
@@ -50,6 +55,7 @@ class ApprovalController extends Controller
             $booking->save();
         
             $usage = Usage::create([
+                'user_id' => $unitAdminId,
                 'booking_id' => $booking->id,
                 'status' => 'awaiting use',
                 'due_date' => $validatedData['due_date'],
@@ -85,6 +91,71 @@ class ApprovalController extends Controller
             return redirect()->route('bookings.index');
         } else {
             abort(403, 'Forbidden');
+        }
+    }
+
+    public function cancel(Booking $booking)
+    {
+        if ($booking->status !== 'pending') {
+            return redirect()->back()->with('error', 'Cannot cancel a booking that is not pending.');
+        }
+
+        $user = auth()->user();
+        if ($user->can('borrower')) {
+            $booking->status = 'cancelled';
+            $booking->save();
+            
+            return redirect()->route('bookings.index');
+        } else {
+            abort(403, 'Forbidden');
+        }
+    }
+
+    public function generateApprovalLetter(Booking $booking)
+    {
+        $user = $booking->user;
+
+        if ($user->id !== auth()->user()->id) {
+            return redirect()->route('bookings.index')->with('error', 'You are not authorized to access this booking.');
+        } elseif (!$booking) {
+            return redirect()->route('bookings.index')->with('error', 'The provided booking ID was not found.');
+        } elseif ($booking->status !== 'approved') {
+            return redirect()->route('bookings.index')->with('error', 'The provided booking ID is not approved');
+        } else {
+
+            $item = Item::find($booking->item_id);
+            $unit = Unit::find($item->unit_id);
+            $usage = Usage::where('booking_id', $booking->id)->first();
+            $adminUnit = User::where('unit_id', $item->unit_id)->where('role', 'unitadmin')->first();
+
+            $data = [
+                'unit' => $unit->name,
+                'unitLocation' => $unit->location,
+                'usageId' => $usage->id,
+                'name' => $user->name,
+                'id' => $user->id,
+                'email' => $user->email,
+                'phone' => $user->phone,
+                'itemName' => $item->name,
+                'itemId' => $item->id,
+                'bookId' => $booking->id,
+                'quantity' => $booking->quantity,
+                'startDate' => $booking->start_date,
+                'endDate' => $booking->end_date,
+                'dueDate' => $usage->due_date,
+                'usageNote' => $usage->note,
+                'adminUnit' => $adminUnit->unit->name,
+                'adminName' => $adminUnit->name,
+                'adminPhone' => $adminUnit->phone,
+                'createdAt' => $usage->created_at,
+            ];
+
+            $pdf = PDF::loadView('borrower.bookings.print-approval', $data)->setOptions([
+                'defaultFont' => 'Roboto',
+            ]);
+
+            return response($pdf->stream('approval_letter.pdf'), 200)
+                ->header('Content-Type', 'application/pdf');
         }
     }
 }

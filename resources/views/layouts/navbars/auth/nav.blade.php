@@ -11,14 +11,14 @@
       <ul class="navbar-nav justify-content-end">
         @can ('unitadmin')
         <li class="nav-item d-flex align-items-center px-3">
-          <a href="{{ url('unit-info') }}" class="nav-link text-body p-0">
+          <a href="" class="nav-link text-body p-0">
             <i class="fas fa-building me-sm-1"></i>
             <span class="text-sm d-none d-lg-inline-block">{{ Auth::user()->unit->name }}</span>
           </a>
         </li>
         @endcan
         <li class="nav-item d-flex align-items-center px-3">
-          <a href="{{ url('profile') }}" class="nav-link text-body p-0">
+          <a href="{{ route('profile.index') }}" class="nav-link text-body p-0">
             <img src="{{ asset(Auth::user()->photo) }}" class="avatar avatar-sm" alt="item-image">
             <span class="d-sm-inline d-none px-3 font-weight-bold">{{ Auth::user()->name }}</span>
             <span class="d-sm-inline d-none text-muted">({{ Auth::user()->role }})</span>
@@ -29,7 +29,7 @@
             @csrf
             <button type="submit" class="nav-link text-body font-weight-bold px-0 py-0" style="border: none; background: none;">
               <i class="fa fa-sign-out-alt ms-sm-1"></i>    
-              <span class="d-sm-inline d-none">Keluar</span>
+              <span class="d-sm-inline d-none">Logout</span>
             </button>
           </form>
         </li>

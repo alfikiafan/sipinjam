@@ -11,6 +11,7 @@ class Usage extends Model
 
     protected $fillable = [
         'booking_id',
+        'user_id',
         'status',
         'due_date',
         'note'
@@ -19,6 +20,11 @@ class Usage extends Model
     public function booking()
     {
         return $this->belongsTo(Booking::class);
+    }
+
+    public function user()
+    {
+        return $this->belongsTo(User::class);
     }
 
     protected static function newFactory()
