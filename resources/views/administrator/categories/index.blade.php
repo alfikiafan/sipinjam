@@ -2,8 +2,8 @@
 
 @section('content')
 
-categories administrator
 @include('components.notifications')
+
     <div class="mx-3 mb-3">
         <h2>Categories</h2>
         <a href="{{ route('administrator.categories.create') }}" class="btn btn-success">Add Category</a>

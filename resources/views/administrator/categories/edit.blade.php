@@ -2,7 +2,6 @@
 
 @section('content')
 
-categories/{category}/edit administrator
     <div class="mx-3 mb-3">
         <form method="POST" action="{{ route('administrator.categories.update', $category->id) }}">
             @csrf

@@ -2,7 +2,6 @@
 
 @section('content')
 
-units/create administrator
 <div class="mx-3 mb-3">
         <form method="POST" action="{{ route('administrator.units.store') }}">
             @csrf
