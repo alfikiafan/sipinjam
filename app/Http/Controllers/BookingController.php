@@ -30,7 +30,16 @@ class BookingController extends Controller
             return view('unitadmin.bookings.index', compact('bookings', 'status'));
         }
         elseif ($user->can('borrower')) {
-            $bookings = Booking::where('user_id', $user->id)->get();
+            $bookings = Booking::where('user_id', $user->id);
+        
+            $status = $request->query('status');
+        
+            if ($status) {
+                $bookings->where('status', $status);
+            }
+        
+            $bookings = $bookings->get();
+        
             return view('borrower.bookings.index', compact('bookings'));
         } else {
             abort(403, 'Forbidden');
@@ -45,6 +54,8 @@ class BookingController extends Controller
                 abort(403, 'Forbidden');
             }
             return view('unitadmin.bookings.show', compact('booking'));
+        } elseif ($user->can('borrower')) {
+            return view('borrower.bookings.show', compact('booking'));
         } else {
             abort(403, 'Forbidden');
         }

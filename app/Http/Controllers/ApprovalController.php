@@ -7,6 +7,7 @@ use App\Models\Usage;
 use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use PDF;
 
 class ApprovalController extends Controller
 {
@@ -86,5 +87,33 @@ class ApprovalController extends Controller
         } else {
             abort(403, 'Forbidden');
         }
+    }
+
+    public function generateApprovalLetter()
+    {
+        $data = [
+            'unit' => 'Nama Unit',
+            'name' => 'Nama Peminjam',
+            'id' => 'ID Peminjam',
+            'email' => 'Email Peminjam',
+            'phone' => 'Nomor Telepon Peminjam',
+            'itemName' => 'Nama Barang',
+            'quantity' => 'Jumlah',
+            'startDate' => 'Tanggal Mulai',
+            'endDate' => 'Tanggal Selesai',
+            'dueDate' => 'Tanggal Pengembalian',
+            'usageNote' => 'Catatan Penggunaan',
+            'adminUnit' => 'Unit Admin',
+            'adminName' => 'Nama Admin',
+            'adminPhone' => 'Nomor Telepon Admin',
+            'createdAt' => 'Tanggal dan Waktu Persetujuan',
+        ];
+
+        $pdf = PDF::loadView('borrower.bookings.print-approval', $data)->setOptions([
+            'defaultFont' => 'Roboto',
+        ]);
+        
+        return response($pdf->stream('approval_letter.pdf'), 200)
+            ->header('Content-Type', 'application/pdf');
     }
 }

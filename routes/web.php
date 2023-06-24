@@ -98,8 +98,11 @@ Route::middleware('auth', 'unitadmin')->group(function () {
 // Rute borrower saja
 Route::middleware('auth', 'borrower')->group(function () {
 
+    // Rute untuk mengajukan peminjaman
+    Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
+
     // Rute untuk mencetak bukti peminjaman
-    Route::get('/bookings/{booking}/print', [BookingController::class, 'print'])->name('borrower.bookings.print');
+    Route::get('/bookings/approval', [ApprovalController::class, 'generateApprovalLetter'])->name('bookings.print-approval');
 });
 
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
