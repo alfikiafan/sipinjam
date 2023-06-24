@@ -3,15 +3,6 @@
 @section('content')
 
 units administrator
-
-
-@endsection
-
-@extends('layouts.user_type.auth')
-
-@section('content')
-
-units administrator
 @include('components.notifications')
 
     <div class="mx-3 mb-3">
