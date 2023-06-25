@@ -42,6 +42,7 @@ class ItemFactory extends Factory
             'photo' => 'storage/img/items/default.jpg',
             'quantity' => $quantity,
             'status' => $status,
+            'description' => $faker->sentence(),
         ];
     }
 }

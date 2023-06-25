@@ -14,7 +14,7 @@
                                 <p class="text-sm">See all categories</p>
                             </div>
                             <div>
-                                <h6 class="m-0 text-sm">Total number of categories:</h6>
+                                <h6 class="m-0 text-sm">Total categories:</h6>
                                 <p class="d-inline-block me-2 text-sm">{{ $categories->count() }}</p>
                             </div>
                             <div class="ml-auto p-0">
@@ -29,26 +29,33 @@
                                     <tr>
                                         <th class="text-secondary text-xxs font-weight-bolder pe-3">ID</th>
                                         <th class="text-secondary text-xxs font-weight-bolder px-2">Name</th>
-                                        <th class="text-secondary text-xxs font-weight-bolder px-2">Number of Items</th>
+                                        <th class="text-secondary text-xxs font-weight-bolder px-2">Total Items</th>
+                                        <th class="text-secondary text-xxs font-weight-bolder px-2">Description</th>
                                         <th class="text-secondary text-xxs font-weight-bolder px-2">Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     @foreach ($categories as $category)
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle ps-4">
                                                 <span class="text-xs font-weight-bold">{{ $category->id }}</span>
                                             </td>                                              
                                             <td class="align-middle">
                                                 <span class="text-xs font-weight-bold">{{ $category->name }}</span>
                                             </td>                                              
                                             <td class="align-middle">
-                                                @if ($category->item)
-                                                    <span class="text-xs font-weight-bold">{{  $category->item->quantity }}</span>
-                                                @else
-                                                <span class="text-xs font-weight-bold">N/A</span>
-                                                @endif                                            
-                                            </td>                                            
+                                                <span class="text-xs font-weight-bold">{{ $category->items()->where('category_id', $category->id)->count() }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">
+                                                @php
+                                                    $description = $category->description;
+                                                    if (strlen($description) > 70) {
+                                                        $description = substr($description, 0, 70) . '...';
+                                                    }
+                                                    echo $description;
+                                                @endphp</span>
+                                            </td> 
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <a href="{{ route('administrator.categories.show', ['category' => $category->id]) }}" class="me-2">

@@ -9,7 +9,7 @@ use App\Models\Unit;
 class UnitAdminController extends Controller
 {
     public function index() {
-        if(auth()->user()->can('administrator')) {
+        if (auth()->user()->can('administrator')) {
         $unitadmins = User::where('role', 'unitadmin')->get();
 
         return view('administrator.unitadmins.index', compact('unitadmins'));
@@ -19,7 +19,7 @@ class UnitAdminController extends Controller
     }
 
     public function show(User $unitadmin) {
-        if(auth()->user()->can('administrator')) {
+        if (auth()->user()->can('administrator')) {
         return view('administrator.unitadmins.show', compact('unitadmin'));
         } else {
             abort(403, 'Forbidden');

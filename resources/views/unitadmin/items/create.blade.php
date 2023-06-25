@@ -24,7 +24,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control @error('name') is-invalid @enderror" id="name" name="name" required>
@@ -32,7 +31,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="brand">Brand</label>
                     <input type="text" class="form-control @error('brand') is-invalid @enderror" id="brand" name="brand" required>
@@ -40,7 +38,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="serial_number">Serial Number</label>
                     <input type="text" class="form-control @error('serial_number') is-invalid @enderror" id="serial_number" name="serial_number">
@@ -49,7 +46,6 @@
                     @enderror
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="photo">Photo</label>
@@ -58,7 +54,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
                     <input type="number" class="form-control @error('quantity') is-invalid @enderror" id="quantity" name="quantity" min="1" @if(old('serial_number')) value="1" readonly @endif>
@@ -66,7 +61,6 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control @error('status') is-invalid @enderror" id="status" name="status" required>
@@ -78,12 +72,20 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"></textarea>
+                    <small id="character_count" class="form-text text-muted">Type to check remaining character</small>
+                    @error('description')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
         </div>
 
         <div class="row mt-3">
             <div class="col-md-12">
-                <button type="submit" class="btn bg-gradient-primary">Add Item</button>
+                <button type="submit" class="btn bg-gradient-primary me-2">Add Item</button>
                 <a href="/items" class="btn bg-gradient-info">Cancel</a>
             </div>
         </div>

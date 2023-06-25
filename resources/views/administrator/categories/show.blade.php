@@ -13,13 +13,14 @@
         </div>
         <div class="card-body">
           <div class="row">
-            <div class="col-md-4">
-              <h5 class="mb-0 mt-2 d-inline-block">{{ $category->name }}</h5>
-              <p class="d-inline-block"></p>
-              <p class="m-0 d-inline-block">(ID: {{ $category->id }})</p>
+            <h5>{{ $category->name }}</h5>
+            <div class="col-md-6">
+              <p><strong>ID:</strong><br> {{ $category->id }}</p>
+              <p><strong>Description:</strong><br> {{ $category->description }}</p>
             </div>
-            <div class="col-md-4">
-              <p><strong>Number of items:</strong><br> {{ $category->item->quantity ?? 'N/A' }}</p>
+            <div class="col-md-6">
+              <h5></h5>
+              <p><strong>Total items:</strong><br> {{ $category->items()->where('category_id', $category->id)->count() }}</p>
               <p><strong>Added at:</strong><br> {{ $category->created_at }}</p>
             </div>
           </div>
