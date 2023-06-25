@@ -19,7 +19,7 @@
               <p class="m-0 d-inline-block">(ID: {{ $category->id }})</p>
             </div>
             <div class="col-md-4">
-              <p><strong>Number of items:</strong><br> {{ $category->item->quantity ?? 'N/A' }}</p>
+              <p><strong>Number of items:</strong><br> {{ $category->items()->where('category_id', $category->id)->count() }}</p>
               <p><strong>Added at:</strong><br> {{ $category->created_at }}</p>
             </div>
           </div>

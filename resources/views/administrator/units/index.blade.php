@@ -36,7 +36,7 @@
                                 <tbody>
                                     @foreach ($units as $unit)
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle ps-4">
                                                 <span class="text-xs font-weight-bold">{{ $unit->id }}</span>
                                             </td>
                                             <td class="align-middle">

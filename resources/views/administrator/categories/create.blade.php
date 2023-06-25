@@ -3,7 +3,11 @@
 @section('content')
 @include('components.notifications')
 
-    <div class="mx-3 mb-3">
+<div class="mx-3 mb-3">
+    <div class="mb-4">
+        <h6 class="m-0">Add a New Category</h6>
+        <p class="text-sm mb-0">Easily add a new category to improve item organization.</p>
+    </div>
         <form method="POST" action="{{ route('administrator.categories.store') }}">
             @csrf
             <div class="row">
@@ -20,7 +24,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <button type="submit" class="btn bg-gradient-primary">Add Category</button>
+                    <button type="submit" class="btn bg-gradient-primary me-2">Add Category</button>
                     <a href="{{ route('administrator.categories.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>

@@ -6,8 +6,8 @@
 
 <div class="mx-3 mb-3">
     <div class="mb-4">
-    <h6 class="m-0">Edit Item</h6>
-    <p class="text-sm mb-0">Edit unit detail</p>
+        <h6 class="m-0">Edit Item</h6>
+        <p class="text-sm mb-0">Edit unit detail</p>
     </div>
         <form method="POST" action="{{ route('administrator.units.update', $unit->id) }}">
             @csrf
@@ -30,7 +30,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <button type="submit" class="btn bg-gradient-primary">Create Category</button>
+                    <button type="submit" class="btn bg-gradient-primary me-2">Edit Unit</button>
                     <a href="{{ route('administrator.units.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>

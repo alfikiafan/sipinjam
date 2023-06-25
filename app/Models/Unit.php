@@ -14,7 +14,7 @@ class Unit extends Model
         'location'
     ];
 
-    public function Item()
+    public function items()
     {
         return $this->hasMany(Item::class);
     }

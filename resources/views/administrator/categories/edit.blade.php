@@ -21,7 +21,7 @@
 
             <div class="row mt-3">
                 <div class="col-md-12">
-                    <button type="submit" class="btn bg-gradient-primary">Edit Category</button>
+                    <button type="submit" class="btn bg-gradient-primary me-2">Edit Category</button>
                     <a href="{{ route('administrator.categories.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>

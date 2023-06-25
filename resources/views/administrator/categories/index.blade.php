@@ -36,7 +36,7 @@
                                 <tbody>
                                     @foreach ($categories as $category)
                                         <tr>
-                                            <td class="align-middle">
+                                            <td class="align-middle ps-4">
                                                 <span class="text-xs font-weight-bold">{{ $category->id }}</span>
                                             </td>                                              
                                             <td class="align-middle">
@@ -44,9 +44,9 @@
                                             </td>                                              
                                             <td class="align-middle">
                                                 @if ($category->item)
-                                                    <span class="text-xs font-weight-bold">{{  $category->item->quantity }}</span>
+                                                    <span class="text-xs font-weight-bold">{{ $category->item->quantity }}</span>
                                                 @else
-                                                <span class="text-xs font-weight-bold">N/A</span>
+                                                <span class="text-xs font-weight-bold">{{ $category->items()->where('category_id', $category->id)->count() }}</span>
                                                 @endif                                            
                                             </td>                                            
                                             <td>

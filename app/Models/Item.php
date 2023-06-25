@@ -32,17 +32,17 @@ class Item extends Model
         ];
     }
 
-    public function Category()
+    public function category()
     {
         return $this->belongsTo(Category::class, 'category_id');
     }
 
-    public function Unit()
+    public function unit()
     {
         return $this->belongsTo(Unit::class);
     }
 
-    public function Bookings()
+    public function bookings()
     {
         return $this->hasMany(Booking::class);
     }

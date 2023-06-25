@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Unit;
 use Illuminate\Http\Request;
+use App\Models\Item;
 
 class UnitController extends Controller
 {
@@ -16,8 +17,11 @@ class UnitController extends Controller
     public function show(Unit $unit)
     {
         $user = auth()->user();
-        if($user->can('administrator')) {
-            return view('administrator.units.show', compact('unit'));
+
+        if ($user->can('administrator')) {
+            $unitAdmins = $unit->users()->where('role', 'unitadmin')->get();
+
+            return view('administrator.units.show', compact('unit', 'unitAdmins'));
         } else {
             abort(403, 'Forbidden');
         }
@@ -30,8 +34,6 @@ class UnitController extends Controller
 
     public function store(Request $request)
     {
-        // Validasi inputan form
-
         $unit = new Unit([
             'name' => $request->name,
             'location' => $request->location,
@@ -49,8 +51,6 @@ class UnitController extends Controller
 
     public function update(Request $request, Unit $unit)
     {
-        // Validasi inputan form
-
         $unit->name = $request->name;
         $unit->location = $request->location;
         $unit->save();
@@ -60,8 +60,11 @@ class UnitController extends Controller
 
     public function destroy(Unit $unit)
     {
-        $unit->delete();
-
-        return redirect()->route('administrator.units.index')->with('success', 'Unit deleted successfully.');
+        if ($unit->items()->count() === 0) {
+            $unit->delete();
+            return redirect()->route('administrator.units.index')->with('success', 'Unit deleted successfully.');
+        }
+        
+        return redirect()->route('administrator.units.index')->with('error', 'Cannot delete unit. It has items associated with it.');
     }
 }
