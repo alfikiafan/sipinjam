@@ -19,6 +19,14 @@
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
                     </div>
+                    <div class="form-group">
+                        <label for="description">Description</label>
+                        <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description"></textarea>
+                        <small id="character_count" class="form-text text-muted">Type to check remaining character</small>
+                        @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                        @enderror
+                    </div>
                 </div>
             </div>
 

@@ -17,7 +17,8 @@ class Item extends Model
         'serial_number', 
         'photo', 
         'quantity', 
-        'status'
+        'status',
+        'description',
     ];
 
     public function rules()

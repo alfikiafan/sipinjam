@@ -11,7 +11,8 @@ class Unit extends Model
 
     protected $fillable = [
         'name', 
-        'location'
+        'location',
+        'description',
     ];
 
     public function items()

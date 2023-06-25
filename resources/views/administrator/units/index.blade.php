@@ -14,7 +14,7 @@
                                 <p class="text-sm">See all units</p>
                             </div>
                             <div>
-                                <h6 class="m-0 text-sm">Total number of units:</h6>
+                                <h6 class="m-0 text-sm">Total units:</h6>
                                 <p class="d-inline-block me-2 text-sm">{{ $units->count() }}</p>
                             </div>
                             <div class="ml-auto p-0">
@@ -30,6 +30,8 @@
                                         <th class="text-secondary text-xxs font-weight-bolder pe-3">ID</th>
                                         <th class="text-secondary text-xxs font-weight-bolder px-2">Name</th>
                                         <th class="text-secondary text-xxs font-weight-bolder px-2">Location</th>
+                                        <th class="text-secondary text-xxs font-weight-bolder px-2">Total Items</th>
+                                        <th class="text-secondary text-xxs font-weight-bolder px-2">Description</th>
                                         <th class="text-secondary text-xxs font-weight-bolder px-2">Actions</th>
                                     </tr>
                                 </thead>
@@ -45,6 +47,19 @@
                                             <td class="align-middle">
                                                 <span class="text-xs font-weight-bold">{{ $unit->location }}</span>
                                             </td>
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">{{ $unit->items()->where('unit_id', $unit->id)->count() }}</span>
+                                            </td>
+                                            <td class="align-middle">
+                                                <span class="text-xs font-weight-bold">
+                                                @php
+                                                    $description = $unit->description;
+                                                    if (strlen($description) > 50) {
+                                                        $description = substr($description, 0, 50) . '...';
+                                                    }
+                                                    echo $description;
+                                                @endphp</span>
+                                            </td> 
                                             <td>
                                                 <div class="d-flex align-items-center">
                                                     <a href="{{ route('administrator.units.show', ['unit' => $unit->id]) }}" class="me-2">

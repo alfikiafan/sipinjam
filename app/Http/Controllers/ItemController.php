@@ -72,6 +72,7 @@ class ItemController extends Controller
             'quantity' => 'required|integer|min:1',
             'photo' => 'required|image|mimes:jpeg,png,jpg|max:2048',
             'status' => 'required|in:available,not available',
+            'description' => 'nullable',
         ]);
 
         if ($request->has('serial_number') && $request->filled('serial_number')) {
@@ -95,6 +96,7 @@ class ItemController extends Controller
             'photo' => Storage::url($photoPath),
             'quantity' => $request->quantity,
             'status' => $validatedData['status'],
+            'description' => $validatedData['description'],
         ]);
 
         $success = $item->save();
@@ -124,6 +126,7 @@ class ItemController extends Controller
             'quantity' => 'required|integer',
             'photo' => 'image|mimes:jpeg,png,jpg,gif|max:2048',
             'status' => 'required|in:available,not available,empty',
+            'description' => 'nullable',
         ]);
 
         if ($request->has('serial_number') && $request->filled('serial_number')) {
@@ -138,6 +141,7 @@ class ItemController extends Controller
         $item->unit_id = $unitId;
         $item->name = $validatedData['name'];
         $item->brand = $validatedData['brand'];
+        $item->description = $request->description;
 
         if ($request->has('serial_number')) {
             $item->serial_number = $request->serial_number;

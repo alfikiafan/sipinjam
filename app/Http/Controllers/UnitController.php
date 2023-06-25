@@ -2,9 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Unit;
 use Illuminate\Http\Request;
+use App\Models\Unit;
 use App\Models\Item;
+use Illuminate\Validation\Rule;
 
 class UnitController extends Controller
 {
@@ -34,9 +35,16 @@ class UnitController extends Controller
 
     public function store(Request $request)
     {
+        $validatedData = $request->validate([
+            'name' => 'required|unique:units',
+            'location' => 'required',
+            'description' => 'nullable',
+        ]);
+
         $unit = new Unit([
-            'name' => $request->name,
-            'location' => $request->location,
+            'name' => $validatedData['name'],
+            'location' => $validatedData['location'],
+            'description' => $validatedData['description'],
         ]);
 
         $unit->save();
@@ -51,8 +59,21 @@ class UnitController extends Controller
 
     public function update(Request $request, Unit $unit)
     {
-        $unit->name = $request->name;
-        $unit->location = $request->location;
+        $validatedData = $request->validate([
+            'name' => [
+                'required',
+                Rule::unique('units')->ignore($unit->id),
+            ],
+            'location' => [
+                'required',
+                Rule::unique('units')->ignore($unit->id),
+            ],
+            'description' => 'nullable',
+        ]);
+
+        $unit->name = $validatedData['name'];
+        $unit->location = $validatedData['location'];
+        $unit->description = $validatedData['description'];
         $unit->save();
 
         return redirect()->route('administrator.units.index')->with('success', 'Unit updated successfully.');

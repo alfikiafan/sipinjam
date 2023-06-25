@@ -14,7 +14,7 @@
         <div class="card-header pb-0">
           <div class="d-flex align-items-center justify-content-between">
             <div>
-              <h6 class="m-0">Unit Administrators Table</h6>
+              <h6 class="m-0">Unit administrators table</h6>
               <p class="text-sm">See all unit administrators in your organization</p>
             </div>
             <div>
@@ -37,7 +37,6 @@
                   <th class="text-secondary text-xxs font-weight-bolder px-2">Unit</th>
                   <th class="text-secondary text-xxs font-weight-bolder px-2">Phone</th>
                   <th class="text-secondary text-xxs font-weight-bolder px-2">Address</th>
-                  <th class="text-secondary text-xxs font-weight-bolder px-2">City</th>
                   <th class="text-secondary text-xxs font-weight-bolder px-2">Actions</th>
                 </tr>
               </thead>
@@ -63,10 +62,15 @@
                     <p class="text-xs font-weight-bold mb-0">{{ $unitadmin->phone }}</p>
                   </td>
                   <td class="align-middle">
-                    <span class="text-xs font-weight-bold">{{ $unitadmin->address }}</span>
-                  </td>
-                  <td class="align-middle">
-                    <span class="text-xs font-weight-bold">{{ $unitadmin->city }}</span>
+                    <span class="text-xs font-weight-bold">
+                    @php
+                        $address = $unitadmin->address;
+                        if (strlen($address) > 25) {
+                            $address = substr($address, 0, 25) . '...';
+                        }
+                        echo $address;
+                    @endphp
+                    </span>
                   </td>
                   <td>
                     <div class="d-flex align-items-center">
