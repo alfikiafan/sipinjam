@@ -9,7 +9,6 @@ use App\Http\Controllers\UnitController;
 use App\Http\Controllers\ItemController;
 use App\Http\Controllers\BookingController;
 use App\Http\Controllers\UsageController;
-use App\Http\Controllers\UserController;
 use App\Http\Controllers\UnitAdminController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\ApprovalController;
@@ -50,19 +49,29 @@ Route::post('/login', [SessionsController::class, 'store'])->name('login.store')
 // Rute logout
 Route::post('/logout', [SessionsController::class, 'destroy'])->name('logout');
 
+// Rute untuk melengkapi profil
+Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
+Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
+Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
+Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
+Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
+Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');
+
 // Rute administrator saja
 Route::middleware('auth', 'administrator')->group(function () {
 
     // Rute untuk manajemen admin unit
-    Route::get('/unitadmins', [UnitAdminController::class, 'index'])->name('administrator.unitadmins.index');
-    Route::post('/unitadmins', [UnitAdminController::class, 'store'])->name('administrator.unitadmins.store');
-    Route::get('/unitadmins/create', [UnitAdminController::class, 'create'])->name('administrator.unitadmins.create');
-    Route::get('/unitadmins/{unitadmin}/edit', [UnitAdminController::class, 'edit'])->name('administrator.unitadmins.edit');
-    Route::put('/unitadmins/{unitadmin}/update', [UnitAdminController::class, 'update'])->name('administrator.unitadmins.update');
-    Route::delete('/unitadmins/{unitadmin}', [UnitAdminController::class, 'destroy'])->name('administrator.unitadmins.destroy');
+    Route::get('/unitadmins', [UnitAdminController::class, 'index'])->name('unitadmins.index');
+    Route::post('/unitadmins', [UnitAdminController::class, 'store'])->name('unitadmins.store');
+    Route::get('/unitadmins/create', [UnitAdminController::class, 'create'])->name('unitadmins.create');
+    Route::get('/unitadmins/{unitadmin}/show', [UnitAdminController::class, 'show'])->name('unitadmins.show');
+    Route::get('/unitadmins/{unitadmin}/edit', [UnitAdminController::class, 'edit'])->name('unitadmins.edit');
+    Route::put('/unitadmins/{unitadmin}/update', [UnitAdminController::class, 'update'])->name('unitadmins.update');
+    Route::delete('/unitadmins/{unitadmin}', [UnitAdminController::class, 'destroy'])->name('unitadmins.destroy');
 
     // Rute untuk manajemen unit
     Route::get('/units', [UnitController::class, 'index'])->name('administrator.units.index');
+    Route::get('/units/{unit}/show', [UnitController::class, 'show'])->name('administrator.units.show');
     Route::post('/units', [UnitController::class, 'store'])->name('administrator.units.store');
     Route::get('/units/create', [UnitController::class, 'create'])->name('administrator.units.create');
     Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('administrator.units.edit');
@@ -71,6 +80,7 @@ Route::middleware('auth', 'administrator')->group(function () {
 
     // Rute untuk manajemen kategori
     Route::get('/categories', [CategoryController::class, 'index'])->name('administrator.categories.index');
+    Route::get('/categories/{category}/show', [CategoryController::class, 'show'])->name('administrator.categories.show');
     Route::post('/categories', [CategoryController::class, 'store'])->name('administrator.categories.store');
     Route::get('/categories/create', [CategoryController::class, 'create'])->name('administrator.categories.create');
     Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('administrator.categories.edit');
@@ -134,14 +144,6 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     Route::get('/bookings/{booking}/approve', [ApprovalController::class, 'show'])->name('bookings.approve.show');
     Route::post('/bookings/{booking}', [ApprovalController::class, 'approve'])->name('bookings.approve');
     Route::get('/bookings/{booking}/reject', [ApprovalController::class, 'reject'])->name('bookings.reject');
-
-    // Rute untuk melengkapi profil
-    Route::get('/profile', [ProfileController::class, 'index'])->name('profile.index');
-    Route::get('/profile/edit', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::put('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::post('/profile/update-photo', [ProfileController::class, 'updatePhoto'])->name('profile.updatePhoto');
-    Route::get('/profile/change-password', [ProfileController::class, 'changePassword'])->name('profile.changePassword');
-    Route::put('/profile/update-password', [ProfileController::class, 'updatePassword'])->name('profile.updatePassword');    
 
     // Rute untuk mengajukan booking (borrower)
     // Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');

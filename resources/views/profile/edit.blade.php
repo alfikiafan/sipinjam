@@ -12,6 +12,7 @@
     @csrf
     @method('PUT')
     <div class="row">
+      @can('administratorOrBorrower')
       <div class="col-md-6">
         <div class="form-group">
           <label for="name">Name</label>
@@ -44,6 +45,7 @@
           @enderror
         </div>
       </div>
+      @endcan
       <div class="col-md-12">
         <div class="form-group">
           <label for="about_me">About Me</label>

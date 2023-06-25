@@ -31,5 +31,9 @@ class AppServiceProvider extends ServiceProvider
         Gate::define('borrower', function ($user) {
             return $user->role === 'borrower';
         });
+
+        Gate::define('administratorOrBorrower', function ($user) {
+            return $user->role === 'administrator' || $user->role === 'borrower';
+        });
     }
 }

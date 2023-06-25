@@ -23,25 +23,45 @@ class ProfileController extends Controller
 
     public function update(Request $request)
     {
-        $validatedData = $request->validate([
-            'name' => 'required',
-            'phone' => 'required',
-            'address' => 'required',
-            'city' => 'required',
-            'about_me' => 'max:500',
-        ]);
-        
         $user = auth()->user();
-        
-        $user->name = $validatedData['name'];
-        $user->phone = $validatedData['phone'];
-        $user->address = $validatedData['address'];
-        $user->city = $validatedData['city'];
-        $user->about_me = $validatedData['about_me'];
-        
-        $user->save();
 
-        return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
+        if ($user->can('administratorOrBorrower')) {
+            $validatedData = $request->validate([
+                'name' => 'required',
+                'phone' => 'required',
+                'address' => 'required',
+                'city' => 'required',
+                'about_me' => 'max:500',
+            ]);
+            
+            $user = auth()->user();
+            
+            $user->name = $validatedData['name'];
+            $user->phone = $validatedData['phone'];
+            $user->address = $validatedData['address'];
+            $user->city = $validatedData['city'];
+            $user->about_me = $validatedData['about_me'];
+            
+            $user->save();
+
+            return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
+
+        } elseif ($user->can('unitadmin')) {
+            $validatedData = $request->validate([
+                'about_me' => 'max:500',
+            ]);
+            
+            $user = auth()->user();
+            
+            $user->about_me = $validatedData['about_me'];
+            
+            $user->save();
+
+            return redirect()->route('profile.index')->with('success', 'Profile updated successfully.');
+            
+        } else {
+            abort(403, 'Forbidden');
+        }
     }
 
     public function updatePhoto(Request $request)

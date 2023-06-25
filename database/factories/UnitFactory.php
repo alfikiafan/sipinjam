@@ -20,8 +20,9 @@ class UnitFactory extends Factory
     {
         $faker = Faker::create('id_ID');
         return [
-            'name' => $this->faker->word(),
-            'location' => $this->faker->word(),
+            'name' => $faker->word(),
+            'location' => $faker->word(),
+            'description' => $faker->sentence(),
         ];
     }
 }
