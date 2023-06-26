@@ -4,11 +4,12 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\User;
+use App\Models\Unit;
 
 class UnitAdminController extends Controller
 {
     public function index() {
-        if(auth()->user()->can('administrator')) {
+        if (auth()->user()->can('administrator')) {
         $unitadmins = User::where('role', 'unitadmin')->get();
 
         return view('administrator.unitadmins.index', compact('unitadmins'));
@@ -17,52 +18,100 @@ class UnitAdminController extends Controller
         }
     }
 
-    public function create()
-    {
-        return view('administrator.unitadmins.create');
-    }
-
-    public function store(Request $request)
-    {
-        // Validasi inputan form
-
-        $unitadmin = new UnitAdmin([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-            'unit_id' => $request->unit_id,
-        ]);
-
-        $unitadmin->save();
-
-        return redirect()->route('administrator.unitadmins.index')->with('success', 'Unit admin created successfully.');
-    }
-
-    public function edit(UnitAdmin $unitadmin)
-    {
-        if(auth()->user()->can('administrator')) {
-        return view('administrator.unitadmins.edit', compact('unitadmin'));
+    public function show(User $unitadmin) {
+        if (auth()->user()->can('administrator')) {
+        return view('administrator.unitadmins.show', compact('unitadmin'));
         } else {
             abort(403, 'Forbidden');
         }
     }
 
-    public function update(Request $request, UnitAdmin $unitadmin)
+    public function create()
     {
-        // Validasi inputan form
-
-        $unitadmin->name = $request->name;
-        $unitadmin->email = $request->email;
-        $unitadmin->unit_id = $request->unit_id;
-        $unitadmin->save();
-
-        return redirect()->route('administrator.unitadmins.index')->with('success', 'Unit admin updated successfully.');
+        $units = Unit::all();
+        return view('administrator.unitadmins.create', compact('units'));
     }
 
-    public function destroy(UnitAdmin $unitadmin)
+    public function store(Request $request)
     {
-        $unitadmin->delete();
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'email' => 'required|email|unique:users',
+            'password' => 'required|min:8|confirmed',
+            'phone' => 'required',
+            'address' => 'required',
+            'city' => 'required',
+            'unit_id' => 'required',
+        ]);
 
-        return redirect()->route('administrator.unitadmins.index')->with('success', 'Unit admin deleted successfully.');
+        $unitadmin = new User([
+            'name' => $validatedData['name'],
+            'email' => $validatedData['email'],
+            'password' => bcrypt($validatedData['password']),
+            'phone' => $validatedData['phone'],
+            'role' => 'unitadmin',
+            'address' => $validatedData['address'],
+            'city' => $validatedData['city'],
+            'unit_id' => $validatedData['unit_id'],
+        ]);
+
+        $unitadmin->save();
+
+        return redirect()->route('unitadmins.index')->with('success', 'Unit administrator created successfully.');
+    }
+
+    public function edit(User $unitadmin)
+    {
+        if(auth()->user()->can('administrator')) {
+            $units = Unit::all();
+        return view('administrator.unitadmins.edit', compact('unitadmin', 'units'));
+        } else {
+            abort(403, 'Forbidden');
+        }
+    }
+
+    public function update(Request $request, User $unitadmin)
+    {
+        if ($request->has('unit_id') && $unitadmin->unit_id != $request->unit_id) {
+            
+            $AdminUnitRemaining = User::where('unit_id', $unitadmin->unit_id)
+                ->where('role', 'unitadmin')
+                ->where('id', '!=', $unitadmin->id)
+                ->count();
+        
+            if ($AdminUnitRemaining > 0) {
+                $unitadmin->unit_id = $request->unit_id;
+            } else {
+                return redirect()->route('unitadmins.index')->with('error', 'Cannot change unit. There are no other unit administrator with the same unit.');
+            }
+        }
+    
+        $validatedData = $request->validate([
+            'name' => 'required',
+            'phone' => 'required',
+        ]);
+
+        $unitadmin->name = $validatedData['name'];
+        $unitadmin->phone = $validatedData['phone'];
+        $unitadmin->address = $request->address;
+        $unitadmin->city = $request->city;
+        $unitadmin->save();
+    
+        return redirect()->route('unitadmins.index')->with('success', 'Unit administrator updated successfully.');
+    }
+    
+    public function destroy(User $unitadmin)
+    {       
+        $AdminUnitRemaining = User::where('unit_id', $unitadmin->unit_id)
+            ->where('role', 'unitadmin')
+            ->where('id', '!=', $unitadmin->id)
+            ->count();
+    
+        if ($AdminUnitRemaining > 0) {
+            $unitadmin->delete();
+            return redirect()->route('unitadmins.index')->with('success', 'Unit administrator deleted successfully.');
+        } else {
+            return redirect()->route('unitadmins.index')->with('error', 'Cannot delete unit administrator. There are no other unit administrator with the same unit.');
+        }
     }
 }

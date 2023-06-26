@@ -39,6 +39,11 @@
               <p><strong>Added at:</strong><br> {{ $item->created_at }}</p>
             </div>
           </div>
+          <div class="row mt-3">
+            <div class="col-md-12">
+              <p><strong>Description:</strong><br> {{ $item->description }}</p>
+            </div>
+          </div>
           <hr>
           <div class="col-md-6 mt-4">
             <a href="{{ route('items.index') }}" class="btn bg-gradient-info">Back</a>

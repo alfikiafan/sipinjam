@@ -11,10 +11,11 @@ class Unit extends Model
 
     protected $fillable = [
         'name', 
-        'location'
+        'location',
+        'description',
     ];
 
-    public function Item()
+    public function items()
     {
         return $this->hasMany(Item::class);
     }

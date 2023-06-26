@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function() {
     const aboutMe = document.getElementById('about_me');
     const note = document.getElementById("note");
+    const description = document.getElementById("description");
     const characterCountElement = document.getElementById('character_count');
     const editProfile = document.getElementById('.edit-profile');
     const photoUpload = document.getElementById('photo-upload');
@@ -19,6 +20,14 @@ document.addEventListener("DOMContentLoaded", function() {
     if (note) {
         note.addEventListener('input', function() {
             let characterCount = note.value.length;
+            let remainingCount = 300 - characterCount;
+            characterCountElement.textContent = remainingCount + ' characters remaining';
+        });
+    }
+
+    if (description) {
+        description.addEventListener('input', function() {
+            let characterCount = description.value.length;
             let remainingCount = 300 - characterCount;
             characterCountElement.textContent = remainingCount + ' characters remaining';
         });

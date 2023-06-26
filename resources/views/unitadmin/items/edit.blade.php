@@ -25,7 +25,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" value="{{ old('name', $item->name) }}" required>
@@ -33,7 +32,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="brand">Brand</label>
                     <input type="text" class="form-control" id="brand" name="brand" value="{{ old('brand', $item->brand) }}" required>
@@ -41,7 +39,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="serial_number">Serial Number</label>
                     <input type="text" class="form-control" id="serial_number" name="serial_number" value="{{ old('serial_number', $item->serial_number) }}">
@@ -50,7 +47,6 @@
                     @enderror
                 </div>
             </div>
-
             <div class="col-md-6">
                 <div class="form-group">
                     <label for="photo">Photo</label>
@@ -59,7 +55,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="quantity">Quantity</label>
                     <input type="number" class="form-control" id="quantity" name="quantity" value="{{ old('quantity', $item->quantity) }}" min="0" required>
@@ -67,7 +62,6 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
-
                 <div class="form-group">
                     <label for="status">Status</label>
                     <select class="form-control" id="status" name="status" required>
@@ -79,9 +73,16 @@
                         <div class="text-danger">{{ $message }}</div>
                     @enderror
                 </div>
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea class="form-control @error('description') is-invalid @enderror" id="description" name="description">{{ $item->description }}</textarea>
+                    <small id="character_count" class="form-text text-muted">Type to check remaining character</small>
+                    @error('description')
+                        <div class="invalid-feedback">{{ $message }}</div>
+                    @enderror
+                </div>
             </div>
         </div>
-
         <div class="row mt-3">
             <div class="col-md-12">
                 <button type="submit" class="btn bg-gradient-primary me-2">Update Item</button>

@@ -15,12 +15,13 @@ return new class extends Migration
             $table->id();
             $table->unsignedBigInteger('category_id');
             $table->unsignedBigInteger('unit_id');
-            $table->string('name', 100);
-            $table->string('brand', 50)->nullable();
-            $table->string('serial_number', 50)->nullable();
-            $table->string('photo', 100)->nullable();  
+            $table->string('name');
+            $table->string('brand')->nullable();
+            $table->string('serial_number')->nullable();
+            $table->string('photo')->nullable();  
             $table->unsignedInteger('quantity');
             $table->string('status');
+            $table->string('description', 300)->nullable();
             $table->foreign('category_id')->references('id')->on('categories')->onDelete('cascade');
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
             $table->timestamps();

@@ -20,7 +20,8 @@ class CategoryFactory extends Factory
     {
         $faker = Faker::create('id_ID');
         return [
-            'name' => $this->faker->word(),
+            'name' => $faker->word(),
+            'description' => $faker->sentence(),
         ];
     }
 }
