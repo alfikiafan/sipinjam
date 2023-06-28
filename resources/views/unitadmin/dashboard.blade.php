@@ -69,7 +69,7 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Active Usages</p>
-                                <h5 class="font-weight-bolder mb-0">{{ $activeUsages }}</h5>
+                                <h5 class="font-weight-bolder mb-0">{{ $activeUsagesCount }}</h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -145,7 +145,7 @@
                         <div class="col-8">
                             <div class="numbers">
                                 <p class="text-sm mb-0 text-capitalize font-weight-bold">Late<br> Usages</p>
-                                <h5 class="font-weight-bolder mb-0">{{ $lateUsages }}</h5>
+                                <h5 class="font-weight-bolder mb-0">{{ $lateUsagesCount }}</h5>
                             </div>
                         </div>
                         <div class="col-4 text-end">
@@ -211,19 +211,21 @@
                 <div class="card-body">
                     <div class="timeline timeline-one-side">
                         @php
-                            $sortedBookings = $bookings->sortByDesc('created_at');
+                            $sortedBookings = $bookings->sortByDesc('created_at')->take(5);;
                         @endphp
                         @foreach ($sortedBookings as $booking)
-                        <div class="timeline-block mb-3">
-                            <span class="timeline-step">
-                                <i><img src="{{ asset($booking->user->photo) }}" class="avatar avatar-sm"
-                                        alt="item-image"></i>
-                            </span>
-                            <div class="timeline-content">
-                                <h6 class="text-dark text-sm mb-0">{{ $booking->user->name }}, <span class="text-secondary">{{ $booking->user->email }}</span></h6>
-                                <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $booking->item->name }}</span>, <span class="text-secondary">{{ $booking->created_at }}</span></p>
+                        <a href="{{ route('bookings.show', ['booking' => $booking->id]) }}">
+                            <div class="timeline-block mb-3">
+                                <span class="timeline-step">
+                                    <i><img src="{{ asset($booking->user->photo) }}" class="avatar avatar-sm"
+                                            alt="item-image"></i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm mb-0">{{ $booking->user->name }}, <span class="text-secondary">{{ $booking->user->email }}</span></h6>
+                                    <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $booking->item->name }}</span>, <span class="text-secondary">{{ $booking->created_at }}</span></p>
+                                </div>
                             </div>
-                        </div>
+                        </a>
                         @endforeach
                     </div>
                 </div>
@@ -248,23 +250,62 @@
     </div>
     <div class="row mt-4">
         <div class="col-md-6">
-            <div class="card mb-3">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>Active Usages</h6>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Active Usages List</h5>
-
+                    <div class="timeline timeline-one-side">
+                        @php
+                            $sortedActiveUsages = $activeUsages->sortByDesc('created_at')->take(5);;
+                        @endphp
+                        @foreach ($sortedActiveUsages as $activeUsage)
+                        <a href="{{ route('usages.show', ['usage' => $activeUsage->id]) }}">
+                            <div class="timeline-block mb-3">
+                                <span class="timeline-step">
+                                    <i><img src="{{ asset($activeUsage->booking->user->photo) }}" class="avatar avatar-sm"
+                                            alt="item-image"></i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm mb-0">{{ $activeUsage->booking->user->name }}, <span class="text-secondary">{{ $activeUsage->booking->user->email }}</span></h6>
+                                    <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $activeUsage->booking->item->name }}</span>, <span class="text-secondary">{{ $activeUsage->booking->start_date }}</span></p>
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
         <div class="col-md-6">
-            <div class="card mb-3">
+            <div class="card h-100">
+                <div class="card-header pb-0">
+                    <h6>Late Usages</h6>
+                </div>
                 <div class="card-body">
-                    <h5 class="card-title">Late Usages</h5>
-
+                    <div class="timeline timeline-one-side">
+                        @php
+                            $sortedLateUsages = $lateUsages->sortByDesc('created_at')->take(5);;
+                        @endphp
+                        @foreach ($sortedLateUsages as $lateUsage)
+                        <a href="{{ route('usages.show', ['usage' => $lateUsage->id]) }}">
+                            <div class="timeline-block mb-3">
+                                <span class="timeline-step">
+                                    <i><img src="{{ asset($lateUsage->booking->user->photo) }}" class="avatar avatar-sm"
+                                        alt="item-image"></i>
+                                </span>
+                                <div class="timeline-content">
+                                    <h6 class="text-dark text-sm mb-0">{{ $lateUsage->booking->user->name }}, <span class="text-secondary">{{ $lateUsage->booking->user->email }}</span></h6>
+                                    <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $lateUsage->booking->item->name }}</span>, <span class="text-secondary">{{ $lateUsage->booking->start_date }}</span></p>
+                                </div>
+                            </div>
+                        </a>
+                        @endforeach
+                    </div>
                 </div>
             </div>
         </div>
     </div>
-
 </div>
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
