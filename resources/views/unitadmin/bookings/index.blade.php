@@ -97,6 +97,7 @@
                           <i class="fas fa-eye"></i>
                         </button>
                       </a>
+                      @if ($booking->status === 'pending')
                       <a href="{{ route('bookings.approve.show', ['booking' => $booking->id]) }}">
                         <button type="button" class="btn btn-action btn-success mb-0 me-2" title="Approve this booking">
                           <i class="fas fa-check"></i>
@@ -107,6 +108,7 @@
                         <i class="fas fa-times"></i>
                         </button>
                       </a>
+                      @endif
                     </div>
                   </td>
                 </tr>

@@ -32,15 +32,19 @@ class BookingFactory extends Factory
         
         $itemId = $faker->randomElement($itemIds);
         $item = Item::find($itemId);
-        $maxQuantity = $item->quantity;
+        $maxQuantity = 50;
 
         $quantity = $faker->numberBetween(1, $maxQuantity);
 
         if ($item && $quantity <= $maxQuantity) {
             $item->quantity -= $quantity;
+            if ($item->quantity < 0) {
+                $item->quantity = 0;
+            }
+            if ($item->quantity === 0) {
+                $item->status = 'empty';
+            }
             $item->save();
-        } else {
-            $quantity = 1;
         }
 
         $createdAt = Carbon::instance($faker->dateTimeBetween(

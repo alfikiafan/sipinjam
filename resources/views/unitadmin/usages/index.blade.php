@@ -100,6 +100,7 @@
                               <i class="fas fa-pencil-alt"></i>
                             </button>
                           </a>
+                          @if ($usage->status === 'awaiting use')
                           <div class="me-2">
                             <form action="{{ route('usages.set-used', ['usage' => $usage->id]) }}" method="POST">
                                 @csrf
@@ -109,11 +110,14 @@
                                 </button>
                             </form>
                           </div>
+                          @endif
+                          @if ($usage->status === 'used' || $usage->status === 'late')
                           <a href="{{ route('usages.return.show', ['usage' => $usage->id]) }}">
                             <button type="button" class="btn btn-action btn-success mb-0" title="Return item(s) in this usage">
                             <i class="fas fa-arrow-rotate-left"></i>
                             </button>
                           </a>
+                          @endif
                         </div>
                       </td>
                   </tr>

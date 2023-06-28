@@ -12,7 +12,7 @@ use Carbon\Carbon;
 class BookingController extends Controller
 {
     public function index(Request $request)
-    {   
+    {
         $user = auth()->user();
 
         if ($user->can('unitadmin')) {
@@ -90,6 +90,12 @@ class BookingController extends Controller
             'start_date' => 'required|date',
             'end_date' => 'required|date|after:start_date',
         ]);
+
+        // if item quantity is === 0, cannot book
+        $item = Item::find($validatedData['item_id']);
+        if ($item->quantity === 0) {
+            return back()->withErrors('Item is out of stock.')->withInput();
+        }
 
         // Check if start_date is greater than end_date
         if (strtotime($validatedData['start_date']) > strtotime($validatedData['end_date'])) {
