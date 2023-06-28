@@ -35,7 +35,7 @@
                   <span>
                     @php
                         $usage = App\Models\Usage::where('booking_id', $booking->id)->first();
-                        $user = App\Models\User::find($usage->user_id);
+                        $user = App\Models\User::find($booking->user_id);
                     @endphp
                     @if ($user)
                         {{ $user->name }}

@@ -109,7 +109,9 @@ Route::middleware('auth', 'unitadmin')->group(function () {
 Route::middleware('auth', 'borrower')->group(function () {
 
     // Rute untuk mengajukan peminjaman
-    Route::get('/bookings/create', [BookingController::class, 'create'])->name('bookings.create');
+    Route::get('/bookings', [BookingController::class, 'create'])->name('bookings.create');
+    Route::get('/bookings/{item}', [BookingController::class, 'booking_unit'])->name('bookings.unit');
+    Route::post('/bookings/create', [BookingController::class, 'store'])->name('bookings.store');
 
     // Rute untuk menolak peminjaman
     Route::get('/bookings/{booking}/cancel', [ApprovalController::class, 'cancel'])->name('bookings.cancel');

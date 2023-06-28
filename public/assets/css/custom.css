@@ -49,3 +49,9 @@
 .upload-input {
     display: none;
 }
+
+/* Underline text with primary color */
+.underline {
+    text-decoration: underline !important;
+    text-decoration-color: #cb0c9f;
+}

@@ -57,7 +57,9 @@ class ItemController extends Controller
                 abort(403, 'Forbidden');
             }
             return view('unitadmin.items.show', compact('item'));
-        } else {
+        } elseif($user->can('borrower')){
+            return view('borrower.items.show', compact('item'));
+        }else {
             abort(403, 'Forbidden');
         }
     }

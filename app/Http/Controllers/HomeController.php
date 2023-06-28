@@ -20,4 +20,16 @@ class HomeController extends Controller
             abort(403, 'Forbidden');
         }
     }
+
+    public function index() {
+        if ($user->can('administrator')) {
+
+        } elseif ($user->can('unitadmin')) {
+
+        } elseif ($user->can('borrower')) {
+
+        } else {
+            abort(403, 'Forbidden');
+        }
+    }
 }

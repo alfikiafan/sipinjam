@@ -23,7 +23,7 @@
               <p class="d-inline-block text-sm">Items: {{ $bookings->pluck('item_id')->unique()->count() }}</p>
             </div>
             <div class="ml-auto p-0">
-              <a href="{{ route('bookings.create') }}" class="btn bg-gradient-primary m-0">Book Item</a>
+              <a href="{{ route('items.index') }}" class="btn bg-gradient-primary m-0">Book Item</a>
             </div>
           </div>
         </div>
