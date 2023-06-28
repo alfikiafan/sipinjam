@@ -3,8 +3,6 @@
 @section('content')
 @include('components.notifications')
 
-@include('components.notifications')
-
 dashboard administrator
 
 @endsection

@@ -3,8 +3,6 @@
 @section('content')
 @include('components.notifications')
 
-@include('components.notifications')
-
 <div class="card mx-3 mb-3">
     <div class="card-header pb-3">
         <h6 class="m-0">Edit Item</h6>
