@@ -30,7 +30,7 @@ class HomeController extends Controller
         $emptyItems = Item::where('unit_id', $unitId)->where('status', 'empty')->count();
         
         // Menghitung penggunaan aktif
-        $activeUsages = Usage::join('bookings', 'usages.booking_id', '=', 'bookings.id')
+        $activeUsagesCount = Usage::join('bookings', 'usages.booking_id', '=', 'bookings.id')
             ->join('items', 'bookings.item_id', '=', 'items.id')
             ->where('items.unit_id', $unitId)
             ->where('usages.status', 'used')
@@ -58,7 +58,7 @@ class HomeController extends Controller
             ->count();
         
         // Menghitung penggunaan yang terlambat
-        $lateUsages = Usage::where('status', 'late')
+        $lateUsagesCount = Usage::where('status', 'late')
             ->whereHas('booking', function ($query) use ($unitId) {
                 $query->whereHas('item', function ($query) use ($unitId) {
                     $query->where('unit_id', $unitId);
@@ -71,6 +71,24 @@ class HomeController extends Controller
                 $query->where('unit_id', $unitId);
             })
             ->where('status', 'pending')
+            ->get();
+
+        // Mengambil daftar usage yang statusnya 'used'
+        $activeUsages = Usage::whereHas('booking', function ($query) use ($unitId) {
+                $query->whereHas('item', function ($query) use ($unitId) {
+                    $query->where('unit_id', $unitId);
+                });
+            })
+            ->where('status', 'used')
+            ->get();
+
+        // Mengambil daftar usage yang statusnya 'late'
+        $lateUsages = Usage::whereHas('booking', function ($query) use ($unitId) {
+                $query->whereHas('item', function ($query) use ($unitId) {
+                    $query->where('unit_id', $unitId);
+                });
+            })
+            ->where('status', 'late')
             ->get();
         
         // Mendapatkan data booking requests dari 12 bulan terakhir
@@ -108,14 +126,16 @@ class HomeController extends Controller
                 'totalItems',
                 'itemsAvailable',
                 'emptyItems',
-                'activeUsages',
+                'activeUsagesCount',
                 'pendingBookings',
                 'rejectedBookings',
                 'cancelledBookings',
-                'lateUsages',
+                'lateUsagesCount',
                 'bookings',
                 'bookingRequestsData',
                 'approvedBookingsData',
+                'activeUsages',
+                'lateUsages',
             ));
         } elseif ($user->can('borrower')) {
             // Implementasi untuk peran 'borrower'

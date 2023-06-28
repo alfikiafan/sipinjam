@@ -14,7 +14,7 @@ class UnitSeeder extends Seeder
     public function run(): void
     {
         Unit::factory()
-        ->count(20)
+        ->count(15)
         ->create();
     }
 }

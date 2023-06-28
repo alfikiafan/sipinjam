@@ -62,14 +62,22 @@
             <p>{{ $usage->note }}</p>
           </div>
           <hr>
-          
           <div class="col-md-6 mt-4">
-            <a href="{{ route('usages.index') }}" class="btn bg-gradient-info">Back</a>
+            <a href="{{ route('usages.index') }}" class="btn bg-gradient-info me-2">Back</a>
+            @if ($usage->status === 'used' || $usage->status === 'late')
+              <a href="{{ route('usages.return.show', ['usage' => $usage->id]) }}" class="btn bg-gradient-success">Return</a>
+            @elseif ($usage->status === 'awaiting use')
+              <form action="{{ route('usages.set-used', ['usage' => $usage->id]) }}" method="POST" class="d-inline">
+                @csrf
+                @method('PUT')
+                <button type="submit" class="btn bg-gradient-warning btn-warning" onclick="return confirm('Are you sure to set the item in this usage to &quot;used&quot;?')" title="Set item(s) in this usage as &quot;used&quot;">Set as Used</button>
+              </form>
+            @endif
           </div>
         </div>
       </div>
     </div>
-  </div>
+  <k/div>
 </div>
 
 @endsection
