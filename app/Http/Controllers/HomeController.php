@@ -6,6 +6,9 @@ use Illuminate\Http\Request;
 use App\Models\Item;
 use App\Models\Booking;
 use App\Models\Usage;
+use App\Models\Category;
+use App\Models\Unit;
+use App\Models\User;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -16,7 +19,21 @@ class HomeController extends Controller
     
     if ($user->can('administrator')) {
         // Implementasi untuk peran 'administrator'
-        // ...
+        // total category
+        $totalCategories = Category::from('categories')->count();
+
+        // total unit admin
+        $totalUnitadmins = User::where('role', 'unitadmin')->count();
+
+        // total units
+        $totalUnits = Unit::from('units')->count();
+
+        return view('administrator.dashboard', compact(
+            'totalCategories',
+            'totalUnits',
+            'totalUnitadmins',
+        ));
+
     } elseif ($user->can('unitadmin')) {
         $unitId = $user->unit_id;
         
