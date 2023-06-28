@@ -15,8 +15,8 @@ class HomeController extends Controller
     $user = auth()->user();
     
     if ($user->can('administrator')) {
-        // Implementasi untuk peran 'administrator'
-        // ...
+        return view('administrator.dashboard', compact('user'));
+
     } elseif ($user->can('unitadmin')) {
         $unitId = $user->unit_id;
         
@@ -138,8 +138,8 @@ class HomeController extends Controller
                 'lateUsages',
             ));
         } elseif ($user->can('borrower')) {
-            // Implementasi untuk peran 'borrower'
-            // ...
+            return view('borrower.dashboard', compact('user'));
+
         } else {
             abort(403, 'Forbidden');
         }

@@ -34,8 +34,7 @@ class ItemController extends Controller
         elseif ($user->can('borrower')) {
             $status = $request->query('status');
 
-            Item::where('unit_id', $unitId)
-            ->where('quantity', 0)
+            Item::where('quantity', 0)
             ->update(['status' => 'empty']);
 
             $items = Item::where('status', 'available')->get();
@@ -139,7 +138,7 @@ class ItemController extends Controller
             'description' => 'nullable',
         ]);
 
-        if ($request->has('serial_number') && $request->filled('serial_number')) {
+        if ($request->has('serial_number') && $request->filled('serial_number') && $request->quantity != 0) {
             $request->merge(['quantity' => 1]);
         }
 

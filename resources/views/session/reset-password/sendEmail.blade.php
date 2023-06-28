@@ -1,6 +1,7 @@
 @extends('layouts.user_type.guest')
 
 @section('content')
+@include('components.notifications')
 
 <div class="page-header section-height-75">
     <div class="container">

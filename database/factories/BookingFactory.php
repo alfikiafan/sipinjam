@@ -50,7 +50,9 @@ class BookingFactory extends Factory
         $createdAt = Carbon::instance($faker->dateTimeBetween(
             $startDateTime->sub(new DateInterval('P7D')),
             $startDateTime
-        ));        
+        ));
+
+        $status = $faker->randomElement(['pending', 'cancelled', 'rejected']);
 
         return [
             'item_id' => $itemId,
@@ -59,7 +61,7 @@ class BookingFactory extends Factory
             'start_date' => $startDateTime->format('Y-m-d'),
             'end_date' => $endDateTime->format('Y-m-d'),
             'created_at' => $createdAt,
-            'status' => $faker->randomElement(['pending', 'cancelled', 'approved', 'rejected'])
+            'status' => $status
         ];
     }
 }

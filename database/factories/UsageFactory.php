@@ -39,6 +39,9 @@ class UsageFactory extends Factory
             $bookingCreatedDate
         ));
         $createdDate = $faker->dateTimeBetween($bookingCreatedDate, 'now');
+
+        $selectedBooking->status = 'approved';
+        $selectedBooking->save();
         
         return [
             'booking_id' => $selectedBookingId,
