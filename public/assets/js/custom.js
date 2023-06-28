@@ -6,6 +6,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const editProfile = document.getElementById('.edit-profile');
     const photoUpload = document.getElementById('photo-upload');
     const profileForm = document.getElementById('profile-form');
+    const rejectButton = document.getElementById('rejectBooking');
     const yearElement = document.getElementById('currentYear');
     const currentYear = new Date().getFullYear();
   
@@ -48,6 +49,17 @@ document.addEventListener("DOMContentLoaded", function() {
 
     if (currentYear) {
         yearElement.textContent = currentYear;
+    }
+
+    if (rejectButton) {
+        rejectButton.addEventListener('click', function(event) {
+            event.preventDefault();
+
+            var confirmation = confirm('Are you sure to reject this booking?');
+            if (confirmation) {
+                window.location.href = rejectButton.href;
+            }
+        });
     }
 });
   

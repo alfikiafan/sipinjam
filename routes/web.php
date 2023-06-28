@@ -35,7 +35,7 @@ Route::get('/', function () {
 
 // Rute dashboard
 Route::middleware(['auth'])->group(function () {
-    Route::get('/dashboard', [HomeController::class, 'home'])->name('dashboard');
+    Route::get('/dashboard', [HomeController::class, 'index'])->name('dashboard.index');
 });
 
 // Rute register

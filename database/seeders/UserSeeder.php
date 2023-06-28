@@ -17,8 +17,8 @@ class UserSeeder extends Seeder
     public function run()
     {
         $administratorCount = 2;
-        $unitadminCount = 10;
-        $borrowerCount = 20;
+        $unitadminCount = 20;
+        $borrowerCount = 50;
 
         User::factory()->count($administratorCount)->create(['role' => 'administrator']);
         User::factory()->count($unitadminCount)->create(['role' => 'unitadmin']);
