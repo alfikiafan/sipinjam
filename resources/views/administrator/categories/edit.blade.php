@@ -3,11 +3,12 @@
 @section('content')
 @include('components.notifications')
 
-<div class="mx-3 mb-3">
-    <div class="mb-4">
-    <h6 class="m-0">Edit Item</h6>
-    <p class="text-sm mb-0"></p>
+<div class="card mx-3 mb-3">
+    <div class="card-header pb-3">
+        <h6 class="m-0">Edit Item</h6>
+        <p class="text-sm mb-0"></p>
     </div>
+    <div class="card-body pt-0">
         <form method="POST" action="{{ route('administrator.categories.update', $category->id) }}">
             @csrf
             @method('PUT')
@@ -35,4 +36,5 @@
             </div>
         </form>
     </div>
+</div>
 @endsection

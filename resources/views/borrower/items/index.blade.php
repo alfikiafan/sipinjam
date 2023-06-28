@@ -1,6 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
 
 <div class="container-fluid px-3">
   <div class="row">
@@ -10,7 +11,7 @@
           <div class="d-flex align-items-center justify-content-between">
             <div>
               <h6 class="m-0">Items table</h6>
-              <p class="text-sm">See all items located in your unit</p>
+              <p class="text-sm">See all available items that you can book.</p>
             </div>
             <div>
               <h6 class="m-0 text-sm">Total number of:</h6>
@@ -63,7 +64,7 @@
                           <i class="fas fa-eye"></i>
                         </button>
                       </a>
-                      <a href="{{ route('bookings.unit', ['item' => $item->id]) }}">
+                      <a href="{{ route('bookings.create', ['item' => $item->id]) }}">
                         <button type="button" class="btn btn-action btn-primary mb-0 me-1" title="Booking this item">
                           <i class="fas fa-plus"></i>
                         </button>

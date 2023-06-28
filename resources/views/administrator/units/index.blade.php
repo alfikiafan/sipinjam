@@ -1,6 +1,7 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
+@include('components.notifications')
     @include('components.notifications')
 
     <div class="container-fluid px-3">
