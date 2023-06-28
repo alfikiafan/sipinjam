@@ -14,7 +14,7 @@ class UsageSeeder extends Seeder
     public function run(): void
     {
         Usage::factory()
-        ->count(15)
+        ->count(800)
         ->create();
     }
 }
