@@ -15,7 +15,6 @@ class HomeController extends Controller
     $user = auth()->user();
     
     if ($user->can('administrator')) {
-        return view('administrator.dashboard', compact('user'));
 
     } elseif ($user->can('unitadmin')) {
         $unitId = $user->unit_id;
