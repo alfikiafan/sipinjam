@@ -1,14 +1,14 @@
 @extends('layouts.user_type.auth')
 
 @section('content')
-
 @include('components.notifications')
 
-<div class="mx-3 mb-3">
-    <div class="mb-4">
+<div class="card mx-3 mb-3">
+    <div class="card-header pb-3">
         <h6 class="m-0">Edit Item</h6>
         <p class="text-sm mb-0">Edit unit detail</p>
     </div>
+    <div class="card-body pt-0">
         <form method="POST" action="{{ route('administrator.units.update', $unit->id) }}">
             @csrf
             @method('PUT')
@@ -42,5 +42,5 @@
             </div>
         </form>
     </div>
-
+</div>
 @endsection

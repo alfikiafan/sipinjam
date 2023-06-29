@@ -65,6 +65,9 @@ class ApprovalController extends Controller
             $item = $booking->item;
             
             $item->quantity -= $booking->quantity;
+            if ($item->quantity == 0) {
+                $item->status = 'empty';
+            }
             $item->save();
         
             if ($booking->save() && $usage->save()) {

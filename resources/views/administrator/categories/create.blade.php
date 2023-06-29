@@ -3,11 +3,12 @@
 @section('content')
 @include('components.notifications')
 
-<div class="mx-3 mb-3">
-    <div class="mb-4">
+<div class="card mx-3 mb-3">
+    <div class="card-header pb-3">
         <h6 class="m-0">Add a New Category</h6>
         <p class="text-sm mb-0">Easily add a new category to improve item organization.</p>
     </div>
+    <div class="card-body pt-0">
         <form method="POST" action="{{ route('administrator.categories.store') }}">
             @csrf
             <div class="row">
@@ -38,5 +39,6 @@
             </div>
         </form>
     </div>
+</div>
 
 @endsection

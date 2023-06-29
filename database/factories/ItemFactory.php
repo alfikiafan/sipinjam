@@ -18,21 +18,27 @@ class ItemFactory extends Factory
      *
      * @return array<string, mixed>
      */
-    public function definition(): array
+
+    protected $model = Item::class;
+
+    public function definition()
     {
-        static $serialNumberCount = 0;
-    
         $faker = Faker::create('id_ID');
         $categoryIds = Category::pluck('id')->toArray();
         $unitIds = Unit::pluck('id')->toArray();
 
-        $hasSerialNumber = ($serialNumberCount <= 10) ? false : true;
-        $serialNumberCount++;
+        $hasSerialNumber = $faker->boolean(40);
 
-        $serialNumber = $hasSerialNumber ? null : $faker->unique()->randomNumber();
-        $quantity = $hasSerialNumber ? $faker->numberBetween(0, 100) : 1;
-        $status = ($quantity === 0) ? 'empty' : $faker->randomElement(['available', 'not available']);
-    
+        $quantity = $faker->numberBetween(1, 500);
+
+        $status = $faker->boolean(90) ? 'available' : 'not available';
+
+        if ($hasSerialNumber) {
+            $quantity = 1;
+        }
+
+        $serialNumber = $hasSerialNumber ? $faker->unique()->randomNumber() : null;
+
         return [
             'category_id' => $faker->randomElement($categoryIds),
             'unit_id' => $faker->randomElement($unitIds),

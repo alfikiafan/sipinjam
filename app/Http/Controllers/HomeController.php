@@ -220,8 +220,8 @@ class HomeController extends Controller
                 'lateUsages',
             ));
         } elseif ($user->can('borrower')) {
-            // Implementasi untuk peran 'borrower'
-            // ...
+            return view('borrower.dashboard', compact('user'));
+
         } else {
             abort(403, 'Forbidden');
         }

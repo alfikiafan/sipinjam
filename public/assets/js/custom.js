@@ -3,7 +3,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const note = document.getElementById("note");
     const description = document.getElementById("description");
     const characterCountElement = document.getElementById('character_count');
-    const editProfile = document.getElementById('.edit-profile');
+    const editProfile = document.getElementById('edit-profile');
     const photoUpload = document.getElementById('photo-upload');
     const profileForm = document.getElementById('profile-form');
     const rejectButton = document.getElementById('rejectBooking');

@@ -9,7 +9,7 @@
         </div>
         <div class="card card-body blur shadow-blur mx-4 mt-n6">
             <div class="row gx-4">
-                <div class="col-auto">
+                <div class="col-auto mx-2">
                     <div class="avatar avatar-xl position-relative avatar-profile">
                         <img src="{{ asset(Auth::user()->photo) }}" alt="..." class="w-100 border-radius-lg shadow-sm image-hover">
                         <label for="photo-upload" class="edit-profile-btn" id="edit-profile">
@@ -22,7 +22,7 @@
                     </div>
                 </div>
                 <div class="col-auto my-auto">
-                    <div class="h-100 me-3">
+                    <div class="h-100">
                         <h5 class="mb-1">{{ $user->name }}</h5>
                         <p class="mb-0 font-weight-bold text-sm">{{ $user->email }}</p>
                     </div>
@@ -32,10 +32,10 @@
     </div>
     <div class="container-fluid py-4">
         <div class="card mx-4 mb-3">
-            <div class="card-header pb-0 px-3">
+            <div class="card-header pb-0 px-4">
                 <h6 class="mb-0">Profile Information</h6>
             </div>
-            <div class="card-body p-3">
+            <div class="card-body p-4">
                 <p class="text-sm">
                     {{ $user->about_me }}
                 </p>
