@@ -11,7 +11,16 @@ class CategoryController extends Controller
     public function index()
     {
         $perPage = 10;
-        $categories = Category::paginate($perPage);
+        $search = request()->query('search');
+        $categories = Category::query();
+
+        if ($search) {
+            $categories->where('id', 'LIKE', '%' . $search . '%')
+                ->orWhere('name', 'LIKE', '%' . $search . '%');
+        }
+
+        $categories = $categories->paginate($perPage);
+        $categories->appends(['search' => $search]);
 
         return view('administrator.categories.index', compact('categories'));
     }

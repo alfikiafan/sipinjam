@@ -336,6 +336,11 @@ gradientStroke2.addColorStop(1, 'rgba(20,23,39,0.2)');
 gradientStroke2.addColorStop(0.2, 'rgba(72,72,176,0.0)');
 gradientStroke2.addColorStop(0, 'rgba(20,23,39,0)');
 
+var gradientStroke3 = bookingChart.createLinearGradient(0, 230, 0, 50);
+gradientStroke3.addColorStop(1, 'rgba(20,23,39,0.2)');
+gradientStroke3.addColorStop(0.2, 'rgba(72,72,176,0.0)');
+gradientStroke3.addColorStop(0, 'rgba(20,23,39,0)');
+
 // Mendapatkan tanggal 12 bulan terakhir
 const currentDate = new Date();
 let labels = [];
@@ -369,6 +374,17 @@ new Chart(bookingChart, {
                 backgroundColor: gradientStroke2,
                 fill: true,
                 data: {!! json_encode($approvedBookingsData) !!},
+                maxBarThickness: 6,
+                pointRadius: 0
+            },
+            {
+                label: "Returned Bookings",
+                tension: 0.4,
+                borderWidth: 3,
+                borderColor: "#4a7c83",
+                backgroundColor: gradientStroke3,
+                fill: true,
+                data: {!! json_encode($usagesReturnedData) !!},
                 maxBarThickness: 6,
                 pointRadius: 0
             }

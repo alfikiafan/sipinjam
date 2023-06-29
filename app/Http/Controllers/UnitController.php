@@ -11,12 +11,20 @@ class UnitController extends Controller
 {
     public function index()
     {
-        $units = Unit::all();
+        $units = Unit::query();
         $perPage = 10;
+        $search = request()->query('search');
+
+        if ($search) {
+            $units->where('id', 'LIKE', '%' . $search . '%')
+                ->orWhere('name', 'LIKE', '%' . $search . '%')
+                ->orWhere('location', 'LIKE', '%' . $search . '%');
+        }
 
         $totalUnits = $units->count();
 
-        $units = Unit::paginate($perPage);
+        $units = $units->paginate($perPage);
+        $units->appends(['search' => $search]);
 
         return view('administrator.units.index', compact('units', 'totalUnits'));
     }

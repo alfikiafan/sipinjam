@@ -24,7 +24,7 @@
         <form action="{{ route('items.index') }}" method="GET">
           <div class="input-group">
             <button class="input-group-text search-icon" type="submit"><i class="fas fa-search"></i></button>
-            <input class="form-control" name="search" placeholder="Search" type="text" value="{{ request('search') }}">
+            <input class="form-control px-2" name="search" placeholder="Search" type="text" value="{{ request('search') }}">
           </div>
         </form>
       </div>
@@ -114,7 +114,7 @@
     </div>
   </div>
 </div>
-<div class="pagination-wrapper">
+<div class="mb-4">
   <ul class="pagination pagination-info justify-content-center">
     <li class="page-item">
         <a class="page-link" href="{{ $items->previousPageUrl() }}" aria-label="Previous">

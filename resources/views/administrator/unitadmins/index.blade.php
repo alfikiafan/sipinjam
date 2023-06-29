@@ -12,12 +12,20 @@
     <div class="d-flex align-items-center justify-content-between">
       <div>
         <h6 class="m-0">Unit administrators table</h6>
-        <p class="text-sm">See all unit administrators in your organization</p>
+        <p class="text-sm">See all unit admin in your organization</p>
       </div>
       <div>
         <h6 class="m-0 text-sm">Total number of:</h6>
         <p class="d-inline-block me-2 text-sm">Unit Admins: {{ $totalUnitAdmins }}</p>
         <p class="d-inline-block me-2 text-sm">Units: {{ $totalUnits }}</p>
+      </div>
+      <div class="form-group mb-3">
+        <form action="{{ route('unitadmins.index') }}" method="GET">
+        <div class="input-group">
+          <button class="input-group-text search-icon" type="submit"><i class="fas fa-search"></i></button>
+          <input class="form-control px-2" name="search" placeholder="Search" type="text" value="{{ request('search') }}">
+        </div>
+        </form>
       </div>
       <div class="ml-auto p-0">
         <a href="{{ route('unitadmins.create') }}" class="btn bg-gradient-primary">Add Unit Admins</a>
@@ -97,7 +105,7 @@
     </div>
   </div>
 </div>
-<div class="pagination-wrapper">
+<div class="mb-4">
   <ul class="pagination pagination-info justify-content-center">
     <li class="page-item">
         <a class="page-link" href="{{ $unitadmins->previousPageUrl() }}" aria-label="Previous">

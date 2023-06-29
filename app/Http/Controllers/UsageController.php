@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Usage;
+use App\Models\Item;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Carbon\Carbon;
@@ -20,11 +21,60 @@ class UsageController extends Controller
                 $query->where('unit_id', $unitId);
             });
         });
-        
+
+        $items = Item::query();
+        $items->join('booking', 'booking.item_id', '=', 'items.id')
+            ->join('usages', 'usages.booking_id', '=', 'booking.id')
+            ->join('users', 'users.id', '=', 'booking.user_id')
+            ->select(
+                'usages.id as usage_id',
+                'booking.id as booking_id',
+                'items.name as item_name',
+                'items.category as item_category',
+                'users.name as user_name',
+                'users.email as user_email',
+                'usages.status',
+                'booking.start_date',
+                'booking.end_date',
+                'usages.due_date',
+                'usages.note',
+                'usages.created_at as usage_created_at',
+                'booking.created_at as booking_created_at'
+            );
+            
         $status = $request->query('status');
+        $search = $request->query('search');
 
         if ($status) {
             $usages->where('status', $status);
+        }
+
+        if ($search) {
+            $usages->where(function ($query) use ($search) {
+                $query->where('id', 'LIKE', '%' . $search . '%')
+                    ->orWhere('status', 'LIKE', '%' . $search . '%')
+                    ->orWhere('due_date', 'LIKE', '%' . $search . '%')
+                    ->orWhere('created_at', 'LIKE', '%' . $search . '%')
+                    ->orWhereHas('booking', function ($query) use ($search) {
+                        $query->where('id', 'LIKE', '%' . $search . '%')
+                            ->orWhere('start_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('end_date', 'LIKE', '%' . $search . '%')
+                            ->orWhere('created_at', 'LIKE', '%' . $search . '%')
+                            ->orWhereHas('user', function ($query) use ($search) {
+                                $query->where('id', 'LIKE', '%' . $search . '%')
+                                    ->orWhere('name', 'LIKE', '%' . $search . '%')
+                                    ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                    ->orWhere('phone', 'LIKE', '%' . $search . '%');
+                            })
+                            ->orWhereHas('item', function ($query) use ($search) {
+                                $query->where('id', 'LIKE', '%' . $search . '%')
+                                    ->orWhere('name', 'LIKE', '%' . $search . '%')
+                                    ->orWhereHas('category', function ($query) use ($search) {
+                                        $query->where('name', 'LIKE', '%' . $search . '%');
+                                    });
+                            });
+                    });
+            });
         }
 
         $totalUsages = $usages->count();
@@ -32,7 +82,7 @@ class UsageController extends Controller
         $totalBorrowers = $usages->pluck('booking_id')->unique()->count('user_id');
 
         $usages = $usages->latest()->paginate($perPage);
-        $usages->appends(['status' => $status]);
+        $usages->appends(['status' => $status, 'search' => $search]);
 
         return view('unitadmin.usages.index', compact('usages', 'status', 'totalUsages', 'totalItems', 'totalBorrowers'));
     }
