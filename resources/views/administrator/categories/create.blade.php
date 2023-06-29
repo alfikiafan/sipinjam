@@ -9,7 +9,7 @@
         <p class="text-sm mb-0">Easily add a new category to improve item organization.</p>
     </div>
     <div class="card-body pt-0">
-        <form method="POST" action="{{ route('administrator.categories.store') }}">
+        <form method="POST" action="{{ route('categories.store') }}">
             @csrf
             <div class="row">
                 <div class="col-md-6">
@@ -34,7 +34,7 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <button type="submit" class="btn bg-gradient-primary me-2">Add Category</button>
-                    <a href="{{ route('administrator.categories.index') }}" class="btn bg-gradient-info">Cancel</a>
+                    <a href="{{ route('categories.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>
         </form>

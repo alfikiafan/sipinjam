@@ -12,7 +12,13 @@ class UnitController extends Controller
     public function index()
     {
         $units = Unit::all();
-        return view('administrator.units.index', compact('units'));
+        $perPage = 10;
+
+        $totalUnits = $units->count();
+
+        $units = Unit::paginate($perPage);
+
+        return view('administrator.units.index', compact('units', 'totalUnits'));
     }
 
     public function show(Unit $unit)
@@ -49,7 +55,7 @@ class UnitController extends Controller
 
         $unit->save();
 
-        return redirect()->route('administrator.units.index')->with('success', 'Unit created successfully.');
+        return redirect()->route('units.index')->with('success', 'Unit created successfully.');
     }
 
     public function edit(Unit $unit)
@@ -76,16 +82,16 @@ class UnitController extends Controller
         $unit->description = $validatedData['description'];
         $unit->save();
 
-        return redirect()->route('administrator.units.index')->with('success', 'Unit updated successfully.');
+        return redirect()->route('units.index')->with('success', 'Unit updated successfully.');
     }
 
     public function destroy(Unit $unit)
     {
         if ($unit->items()->count() === 0) {
             $unit->delete();
-            return redirect()->route('administrator.units.index')->with('success', 'Unit deleted successfully.');
+            return redirect()->route('units.index')->with('success', 'Unit deleted successfully.');
         }
         
-        return redirect()->route('administrator.units.index')->with('error', 'Cannot delete unit. It has items associated with it.');
+        return redirect()->route('units.index')->with('error', 'Cannot delete unit. It has items associated with it.');
     }
 }

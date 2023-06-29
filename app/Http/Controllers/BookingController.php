@@ -14,38 +14,50 @@ class BookingController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
-
+        $perPage = 10;
+    
         if ($user->can('unitadmin')) {
             $unitId = $user->unit_id;
-            $bookings = Booking::whereHas('item', function ($query) use ($unitId) {
-                $query->where('unit_id', $unitId);
+            $bookings = Booking::whereHas('item', function ($bookings) use ($unitId) {
+                $bookings->where('unit_id', $unitId);
             });
-
+    
             $status = $request->query('status');
-
+    
             if ($status) {
                 $bookings->where('status', $status);
             }
 
-            $bookings = $bookings->get();
+            $totalBookings = $bookings->count();
+            $totalBorrowers = $bookings->pluck('user_id')->unique()->count();
+            $totalItems = $bookings->pluck('item_id')->unique()->count();
 
-            return view('unitadmin.bookings.index', compact('bookings', 'status'));
-        }
-        elseif ($user->can('borrower')) {
+            $bookings = $bookings->paginate($perPage);
+            $bookings->appends(['status' => $status]);
+    
+            return view('unitadmin.bookings.index', compact('bookings', 'totalBookings', 'totalBorrowers', 'totalItems'));
+        
+        } elseif ($user->can('borrower')) {
+
             Item::where('quantity', 0)
-            ->update(['status' => 'empty']);
-
+                ->update(['status' => 'empty']);
+    
             $bookings = Booking::where('user_id', $user->id);
-        
+    
             $status = $request->query('status');
-        
+    
             if ($status) {
                 $bookings->where('status', $status);
             }
-        
-            $bookings = $bookings->get();
-        
-            return view('borrower.bookings.index', compact('bookings'));
+
+            $totalBookings = $bookings->count();
+            $totalItems = $bookings->pluck('item_id')->unique()->count();
+    
+            $bookings = $bookings->paginate($perPage);
+            $bookings->appends(['status' => $status]);
+    
+            return view('borrower.bookings.index', compact('bookings', 'totalBookings', 'totalItems'));
+       
         } else {
             abort(403, 'Forbidden');
         }

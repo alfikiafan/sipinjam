@@ -10,7 +10,9 @@ class CategoryController extends Controller
 {
     public function index()
     {
-        $categories = Category::all();
+        $perPage = 10;
+        $categories = Category::paginate($perPage);
+
         return view('administrator.categories.index', compact('categories'));
     }
 
@@ -43,7 +45,7 @@ class CategoryController extends Controller
 
         $category->save();
 
-        return redirect()->route('administrator.categories.index')->with('success', 'Category created successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category created successfully.');
     }
 
     public function edit(Category $category)
@@ -67,13 +69,13 @@ class CategoryController extends Controller
         $category->description = $validatedData['description'];
         $category->save();
 
-        return redirect()->route('administrator.categories.index')->with('success', 'Category updated successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category updated successfully.');
     }
 
     public function destroy(Category $category)
     {
         $category->delete();
 
-        return redirect()->route('administrator.categories.index')->with('success', 'Category deleted successfully.');
+        return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');
     }
 }

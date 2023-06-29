@@ -13,6 +13,8 @@ class UsageController extends Controller
     {   
         $user = auth()->user();
         $unitId = $user->unit_id;
+        $perPage = 10;
+
         $usages = Usage::whereHas('booking', function ($query) use ($unitId) {
             $query->whereHas('item', function ($query) use ($unitId) {
                 $query->where('unit_id', $unitId);
@@ -25,9 +27,14 @@ class UsageController extends Controller
             $usages->where('status', $status);
         }
 
-        $usages = $usages->latest()->paginate(20);
+        $totalUsages = $usages->count();
+        $totalItems = $usages->pluck('booking_id')->unique()->count('item_id');
+        $totalBorrowers = $usages->pluck('booking_id')->unique()->count('user_id');
 
-        return view('unitadmin.usages.index', compact('usages'));
+        $usages = $usages->latest()->paginate($perPage);
+        $usages->appends(['status' => $status]);
+
+        return view('unitadmin.usages.index', compact('usages', 'status', 'totalUsages', 'totalItems', 'totalBorrowers'));
     }
 
     public function show(Usage $usage)

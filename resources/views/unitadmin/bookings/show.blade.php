@@ -56,7 +56,7 @@
       <hr>
       <div class="row">
           <div class="col-md-12 mt-4">
-              <a href="{{ route('bookings.index') }}" class="btn btn-info me-2">Back</a>
+            <a href="" class="btn bg-gradient-info me-2" id="backButton">Back</a>
               @if ($booking->status === 'pending')
                 <a href="{{ route('bookings.approve.show', ['booking' => $booking->id]) }}" class="btn btn-success me-2">Approve</a>
                 <a href="{{ route('bookings.reject', ['booking' => $booking->id]) }}" class="btn btn-danger" id="rejectBooking">Reject</a>

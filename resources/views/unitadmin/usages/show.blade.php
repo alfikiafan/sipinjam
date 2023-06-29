@@ -41,6 +41,8 @@
             <span class="badge bg-info badge-sm">{{ $usage->status }}</span>
           @elseif ($usage->status === 'returned')
             <span class="badge bg-success badge-sm">{{ $usage->status }}</span>
+          @elseif ($usage->status === 'late')
+            <span class="badge bg-warning badge-sm">{{ $usage->status }}</span>
           @else
             <span class="badge bg-danger badge-sm">{{ $usage->status }}</span>
           @endif
@@ -60,7 +62,7 @@
     </div>
     <hr>
     <div class="col-md-6 mt-4">
-      <a href="{{ route('usages.index') }}" class="btn bg-gradient-info me-2">Back</a>
+      <a href="" class="btn bg-gradient-info me-2" id="backButton">Back</a>
       @if ($usage->status === 'used' || $usage->status === 'late')
         <a href="{{ route('usages.return.show', ['usage' => $usage->id]) }}" class="btn bg-gradient-success">Return</a>
       @elseif ($usage->status === 'awaiting use')

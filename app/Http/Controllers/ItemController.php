@@ -12,14 +12,15 @@ class ItemController extends Controller
     public function index(Request $request)
     {
         $user = auth()->user();
+        $perPage = 10;
 
         if ($user->can('unitadmin')) {
             $unitId = $user->unit_id;
             $items = Item::where('unit_id', $unitId);
 
             Item::where('unit_id', $unitId)
-            ->where('quantity', 0)
-            ->update(['status' => 'empty']);
+                ->where('quantity', 0)
+                ->update(['status' => 'empty']);
 
             $status = $request->query('status');
 
@@ -27,19 +28,29 @@ class ItemController extends Controller
                 $items->where('status', $status);
             }
 
-            $items = $items->get();
+            $totalItems = $items->count();
+            $totalCategories = $items->pluck('category_id')->unique()->count();
+            $totalBrands = $items->pluck('brand')->unique()->count();
 
-            return view('unitadmin.items.index', compact('items', 'status'));
+            $items = $items->paginate($perPage);
+            $items->appends(['status' => $status]);
+
+            return view('unitadmin.items.index', compact('items', 'status', 'totalItems', 'totalCategories', 'totalBrands'));
         }
         elseif ($user->can('borrower')) {
-            $status = $request->query('status');
 
             Item::where('quantity', 0)
-            ->update(['status' => 'empty']);
+                ->update(['status' => 'empty']);
 
-            $items = Item::where('status', 'available')->get();
+            $items = Item::where('status', 'available');
 
-            return view('borrower.items.index', compact('items'));
+            $totalItems = $items->count();
+            $totalCategories = $items->pluck('category_id')->unique()->count();
+            $totalBrands = $items->pluck('brand')->unique()->count();
+
+            $items = $items->paginate($perPage);
+
+            return view('borrower.items.index', compact('items', 'totalItems', 'totalCategories', 'totalBrands'));
         } else {
             abort(403, 'Forbidden');
         }

@@ -16,9 +16,9 @@
       </div>
       <div>
         <h6 class="m-0 text-sm">Total number of:</h6>
-        <p class="d-inline-block me-2 text-sm">Usages: {{ $usages->count() }}</p>
-        <p class="d-inline-block text-sm">Items: {{ $usages->pluck('booking_id')->unique()->count('item_id') }}</p>
-        <p class="d-inline-block me-2 text-sm">Borrowers: {{ $usages->pluck('booking_id')->unique()->count('user_id') }}</p>
+        <p class="d-inline-block me-2 text-sm">Usages: {{ $totalUsages }}</p>
+        <p class="d-inline-block me-2 text-sm">Items: {{ $totalItems }}</p>
+        <p class="d-inline-block text-sm">Borrowers: {{ $totalBorrowers }}</p>
       </div>
     </div>
   </div>
@@ -123,6 +123,27 @@
     </table>
     </div>
   </div>
+</div>
+<div class="pagination-wrapper">
+  <ul class="pagination pagination-info justify-content-center">
+    <li class="page-item">
+        <a class="page-link" href="{{ $usages->previousPageUrl() }}" aria-label="Previous">
+            <span aria-hidden="true"><i class="ni ni-bold-left" aria-hidden="true"></i></span>
+        </a>
+    </li>
+
+    @for ($i = 1; $i <= $usages->lastPage(); $i++)
+      <li class="page-item{{ $usages->currentPage() == $i ? ' active' : '' }}">
+          <a class="page-link" href="{{ $usages->url($i) }}">{{ $i }}</a>
+      </li>
+    @endfor
+
+    <li class="page-item">
+      <a class="page-link" href="{{ $usages->nextPageUrl() }}" aria-label="Next">
+        <span aria-hidden="true"><i class="ni ni-bold-right" aria-hidden="true"></i></span>
+      </a>
+    </li>
+  </ul>
 </div>
 
 @endsection

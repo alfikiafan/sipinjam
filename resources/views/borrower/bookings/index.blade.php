@@ -15,9 +15,8 @@
       </div>
       <div>
         <h6 class="m-0 text-sm">Total number of:</h6>
-        <p class="d-inline-block me-2 text-sm">Bookings: {{ $bookings->count() }}</p>
-        <p class="d-inline-block me-2 text-sm">Approved: {{ $bookings->where('status', 'approved')->count() }}</p>
-        <p class="d-inline-block text-sm">Items: {{ $bookings->pluck('item_id')->unique()->count() }}</p>
+        <p class="d-inline-block me-2 text-sm">Bookings: {{ $totalBookings }}</p>
+        <p class="d-inline-block text-sm">Items: {{ $totalItems }}</p>
       </div>
       <div class="ml-auto p-0">
         <a href="{{ route('items.index') }}" class="btn bg-gradient-primary m-0">Book Item</a>
@@ -126,6 +125,27 @@
       </table>
     </div>
   </div>
+</div>
+<div class="pagination-wrapper">
+  <ul class="pagination pagination-info justify-content-center">
+    <li class="page-item">
+        <a class="page-link" href="{{ $bookings->previousPageUrl() }}" aria-label="Previous">
+            <span aria-hidden="true"><i class="ni ni-bold-left" aria-hidden="true"></i></span>
+        </a>
+    </li>
+
+    @for ($i = 1; $i <= $bookings->lastPage(); $i++)
+      <li class="page-item{{ $bookings->currentPage() == $i ? ' active' : '' }}">
+          <a class="page-link" href="{{ $bookings->url($i) }}">{{ $i }}</a>
+      </li>
+    @endfor
+
+    <li class="page-item">
+      <a class="page-link" href="{{ $bookings->nextPageUrl() }}" aria-label="Next">
+        <span aria-hidden="true"><i class="ni ni-bold-right" aria-hidden="true"></i></span>
+      </a>
+    </li>
+  </ul>
 </div>
 
 @endsection

@@ -8,8 +8,16 @@ document.addEventListener("DOMContentLoaded", function() {
     const profileForm = document.getElementById('profile-form');
     const rejectButton = document.getElementById('rejectBooking');
     const yearElement = document.getElementById('currentYear');
+    const backButton = document.getElementById('backButton');
     const currentYear = new Date().getFullYear();
   
+    if (backButton) {
+        backButton.addEventListener('click', function(event) {
+            event.preventDefault();
+            window.history.back();
+        });
+    }
+    
     if (aboutMe) {
         aboutMe.addEventListener('input', function() {
             let characterCount = aboutMe.value.length;

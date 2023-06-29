@@ -58,7 +58,7 @@
                 </div>
             </div>
             <button type="submit" class="btn bg-gradient-primary mt-3 mb-0 me-2">Submit</button>
-            <a href="/items" class="btn bg-gradient-info mt-3 mb-0">Cancel</a>
+            <a href="{{ route('items.index') }}" class="btn bg-gradient-info mt-3 mb-0">Cancel</a>
         </form>
     </div>
 </div>

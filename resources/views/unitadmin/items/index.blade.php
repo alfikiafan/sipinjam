@@ -16,9 +16,9 @@
       </div>
       <div>
         <h6 class="m-0 text-sm">Total number of:</h6>
-        <p class="d-inline-block me-2 text-sm">Items: {{ $items->count() }}</p>
-        <p class="d-inline-block me-2 text-sm">Categories: {{ $items->pluck('category_id')->unique()->count() }}</p>
-        <p class="d-inline-block text-sm">Brands: {{ $items->pluck('brand')->unique()->count() }}</p>
+        <p class="d-inline-block me-2 text-sm">Items: {{ $totalItems }}</p>
+        <p class="d-inline-block me-2 text-sm">Categories: {{ $totalCategories }}</p>
+        <p class="d-inline-block text-sm">Brands: {{ $totalBrands }}</p>
       </div>
       <div class="ml-auto p-0">
         <a href="{{ route('items.create') }}" class="btn bg-gradient-primary m-0">Add Item</a>
@@ -105,6 +105,27 @@
       </table>
     </div>
   </div>
+</div>
+<div class="pagination-wrapper">
+  <ul class="pagination pagination-info justify-content-center">
+    <li class="page-item">
+        <a class="page-link" href="{{ $items->previousPageUrl() }}" aria-label="Previous">
+            <span aria-hidden="true"><i class="ni ni-bold-left" aria-hidden="true"></i></span>
+        </a>
+    </li>
+
+    @for ($i = 1; $i <= $items->lastPage(); $i++)
+      <li class="page-item{{ $items->currentPage() == $i ? ' active' : '' }}">
+          <a class="page-link" href="{{ $items->url($i) }}">{{ $i }}</a>
+      </li>
+    @endfor
+
+    <li class="page-item">
+      <a class="page-link" href="{{ $items->nextPageUrl() }}" aria-label="Next">
+        <span aria-hidden="true"><i class="ni ni-bold-right" aria-hidden="true"></i></span>
+      </a>
+    </li>
+  </ul>
 </div>
 
 @endsection
