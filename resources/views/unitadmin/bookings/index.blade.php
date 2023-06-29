@@ -19,6 +19,14 @@
         <p class="d-inline-block me-2 text-sm">Borrowers: {{ $totalBorrowers }}</p>
         <p class="d-inline-block text-sm">Items: {{ $totalItems }}</p>
       </div>
+      <div class="form-group mb-3">
+        <form action="{{ route('bookings.index') }}" method="GET">
+          <div class="input-group">
+            <button class="input-group-text search-icon" type="submit"><i class="fas fa-search"></i></button>
+            <input class="form-control" name="search" placeholder="Search" type="text" id="search-input" data-url="{{ route('bookings.index') }}" value="{{ request('search') }}">
+          </div>
+        </form>
+      </div>
     </div>
   </div>
   <div class="card-body px-0 pt-0 pb-2">
@@ -119,7 +127,7 @@
   <ul class="pagination pagination-info justify-content-center">
     <li class="page-item">
         <a class="page-link" href="{{ $bookings->previousPageUrl() }}" aria-label="Previous">
-            <span aria-hidden="true"><i class="ni ni-bold-left" aria-hidden="true"></i></span>
+            <span aria-hidden="true"><i class="fas fa-chevron-left text-bold" aria-hidden="true"></i></span>
         </a>
     </li>
 
@@ -131,7 +139,7 @@
 
     <li class="page-item">
       <a class="page-link" href="{{ $bookings->nextPageUrl() }}" aria-label="Next">
-        <span aria-hidden="true"><i class="ni ni-bold-right" aria-hidden="true"></i></span>
+        <span aria-hidden="true"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
       </a>
     </li>
   </ul>

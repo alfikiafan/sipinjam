@@ -15,7 +15,7 @@
                 <p class="d-inline-block me-2 text-sm">{{ $categories->total() }}</p>
             </div>
             <div class="ml-auto p-0">
-                <a href="{{ route('categories.create') }}" class="btn bg-gradient-primary m-0">Add Category</a>
+                <a href="{{ route('categories.create') }}" class="btn bg-gradient-primary">Add Category</a>
             </div>
         </div>
     </div>
@@ -85,7 +85,7 @@
   <ul class="pagination pagination-info justify-content-center">
     <li class="page-item">
         <a class="page-link" href="{{ $categories->previousPageUrl() }}" aria-label="Previous">
-            <span aria-hidden="true"><i class="ni ni-bold-left" aria-hidden="true"></i></span>
+            <span aria-hidden="true"><i class="fas fa-chevron-left" aria-hidden="true"></i></span>
         </a>
     </li>
 
@@ -97,7 +97,7 @@
 
     <li class="page-item">
       <a class="page-link" href="{{ $categories->nextPageUrl() }}" aria-label="Next">
-        <span aria-hidden="true"><i class="ni ni-bold-right" aria-hidden="true"></i></span>
+        <span aria-hidden="true"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
       </a>
     </li>
   </ul>

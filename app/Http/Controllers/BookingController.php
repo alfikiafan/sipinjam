@@ -23,9 +23,30 @@ class BookingController extends Controller
             });
     
             $status = $request->query('status');
+            $search = $request->query('search');
     
             if ($status) {
                 $bookings->where('status', $status);
+            }
+
+            if ($search) {
+                $bookings->where(function ($query) use ($search) {
+                    $query->where('id', 'LIKE', "%{$search}%")
+                        ->orWhere('quantity', 'LIKE', "%{$search}%")
+                        ->orWhereHas('item', function ($query) use ($search) {
+                            $query->where('name', 'LIKE', "%{$search}%")
+                                ->orWhereHas('category', function ($query) use ($search) {
+                                    $query->where('name', 'LIKE', "%{$search}%");
+                                });
+                        })
+                        ->orWhereHas('user', function ($query) use ($search) {
+                            $query->where('name', 'LIKE', "%{$search}%")
+                                ->orWhere('id', 'LIKE', "%{$search}%")
+                                ->orWhere('email', 'LIKE', "%{$search}%");
+                        })
+                        ->orWhere('start_date', 'LIKE', "%{$search}%")
+                        ->orWhere('end_date', 'LIKE', "%{$search}%");
+                });
             }
 
             $totalBookings = $bookings->count();
@@ -33,7 +54,7 @@ class BookingController extends Controller
             $totalItems = $bookings->pluck('item_id')->unique()->count();
 
             $bookings = $bookings->paginate($perPage);
-            $bookings->appends(['status' => $status]);
+            $bookings->appends(['status' => $status, 'search' => $search]);
     
             return view('unitadmin.bookings.index', compact('bookings', 'totalBookings', 'totalBorrowers', 'totalItems'));
         

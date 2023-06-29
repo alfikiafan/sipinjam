@@ -17,7 +17,7 @@ document.addEventListener("DOMContentLoaded", function() {
             window.history.back();
         });
     }
-    
+
     if (aboutMe) {
         aboutMe.addEventListener('input', function() {
             let characterCount = aboutMe.value.length;

@@ -15,7 +15,7 @@
                 <p class="d-inline-block me-2 text-sm">{{ $totalUnits }}</p>
             </div>
             <div class="ml-auto p-0">
-                <a href="{{ route('units.create') }}" class="btn bg-gradient-primary m-0">Add Unit</a>
+                <a href="{{ route('units.create') }}" class="btn bg-gradient-primary">Add Unit</a>
             </div>
         </div>
     </div>
@@ -89,7 +89,7 @@
   <ul class="pagination pagination-info justify-content-center">
     <li class="page-item">
         <a class="page-link" href="{{ $units->previousPageUrl() }}" aria-label="Previous">
-            <span aria-hidden="true"><i class="ni ni-bold-left" aria-hidden="true"></i></span>
+            <span aria-hidden="true"><i class="fas fa-chevron-left" aria-hidden="true"></i></span>
         </a>
     </li>
 
@@ -101,7 +101,7 @@
 
     <li class="page-item">
       <a class="page-link" href="{{ $units->nextPageUrl() }}" aria-label="Next">
-        <span aria-hidden="true"><i class="ni ni-bold-right" aria-hidden="true"></i></span>
+        <span aria-hidden="true"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
       </a>
     </li>
   </ul>
