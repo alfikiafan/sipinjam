@@ -3,9 +3,13 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Random;
 use App\Models\Item;
 use App\Models\Booking;
 use App\Models\Usage;
+use App\Models\Category;
+use App\Models\Unit;
+use App\Models\User;
 use Carbon\Carbon;
 
 class HomeController extends Controller
@@ -15,6 +19,85 @@ class HomeController extends Controller
     $user = auth()->user();
     
     if ($user->can('administrator')) {
+        // Implementasi untuk peran 'administrator'
+        // total category
+        $totalCategories = Category::from('categories')->count();
+
+        // total unit admin
+        $totalUnitadmins = User::where('role', 'unitadmin')->count();
+
+        // total units
+        $totalUnits = Unit::from('units')->count();
+
+        // total bookings bulan ini
+        $currentMonth = now()->format('m');
+        $currentMonthBookings = Booking::whereMonth('created_at', $currentMonth)->count();
+
+        // total items
+        $totalAllItems = Item::from('items')->count();
+
+        // total borrower
+        $totalUsers = User::where('role', 'borrower')->count();
+
+        // data untuk bookings yang telah di approved dalam 12 bulan terakhir
+        $dataBookingsApproved = [];
+        $currentDate = now();
+        for ($i = 11; $i >= 0; $i--) {
+            $date = clone $currentDate;
+            $date->subMonths($i)->startOfMonth();
+            $count = Booking::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->where('status', 'approved')
+                ->count();
+            $dataBookingsApproved[] = $count;
+        }
+
+        // data untuk pengembalian barang dalam 12 bulan terakhir
+        $dataUsagesReturned = [];
+        $currentDate = now();
+        for ($i = 11; $i >= 0; $i--) {
+            $date = clone $currentDate;
+            $date->subMonths($i)->startOfMonth();
+            $count = Usage::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->where('status', 'returned')
+                ->count();
+            $dataUsagesReturned[] = $count;
+        }
+
+        // data untuk permintaan peminjaman barang dalam 12 bulan terakhir
+        $dataBookingsRequest = [];
+        $currentDate = now();
+        for ($i = 11; $i >= 0; $i--) {
+            $date = clone $currentDate;
+            $date->subMonths($i)->startOfMonth();
+            $count = Booking::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->where('status', 'pending')
+                ->count();
+            $dataBookingsRequest[] = $count;
+        }
+
+        $randomNumber = random_int(0, 10);
+        $randomNumber2 = random_int(0, 5);
+        $randomNumber3 = random_int(0, 5);
+        $randomNumber4 = random_int(0, 5);
+    
+        return view('administrator.dashboard', compact(
+            'totalCategories',
+            'totalUnits',
+            'totalUnitadmins',
+            'currentMonthBookings',
+            'totalAllItems',
+            'totalUsers',
+            'dataBookingsApproved',
+            'dataUsagesReturned',
+            'dataBookingsRequest',
+            'randomNumber',
+            'randomNumber2',
+            'randomNumber3',
+            'randomNumber4',
+        ));
 
     } elseif ($user->can('unitadmin')) {
         $unitId = $user->unit_id;
