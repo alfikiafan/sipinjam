@@ -140,7 +140,7 @@
                                 <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                     <h6 class="card-title text-white">Categories</h6>
                                     <p class="card-text text-sm mb-2 text-white">Manage the list of Categories.</p>
-                                    <a href="{{ route('administrator.categories.index') }}"
+                                    <a href="{{ route('categories.index') }}"
                                         class="text-primary font-weight-bold underline">See More</a>
                                 </div>
                             </div>
@@ -160,7 +160,7 @@
                                 <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                     <h6 class="card-title text-white">Unit</h6>
                                     <p class="card-text text-sm mb-2 text-white">Manage the list of Units.</p>
-                                    <a href="{{ route('administrator.units.index') }}"
+                                    <a href="{{ route('units.index') }}"
                                         class="text-primary font-weight-bold underline">See More</a>
                                 </div>
                             </div>
@@ -177,7 +177,7 @@
                 </div>
                 <div class="card-body">
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.categories.index') }}">
+                        <a href="{{ route('categories.index') }}">
                             <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber }} Categories need to be updated</h6>
@@ -188,7 +188,7 @@
                     </div>
 
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.categories.index') }}">
+                        <a href="{{ route('categories.index') }}">
                             <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber2 }} Categories need to be Added</h6>
@@ -199,7 +199,7 @@
                     </div>
 
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.units.index') }}">
+                        <a href="{{ route('units.index') }}">
                             <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber3 }} Unit need to be updated</h6>
@@ -210,7 +210,7 @@
                     </div>
 
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.units.index') }}">
+                        <a href="{{ route('units.index') }}">
                         <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber4 }} Unit need to be Added</h6>
