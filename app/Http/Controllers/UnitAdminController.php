@@ -8,11 +8,19 @@ use App\Models\Unit;
 
 class UnitAdminController extends Controller
 {
-    public function index() {
-        if (auth()->user()->can('administrator')) {
-        $unitadmins = User::where('role', 'unitadmin')->get();
+    public function index()
+    {
+        $perPage = 10;
 
-        return view('administrator.unitadmins.index', compact('unitadmins'));
+        if (auth()->user()->can('administrator')) {
+            $unitadmins = User::where('role', 'unitadmin');
+
+            $totalUnitAdmins = $unitadmins->count();
+            $totalUnits = Unit::all()->count();
+            
+            $unitadmins = $unitadmins->paginate($perPage);
+
+            return view('administrator.unitadmins.index', compact('unitadmins', 'totalUnitAdmins', 'totalUnits'));
         } else {
             abort(403, 'Forbidden');
         }

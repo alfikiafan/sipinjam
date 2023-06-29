@@ -9,7 +9,7 @@
         <p class="text-sm mb-0"></p>
     </div>
     <div class="card-body pt-0">
-        <form method="POST" action="{{ route('administrator.categories.update', $category->id) }}">
+        <form method="POST" action="{{ route('categories.update', $category->id) }}">
             @csrf
             @method('PUT')
             <div class="form-group">
@@ -31,7 +31,7 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <button type="submit" class="btn bg-gradient-primary me-2">Edit Category</button>
-                    <a href="{{ route('administrator.categories.index') }}" class="btn bg-gradient-info">Cancel</a>
+                    <a href="{{ route('categories.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>
         </form>

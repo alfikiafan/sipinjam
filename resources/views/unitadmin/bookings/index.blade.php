@@ -15,9 +15,17 @@
       </div>
       <div>
         <h6 class="m-0 text-sm">Total number of:</h6>
-        <p class="d-inline-block me-2 text-sm">Bookings: {{ $bookings->count() }}</p>
-        <p class="d-inline-block me-2 text-sm">Borrowers: {{ $bookings->pluck('user_id')->unique()->count() }}</p>
-        <p class="d-inline-block text-sm">Items: {{ $bookings->pluck('item_id')->unique()->count() }}</p>
+        <p class="d-inline-block me-2 text-sm">Bookings: {{ $totalBookings }}</p>
+        <p class="d-inline-block me-2 text-sm">Borrowers: {{ $totalBorrowers }}</p>
+        <p class="d-inline-block text-sm">Items: {{ $totalItems }}</p>
+      </div>
+      <div class="form-group mb-3">
+        <form action="{{ route('bookings.index') }}" method="GET">
+          <div class="input-group">
+            <button class="input-group-text search-icon" type="submit"><i class="fas fa-search"></i></button>
+            <input class="form-control" name="search" placeholder="Search" type="text" id="search-input" data-url="{{ route('bookings.index') }}" value="{{ request('search') }}">
+          </div>
+        </form>
       </div>
     </div>
   </div>
@@ -114,6 +122,27 @@
       </table>
     </div>
   </div>
+</div>
+<div class="pagination-wrapper">
+  <ul class="pagination pagination-info justify-content-center">
+    <li class="page-item">
+        <a class="page-link" href="{{ $bookings->previousPageUrl() }}" aria-label="Previous">
+            <span aria-hidden="true"><i class="fas fa-chevron-left text-bold" aria-hidden="true"></i></span>
+        </a>
+    </li>
+
+    @for ($i = 1; $i <= $bookings->lastPage(); $i++)
+      <li class="page-item{{ $bookings->currentPage() == $i ? ' active' : '' }}">
+          <a class="page-link" href="{{ $bookings->url($i) }}">{{ $i }}</a>
+      </li>
+    @endfor
+
+    <li class="page-item">
+      <a class="page-link" href="{{ $bookings->nextPageUrl() }}" aria-label="Next">
+        <span aria-hidden="true"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
+      </a>
+    </li>
+  </ul>
 </div>
 
 @endsection

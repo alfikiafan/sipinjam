@@ -5,157 +5,173 @@
 
 <div class="row px-3">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Items</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $totalItems }}</h5>
+        <a href="{{ route('items.index') }}">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Items</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $totalItems }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-lg fa-cubes opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-lg fa-cubes opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Items Available</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $itemsAvailable }}</h5>
+        <a href="{{ route('items.index', ['status' => 'available']) }}">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Items Available</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $itemsAvailable }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-check fa-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-check fa-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Empty Items</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $emptyItems }}</h5>
+        <a href="{{ route('items.index', ['status' => 'empty']) }}">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Empty Items</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $emptyItems }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-exclamation-circle fa-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-exclamation-circle fa-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Active Usages</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $activeUsagesCount }}</h5>
+        <a href="{{ route('usages.index', ['status' => 'used']) }}">
+            <div class="card h-100">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Active Usages</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $activeUsagesCount }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-lg fa-chart-line opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-lg fa-chart-line opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100 mt-3">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Pending Bookings</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $pendingBookings }}</h5>
+        <a href="{{ route('bookings.index', ['status' => 'pending']) }}">
+            <div class="card h-100 mt-3">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Pending Bookings</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $pendingBookings }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-hourglass-start fa-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-hourglass-start fa-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100 mt-3">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Rejected Bookings</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $rejectedBookings }}</h5>
+        <a href="{{ route('bookings.index', ['status' => 'rejected']) }}">
+            <div class="card h-100 mt-3">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Rejected Bookings</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $rejectedBookings }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-calendar-days fa-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-ban fa-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100 mt-3">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Cancelled Bookings</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $cancelledBookings }}</h5>
+        <a href="{{ route('bookings.index', ['status' => 'cancelled']) }}">
+            <div class="card h-100 mt-3">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Cancelled Bookings</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $cancelledBookings }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-xmark fa-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-xmark fa-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
-        </div>
+        </a>
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
-        <div class="card h-100 mt-3">
-            <div class="card-body p-3">
-                <div class="row">
-                    <div class="col-8">
-                        <div class="numbers">
-                            <p class="text-sm mb-0 text-capitalize font-weight-bold">Late<br> Usages</p>
-                            <h5 class="font-weight-bolder mb-0">{{ $lateUsagesCount }}</h5>
+        <a href="{{ route('usages.index', ['status' => 'late']) }}">
+            <div class="card h-100 mt-3">
+                <div class="card-body p-3">
+                    <div class="row">
+                        <div class="col-8">
+                            <div class="numbers">
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Late<br> Usages</p>
+                                <h5 class="font-weight-bolder mb-0">{{ $lateUsagesCount }}</h5>
+                            </div>
                         </div>
-                    </div>
-                    <div class="col-4 text-end">
-                        <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                            <i class="fas fa-clock fa-lg opacity-10" aria-hidden="true"></i>
+                        <div class="col-4 text-end">
+                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                <i class="fas fa-clock fa-lg opacity-10" aria-hidden="true"></i>
+                            </div>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
-    </div>
+    </a>
 </div>
 <div class="row px-3 mt-5">
     <div class="col-lg-6 mb-lg-0 mb-4">

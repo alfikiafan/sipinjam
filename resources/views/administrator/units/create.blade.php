@@ -9,7 +9,7 @@
         <p class="text-sm mb-0">Easily add a new loan unit to your loan system.</p>
     </div>
     <div class="card-body pt-0">
-        <form method="POST" action="{{ route('administrator.units.store') }}">
+        <form method="POST" action="{{ route('units.store') }}">
             @csrf
             <div class="row">
                 <div class="col-md-12">
@@ -41,7 +41,7 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <button type="submit" class="btn bg-gradient-primary me-2">Add Unit</button>
-                    <a href="{{ route('administrator.units.index') }}" class="btn bg-gradient-info">Cancel</a>
+                    <a href="{{ route('units.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>
         </form>

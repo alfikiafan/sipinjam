@@ -16,11 +16,11 @@
       </div>
       <div>
         <h6 class="m-0 text-sm">Total number of:</h6>
-        <p class="d-inline-block me-2 text-sm">Unit Admins: {{ $unitadmins->count() }}</p>
-        <p class="d-inline-block me-2 text-sm">Units: {{ $unitadmins->pluck('unit_id')->unique()->count() }}</p>
+        <p class="d-inline-block me-2 text-sm">Unit Admins: {{ $totalUnitAdmins }}</p>
+        <p class="d-inline-block me-2 text-sm">Units: {{ $totalUnits }}</p>
       </div>
       <div class="ml-auto p-0">
-        <a href="{{ route('unitadmins.create') }}" class="btn bg-gradient-primary m-0">Add Unit Admins</a>
+        <a href="{{ route('unitadmins.create') }}" class="btn bg-gradient-primary">Add Unit Admins</a>
       </div>
     </div>
   </div>
@@ -96,6 +96,27 @@
       </table>
     </div>
   </div>
+</div>
+<div class="pagination-wrapper">
+  <ul class="pagination pagination-info justify-content-center">
+    <li class="page-item">
+        <a class="page-link" href="{{ $unitadmins->previousPageUrl() }}" aria-label="Previous">
+            <span aria-hidden="true"><i class="fas fa-chevron-left" aria-hidden="true"></i></span>
+        </a>
+    </li>
+
+    @for ($i = 1; $i <= $unitadmins->lastPage(); $i++)
+      <li class="page-item{{ $unitadmins->currentPage() == $i ? ' active' : '' }}">
+          <a class="page-link" href="{{ $unitadmins->url($i) }}">{{ $i }}</a>
+      </li>
+    @endfor
+
+    <li class="page-item">
+      <a class="page-link" href="{{ $unitadmins->nextPageUrl() }}" aria-label="Next">
+        <span aria-hidden="true"><i class="fas fa-chevron-right" aria-hidden="true"></i></span>
+      </a>
+    </li>
+  </ul>
 </div>
 
 @endsection

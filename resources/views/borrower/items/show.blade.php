@@ -38,7 +38,7 @@
       </div>
       <hr>
       <div class="col-md-6 mt-4">
-        <a href="{{ route('items.index') }}" class="btn bg-gradient-info">Back</a>
+        <a href="" class="btn bg-gradient-info" id="backButton">Back</a>
       </div>
     </div>
   </div>

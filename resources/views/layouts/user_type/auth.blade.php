@@ -22,7 +22,7 @@
 
         @else
             @include('layouts.navbars.auth.sidebar')
-            <main class="main-content position-relative max-height-vh-100 h-100 mt-1 border-radius-lg">
+            <main class="main-content position-relative max-height-vh-100 h-100 border-radius-lg">
                 @include('layouts.navbars.auth.nav')
                 <div class="container-fluid py-3">
                     @yield('content')

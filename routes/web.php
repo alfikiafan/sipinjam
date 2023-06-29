@@ -25,6 +25,7 @@ use App\Http\Controllers\ReturnController;
 |
 */
 
+// Rute root
 Route::get('/', function () {
     if (auth()->check()) {
         return redirect('/dashboard');
@@ -70,22 +71,22 @@ Route::middleware('auth', 'administrator')->group(function () {
     Route::delete('/unitadmins/{unitadmin}', [UnitAdminController::class, 'destroy'])->name('unitadmins.destroy');
 
     // Rute untuk manajemen unit
-    Route::get('/units', [UnitController::class, 'index'])->name('administrator.units.index');
-    Route::get('/units/{unit}/show', [UnitController::class, 'show'])->name('administrator.units.show');
-    Route::post('/units', [UnitController::class, 'store'])->name('administrator.units.store');
-    Route::get('/units/create', [UnitController::class, 'create'])->name('administrator.units.create');
-    Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('administrator.units.edit');
-    Route::put('/units/{unit}/update', [UnitController::class, 'update'])->name('administrator.units.update');
-    Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->name('administrator.units.destroy');
+    Route::get('/units', [UnitController::class, 'index'])->name('units.index');
+    Route::get('/units/{unit}/show', [UnitController::class, 'show'])->name('units.show');
+    Route::post('/units', [UnitController::class, 'store'])->name('units.store');
+    Route::get('/units/create', [UnitController::class, 'create'])->name('units.create');
+    Route::get('/units/{unit}/edit', [UnitController::class, 'edit'])->name('units.edit');
+    Route::put('/units/{unit}/update', [UnitController::class, 'update'])->name('units.update');
+    Route::delete('/units/{unit}', [UnitController::class, 'destroy'])->name('units.destroy');
 
     // Rute untuk manajemen kategori
-    Route::get('/categories', [CategoryController::class, 'index'])->name('administrator.categories.index');
-    Route::get('/categories/{category}/show', [CategoryController::class, 'show'])->name('administrator.categories.show');
-    Route::post('/categories', [CategoryController::class, 'store'])->name('administrator.categories.store');
-    Route::get('/categories/create', [CategoryController::class, 'create'])->name('administrator.categories.create');
-    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('administrator.categories.edit');
-    Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('administrator.categories.update');
-    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('administrator.categories.destroy');
+    Route::get('/categories', [CategoryController::class, 'index'])->name('categories.index');
+    Route::get('/categories/{category}/show', [CategoryController::class, 'show'])->name('categories.show');
+    Route::post('/categories', [CategoryController::class, 'store'])->name('categories.store');
+    Route::get('/categories/create', [CategoryController::class, 'create'])->name('categories.create');
+    Route::get('/categories/{category}/edit', [CategoryController::class, 'edit'])->name('categories.edit');
+    Route::put('/categories/{category}/update', [CategoryController::class, 'update'])->name('categories.update');
+    Route::delete('/categories/{category}', [CategoryController::class, 'destroy'])->name('categories.destroy');
 });
 
 // Rute unit admin saja
@@ -120,6 +121,7 @@ Route::middleware('auth', 'borrower')->group(function () {
 });
 
 Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
+
     // Rute untuk manajemen item (unit admin)
     Route::get('/items', [ItemController::class, 'index'])->name('items.index');
     Route::get('/items/{item}/show', [ItemController::class, 'show'])->name('items.show');
@@ -128,10 +130,6 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     Route::get('/items/{item}/edit', [ItemController::class, 'edit'])->name('items.edit');
     Route::put('/items/{item}', [ItemController::class, 'update'])->name('items.update');
     Route::delete('/items/{item}', [ItemController::class, 'destroy'])->name('items.destroy');
-
-    // Rute untuk melihat ketersediaan barang (borrower)
-    // Route::get('/items', [ItemController::class, 'index'])->name('borrower.items.index');
-    // Route::get('/items/{item}', [ItemController::class, 'show'])->name('borrower.items.show');
 
     // Rute untuk menampilkan daftar booking (unit admin)
     Route::get('/bookings', [BookingController::class, 'index'])->name('bookings.index');
@@ -143,9 +141,4 @@ Route::middleware(['auth', 'unitadminorborrower'])->group(function () {
     Route::get('/bookings/{booking}/approve', [ApprovalController::class, 'show'])->name('bookings.approve.show');
     Route::post('/bookings/{booking}', [ApprovalController::class, 'approve'])->name('bookings.approve');
     Route::get('/bookings/{booking}/reject', [ApprovalController::class, 'reject'])->name('bookings.reject');
-
-    // Rute untuk mengajukan booking (borrower)
-    // Route::get('/bookings', [BookingController::class, 'index'])->name('borrower.bookings.index');
-    // Route::get('/bookings/create', [BookingController::class, 'create'])->name('borrower.bookings.create');
-    // Route::post('/bookings', [BookingController::class, 'store'])->name('borrower.bookings.store');
 });

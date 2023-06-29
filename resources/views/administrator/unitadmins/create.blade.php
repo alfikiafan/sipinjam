@@ -82,7 +82,7 @@
             <div class="row mt-3">
                 <div class="col-md-12">
                     <button type="submit" class="btn bg-gradient-primary me-2">Add Unit Admin</button>
-                    <a href="/items" class="btn bg-gradient-info">Cancel</a>
+                    <a href="{{ route('unitadmins.index') }}" class="btn bg-gradient-info">Cancel</a>
                 </div>
             </div>
         </form>
