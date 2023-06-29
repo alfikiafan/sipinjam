@@ -6,47 +6,73 @@
 <div class="container-fluid py-4">
     <div class="row">
         <div class="col-xl-4 col-sm-6 mb-xl-2 mb-4">
-            <div class="card h-100">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Units</p>
-                                <h5 class="font-weight-bolder mb-0">{{ $totalUnits }}</h5>
+            <a href="{{ route('units.index') }}">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Units</p>
+                                    <h5 class="font-weight-bolder mb-0">{{ $totalUnits }}</h5>
+                                </div>
                             </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fas fa-lg fa-building opacity-10" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4 col-sm-6 mb-xl-2 mb-4">
-            <div class="card h-100">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Unit Admin</p>
-                                <h5 class="font-weight-bolder mb-0">{{ $totalUnitadmins }}</h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fas fa-lg fa-user-cog opacity-10" aria-hidden="true"></i>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fas fa-lg fa-building opacity-10" aria-hidden="true"></i>
+                                </div>
                             </div>
                         </div>
                     </div>
                 </div>
-            </div>
+            </a>
         </div>
 
         <div class="col-xl-4 col-sm-6 mb-xl-2 mb-4">
-            <div class="card h-100">
+            <a href="{{ route('unitadmins.index') }}">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Unit Admin</p>
+                                    <h5 class="font-weight-bolder mb-0">{{ $totalUnitadmins }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fas fa-lg fa-user-cog opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 mb-xl-1 mb-4">
+            <a href="{{ route('categories.index') }}">
+                <div class="card h-100">
+                    <div class="card-body p-3">
+                        <div class="row">
+                            <div class="col-8">
+                                <div class="numbers">
+                                    <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Categories</p>
+                                    <h5 class="font-weight-bolder mb-0">{{ $totalCategories }}</h5>
+                                </div>
+                            </div>
+                            <div class="col-4 text-end">
+                                <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
+                                    <i class="fas fa-lg fa-list-alt opacity-10" aria-hidden="true"></i>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </a>
+        </div>
+
+        <div class="col-xl-4 col-sm-6 mb-xl-2 mb-4">
+            <div class="card h-100 mt-3">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -66,27 +92,7 @@
         </div>
 
         <div class="col-xl-4 col-sm-6 mb-xl-1 mb-4">
-            <div class="card h-100">
-                <div class="card-body p-3">
-                    <div class="row">
-                        <div class="col-8">
-                            <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Categories</p>
-                                <h5 class="font-weight-bolder mb-0">{{ $totalCategories }}</h5>
-                            </div>
-                        </div>
-                        <div class="col-4 text-end">
-                            <div class="icon icon-shape bg-gradient-primary shadow text-center border-radius-md">
-                                <i class="fas fa-lg fa-list-alt opacity-10" aria-hidden="true"></i>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="col-xl-4 col-sm-6 mb-xl-1 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 mt-3">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -106,12 +112,12 @@
         </div>
 
         <div class="col-xl-4 col-sm-6 mb-xl-1 mb-4">
-            <div class="card h-100">
+            <div class="card h-100 mt-3">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Bookings this month</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Bookings<br> in This Month</p>
                                 <h5 class="font-weight-bolder mb-0">{{ $currentMonthBookings }}</h5>
                             </div>
                         </div>
@@ -140,7 +146,7 @@
                                 <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                     <h6 class="card-title text-white">Categories</h6>
                                     <p class="card-text text-sm mb-2 text-white">Manage the list of Categories.</p>
-                                    <a href="{{ route('administrator.categories.index') }}"
+                                    <a href="{{ route('categories.index') }}"
                                         class="text-primary font-weight-bold underline">See More</a>
                                 </div>
                             </div>
@@ -160,7 +166,7 @@
                                 <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                     <h6 class="card-title text-white">Unit</h6>
                                     <p class="card-text text-sm mb-2 text-white">Manage the list of Units.</p>
-                                    <a href="{{ route('administrator.units.index') }}"
+                                    <a href="{{ route('units.index') }}"
                                         class="text-primary font-weight-bold underline">See More</a>
                                 </div>
                             </div>
@@ -177,7 +183,7 @@
                 </div>
                 <div class="card-body">
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.categories.index') }}">
+                        <a href="{{ route('categories.index') }}">
                             <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber }} Categories need to be updated</h6>
@@ -188,7 +194,7 @@
                     </div>
 
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.categories.index') }}">
+                        <a href="{{ route('categories.index') }}">
                             <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber2 }} Categories need to be Added</h6>
@@ -199,7 +205,7 @@
                     </div>
 
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.units.index') }}">
+                        <a href="{{ route('units.index') }}">
                             <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber3 }} Unit need to be updated</h6>
@@ -210,7 +216,7 @@
                     </div>
 
                     <div class="timeline timeline-one-side">
-                        <a href="{{ route('administrator.units.index') }}">
+                        <a href="{{ route('units.index') }}">
                         <div class="timeline-block mb-3">
                                 <div class="timeline-content">
                                     <h6 class="text-dark text-sm mb-0">{{ $randomNumber4 }} Unit need to be Added</h6>

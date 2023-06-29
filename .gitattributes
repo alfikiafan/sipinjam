@@ -10,4 +10,5 @@
 CHANGELOG.md export-ignore
 .styleci.yml export-ignore
 
-public/assets/* linguist-vendored
+public/assets/css/soft-ui-dashboard.css linguist-vendored
+public/assets/js/soft-ui-dashboard.js linguist-vendored

@@ -14,11 +14,26 @@ class UnitAdminController extends Controller
 
         if (auth()->user()->can('administrator')) {
             $unitadmins = User::where('role', 'unitadmin');
+            $search = request()->query('search');
+
+            if ($search) {
+                $unitadmins->where('id', 'LIKE', '%' . $search . '%')
+                    ->orWhere('name', 'LIKE', '%' . $search . '%')
+                    ->orWhere('email', 'LIKE', '%' . $search . '%')
+                    ->orWhere('phone', 'LIKE', '%' . $search . '%')
+                    ->orWhere('address', 'LIKE', '%' . $search . '%')
+                    ->orWhere('city', 'LIKE', '%' . $search . '%')
+                    ->orWhereHas('unit', function ($query) use ($search) {
+                        $query->where('name', 'LIKE', '%' . $search . '%')
+                            ->orWhere('location', 'LIKE', '%' . $search . '%');
+                    });
+            }
 
             $totalUnitAdmins = $unitadmins->count();
             $totalUnits = Unit::all()->count();
             
             $unitadmins = $unitadmins->paginate($perPage);
+            $unitadmins->appends(['search' => $search]);
 
             return view('administrator.unitadmins.index', compact('unitadmins', 'totalUnitAdmins', 'totalUnits'));
         } else {

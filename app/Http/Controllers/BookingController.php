@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Booking;
 use App\Models\Unit;
 use App\Models\Item;
+use App\Models\Usage;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
@@ -31,21 +32,23 @@ class BookingController extends Controller
 
             if ($search) {
                 $bookings->where(function ($query) use ($search) {
-                    $query->where('id', 'LIKE', "%{$search}%")
-                        ->orWhere('quantity', 'LIKE', "%{$search}%")
-                        ->orWhereHas('item', function ($query) use ($search) {
-                            $query->where('name', 'LIKE', "%{$search}%")
-                                ->orWhereHas('category', function ($query) use ($search) {
-                                    $query->where('name', 'LIKE', "%{$search}%");
-                                });
-                        })
+                    $query->where('id', 'LIKE', '%' . $search . '%')
+                        ->orWhere('quantity', 'LIKE', '%' . $search . '%')
+                        ->orWhere('start_date', 'LIKE', '%' . $search . '%')
+                        ->orWhere('end_date', 'LIKE', '%' . $search . '%')
                         ->orWhereHas('user', function ($query) use ($search) {
-                            $query->where('name', 'LIKE', "%{$search}%")
-                                ->orWhere('id', 'LIKE', "%{$search}%")
-                                ->orWhere('email', 'LIKE', "%{$search}%");
+                            $query->where('id', 'LIKE', '%' . $search . '%')
+                                ->orWhere('name', 'LIKE', '%' . $search . '%')
+                                ->orWhere('email', 'LIKE', '%' . $search . '%')
+                                ->orWhere('phone', 'LIKE', '%' . $search . '%');
                         })
-                        ->orWhere('start_date', 'LIKE', "%{$search}%")
-                        ->orWhere('end_date', 'LIKE', "%{$search}%");
+                        ->orWhereHas('item', function ($query) use ($search) {
+                            $query->where('id', 'LIKE', '%' . $search . '%')
+                                ->orWhere('name', 'LIKE', '%' . $search . '%')
+                                ->orWhereHas('category', function ($query) use ($search) {
+                                    $query->where('name', 'LIKE', '%' . $search . '%');
+                                });
+                        });
                 });
             }
 
@@ -64,11 +67,31 @@ class BookingController extends Controller
                 ->update(['status' => 'empty']);
     
             $bookings = Booking::where('user_id', $user->id);
-    
+            $usages = Usage::whereHas('booking', function ($query) use ($user) {
+                $query->where('user_id', $user->id);
+            })->get();
+            
             $status = $request->query('status');
+            $search = $request->query('search');
     
             if ($status) {
                 $bookings->where('status', $status);
+            }
+
+            if ($search) {
+                $bookings->where(function ($query) use ($search) {
+                    $query->where('id', 'LIKE', '%' . $search . '%')
+                        ->orWhere('quantity', 'LIKE', '%' . $search . '%')
+                        ->orWhere('start_date', 'LIKE', '%' . $search . '%')
+                        ->orWhere('end_date', 'LIKE', '%' . $search . '%')
+                        ->orWhereHas('item', function ($query) use ($search) {
+                            $query->where('id', 'LIKE', '%' . $search . '%')
+                                ->orWhere('name', 'LIKE', '%' . $search . '%')
+                                ->orWhereHas('category', function ($query) use ($search) {
+                                    $query->where('name', 'LIKE', '%' . $search . '%');
+                                });
+                        });
+                });
             }
 
             $totalBookings = $bookings->count();
@@ -77,7 +100,7 @@ class BookingController extends Controller
             $bookings = $bookings->paginate($perPage);
             $bookings->appends(['status' => $status]);
     
-            return view('borrower.bookings.index', compact('bookings', 'totalBookings', 'totalItems'));
+            return view('borrower.bookings.index', compact('bookings', 'usages', 'totalBookings', 'totalItems'));
        
         } else {
             abort(403, 'Forbidden');
@@ -92,7 +115,13 @@ class BookingController extends Controller
                 abort(403, 'Forbidden');
             }
             return view('unitadmin.bookings.show', compact('booking'));
+            
         } elseif ($user->can('borrower')) {
+            // Ensure borrower only show their own booking
+            if ($booking->user_id !== $user->id) {
+                abort(403, 'Forbidden');
+            }
+
             return view('borrower.bookings.show', compact('booking'));
         } else {
             abort(403, 'Forbidden');
@@ -103,6 +132,10 @@ class BookingController extends Controller
     {
         $user = auth()->user();
         if($user->can('borrower')) {
+            // Ensure that borrower only create booking for item that is available
+            if ($item->status !== 'available') {
+                abort(403, 'Forbidden');
+            }
             return view('borrower.bookings.create', compact('item'));
         } else {
             abort(403, 'Forbidden');

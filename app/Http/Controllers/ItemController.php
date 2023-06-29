@@ -23,9 +23,24 @@ class ItemController extends Controller
                 ->update(['status' => 'empty']);
 
             $status = $request->query('status');
+            $search = $request->query('search');
 
             if ($status) {
                 $items->where('status', $status);
+            }
+
+            if ($search) {
+                $items->where(function ($query) use ($search) {
+                    $query->where('id', 'LIKE', '%' . $search . '%')
+                        ->orWhere('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('brand', 'LIKE', '%' . $search . '%')
+                        ->orWhere('serial_number', 'LIKE', '%' . $search . '%')
+                        ->orWhere('quantity', 'LIKE', '%' . $search . '%')
+                        ->orWhere('status', 'LIKE', '%' . $search . '%')
+                        ->orWhereHas('category', function ($query) use ($search) {
+                            $query->where('name', 'LIKE', '%' . $search . '%');
+                        });
+                });
             }
 
             $totalItems = $items->count();
@@ -33,7 +48,7 @@ class ItemController extends Controller
             $totalBrands = $items->pluck('brand')->unique()->count();
 
             $items = $items->paginate($perPage);
-            $items->appends(['status' => $status]);
+            $items->appends(['status' => $status, 'search' => $search]);
 
             return view('unitadmin.items.index', compact('items', 'status', 'totalItems', 'totalCategories', 'totalBrands'));
         }
@@ -43,6 +58,21 @@ class ItemController extends Controller
                 ->update(['status' => 'empty']);
 
             $items = Item::where('status', 'available');
+            $search = $request->query('search');
+
+            if ($search) {
+                $items->where(function ($query) use ($search) {
+                    $query->where('id', 'LIKE', '%' . $search . '%')
+                        ->orWhere('name', 'LIKE', '%' . $search . '%')
+                        ->orWhere('brand', 'LIKE', '%' . $search . '%')
+                        ->orWhere('serial_number', 'LIKE', '%' . $search . '%')
+                        ->orWhere('quantity', 'LIKE', '%' . $search . '%')
+                        ->orWhere('status', 'LIKE', '%' . $search . '%')
+                        ->orWhereHas('category', function ($query) use ($search) {
+                            $query->where('name', 'LIKE', '%' . $search . '%');
+                        });
+                });
+            }
 
             $totalItems = $items->count();
             $totalCategories = $items->pluck('category_id')->unique()->count();
@@ -75,9 +105,14 @@ class ItemController extends Controller
                 abort(403, 'Forbidden');
             }
             return view('unitadmin.items.show', compact('item'));
+
         } elseif($user->can('borrower')){
+            // Ensure borrower only see available items
+            if ($item->status !== 'available') {
+                abort(403, 'Forbidden');
+            }
             return view('borrower.items.show', compact('item'));
-        }else {
+        } else {
             abort(403, 'Forbidden');
         }
     }
@@ -130,7 +165,12 @@ class ItemController extends Controller
 
     public function edit(Item $item)
     {
+        $user = auth()->user();
         $categories = Category::all();
+        $unitId = $user->unit_id;
+            if ($item->unit_id !== $unitId) {
+                abort(403, 'Forbidden');
+            }
         return view('unitadmin.items.edit', compact('item', 'categories'));
     }
 

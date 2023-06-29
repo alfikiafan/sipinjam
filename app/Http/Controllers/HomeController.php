@@ -19,7 +19,7 @@ class HomeController extends Controller
     $user = auth()->user();
     
     if ($user->can('administrator')) {
-        // Implementasi untuk peran 'administrator'
+
         // total category
         $totalCategories = Category::from('categories')->count();
 
@@ -30,8 +30,9 @@ class HomeController extends Controller
         $totalUnits = Unit::from('units')->count();
 
         // total bookings bulan ini
-        $currentMonth = now()->format('m');
-        $currentMonthBookings = Booking::whereMonth('created_at', $currentMonth)->count();
+        $firstCurrentMonthDate = Carbon::now()->startOfMonth();
+        $currentMonthBookings = Booking::where('created_at', '>=', $firstCurrentMonthDate)
+            ->count();
 
         // total items
         $totalAllItems = Item::from('items')->count();
@@ -45,9 +46,8 @@ class HomeController extends Controller
         for ($i = 11; $i >= 0; $i--) {
             $date = clone $currentDate;
             $date->subMonths($i)->startOfMonth();
-            $count = Booking::whereYear('created_at', $date->year)
+            $count = Usage::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
-                ->where('status', 'approved')
                 ->count();
             $dataBookingsApproved[] = $count;
         }
@@ -73,7 +73,6 @@ class HomeController extends Controller
             $date->subMonths($i)->startOfMonth();
             $count = Booking::whereYear('created_at', $date->year)
                 ->whereMonth('created_at', $date->month)
-                ->where('status', 'pending')
                 ->count();
             $dataBookingsRequest[] = $count;
         }
@@ -204,6 +203,25 @@ class HomeController extends Controller
                 ->count();
             $approvedBookingsData[] = $count;
         }
+
+        // Mendapatkan data usages returned dari 12 bulan terakhir
+        $usagesReturnedData = [];
+        $currentDate = now();
+        for ($i = 11; $i >= 0; $i--) {
+            $date = clone $currentDate;
+            $date->subMonths($i)->startOfMonth();
+            $count = Usage::whereYear('created_at', $date->year)
+                ->whereMonth('created_at', $date->month)
+                ->whereHas('booking', function ($query) use ($unitId) {
+                    $query->whereHas('item', function ($query) use ($unitId) {
+                        $query->where('unit_id', $unitId);
+                    });
+                })
+                ->where('status', 'returned')
+                ->count();
+            $usagesReturnedData[] = $count;
+        }
+
             return view('unitadmin.dashboard', compact(
                 'totalItems',
                 'itemsAvailable',
@@ -216,6 +234,7 @@ class HomeController extends Controller
                 'bookings',
                 'bookingRequestsData',
                 'approvedBookingsData',
+                'usagesReturnedData',
                 'activeUsages',
                 'lateUsages',
             ));

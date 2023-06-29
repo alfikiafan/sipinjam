@@ -57,30 +57,24 @@
             <strong>Unit: {{ $unit }}</strong>
         </p>
         <p class="center-align mt-0">
-            <strong>Location: {{ $unitLocation }}</strong>
+            <strong>{{ $unitLocation }}</strong>
         </p>
         <hr>
         <p class="center-align blue-heading text-bold mb-0">
             ITEM LOAN AUTHORIZATION
         </p>
-        <p class="center-align mt-0">
-            <strong>Usage ID: {{ $usageId }}</strong>
+        <p class="center-align">
+            <strong>No: {{ $bookId }}-{{ $usageId }}</strong>
         </p>
         <p>
             The admin unit has approved the borrower on behalf of:
         </p>
         <ul class="list-items">
             <li>
-                <strong>Borrower:</strong> {{ $name }}
-            </li>
-            <li>
                 <strong>Name:</strong> {{ $name }}
             </li>
             <li>
-                <strong>User ID:</strong> {{ $id }}
-            </li>
-            <li>
-                <strong>email:</strong> {{ $email }}
+                <strong>Email:</strong> {{ $email }}
             </li>
             <li>
                 <strong>Phone number:</strong> {{ $phone }}
@@ -94,13 +88,7 @@
                 <strong>Name:</strong> {{ $itemName }}
             </li>
             <li>
-                <strong>Item ID:</strong> {{ $itemId }}
-            </li>
-            <li>
-                <strong>Booking ID:</strong> {{ $bookId }}
-            </li>
-            <li>
-                <strong>Borrowed amount:</strong> {{ $quantity }}
+                <strong>Amount:</strong> {{ $quantity }}
             </li>
             <li>
                 <strong>Start date:</strong> {{ $startDate }}

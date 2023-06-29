@@ -14,6 +14,14 @@
                 <h6 class="m-0 text-sm">Total units:</h6>
                 <p class="d-inline-block me-2 text-sm">{{ $totalUnits }}</p>
             </div>
+            <div class="form-group mb-3">
+                <form action="{{ route('units.index') }}" method="GET">
+                    <div class="input-group">
+                        <button class="input-group-text search-icon" type="submit"><i class="fas fa-search"></i></button>
+                        <input class="form-control px-2" name="search" placeholder="Search" type="text" value="{{ request('search') }}">
+                    </div>
+                </form>
+            </div>
             <div class="ml-auto p-0">
                 <a href="{{ route('units.create') }}" class="btn bg-gradient-primary">Add Unit</a>
             </div>
@@ -85,7 +93,7 @@
         </div>
     </div>
 </div>
-<div class="pagination-wrapper">
+<div class="mb-4">
   <ul class="pagination pagination-info justify-content-center">
     <li class="page-item">
         <a class="page-link" href="{{ $units->previousPageUrl() }}" aria-label="Previous">
