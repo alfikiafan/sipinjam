@@ -28,33 +28,39 @@
           @endif
           <p><strong>Category:</strong><br>{{ $booking->item->category->name }}</p>
           <p><strong>Quantity:</strong><br>{{ $booking->quantity }}</p>
-          <p><strong>Admin Unit:</strong><br>
-            <span>
-              @php
-                  $usage = App\Models\Usage::where('booking_id', $booking->id)->first();
-                  $user = App\Models\User::find($booking->user_id);
-              @endphp
-              @if ($user)
-                  {{ $user->name }}
-              @endif
-          </span>
-          </p>
         </div>
         <div class="col-md-4">
-          <p><strong>Created At:</strong><br>{{ $booking->created_at }}</p>
-          <p><strong>Start Date:</strong><br>{{ $booking->start_date }}</p>
-          <p><strong>End Date:</strong><br>{{ $booking->end_date }}</p>
-          <p><strong>Due Date:</strong><br>
+          <p><strong>Booked at:</strong><br>{{ $booking->created_at }}</p>
+          <p><strong>Start date:</strong><br>{{ $booking->start_date }}</p>
+          <p><strong>End date:</strong><br>{{ $booking->end_date }}</p>
+          @if ($booking->usage)
+          <p><strong>Due date:</strong><br>
             <span>
-                @php
-                    $usage = App\Models\Usage::where('booking_id', $booking->id)->first();
-                @endphp
-                @if ($usage)
-                    {{ $usage->due_date }}
-                @endif
+                {{ $booking->usage->due_date }}
             </span>
-        </p>
+          </p>
+          @endif
         </div>
+      </div>
+      <hr>
+      <div class="row gx-4">
+        <p class="text-dark"><strong>Responsible unit admin(s):</strong></p>
+        @foreach ($unitAdmins as $admin)
+        <div class="col-md-4 mb-4 pe-4">
+          <div class="row-auto">
+            <div class="avatar avatar-xl position-relative">
+              <img src="{{ asset($admin->photo) }}" alt="..." class="w-100 border-radius-lg shadow-sm image-hover">
+            </div>
+          </div>
+          <div class="row-auto my-auto">
+            <div class="h-100 me-3">
+              <p class="mb-1"><strong>{{ $admin->name }}</strong></p>
+              <p class="mb-0 text-sm">{{ $admin->email }}</p>
+              <p class="mb-0 text-sm">{{ $admin->phone }}</p>
+            </div>
+          </div>
+        </div>
+        @endforeach
       </div>
       <hr>
       <div class="col-md-6 mt-4">

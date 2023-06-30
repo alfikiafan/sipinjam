@@ -50,7 +50,9 @@
             <th class="text-xxs font-weight-bolder px-2">Status</th>
             <th class="text-xxs font-weight-bolder px-2">Start Date</th>
             <th class="text-xxs font-weight-bolder px-2">End Date</th>
+            @if ($status === 'approved' || $status === null)
             <th class="text-xxs font-weight-bolder px-2">Due Date</th>
+            @endif
             <th class="text-xxs font-weight-bolder px-2">Actions</th>
           </tr>
         </thead>
@@ -93,6 +95,7 @@
               <td class="align-middle">
                   <span class="text-xs font-weight-bold">{{ $booking->end_date }}</span>
               </td>
+              @if ($status === 'approved' || $status === null)
               <td class="align-middle">
                   <span class="text-xs font-weight-bold">
                   @if ($booking->usage)
@@ -100,6 +103,7 @@
                   @endif
                   </span>
               </td>
+              @endif
               <td>
                   <div class="d-flex align-items-center">
                   <a href="{{ route('bookings.show', ['booking' => $booking->id]) }}" class="me-2">

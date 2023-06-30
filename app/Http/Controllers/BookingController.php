@@ -6,6 +6,7 @@ use App\Models\Booking;
 use App\Models\Unit;
 use App\Models\Item;
 use App\Models\Usage;
+use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use Carbon\Carbon;
@@ -117,12 +118,15 @@ class BookingController extends Controller
             return view('unitadmin.bookings.show', compact('booking'));
             
         } elseif ($user->can('borrower')) {
-            // Ensure borrower only show their own booking
+
             if ($booking->user_id !== $user->id) {
                 abort(403, 'Forbidden');
             }
 
-            return view('borrower.bookings.show', compact('booking'));
+            $unitId = $booking->item->unit_id;
+            $unitAdmins = User::where('unit_id', $unitId)->where('role', 'unitadmin')->get();
+
+            return view('borrower.bookings.show', compact('booking', 'unitAdmins'));
         } else {
             abort(403, 'Forbidden');
         }
