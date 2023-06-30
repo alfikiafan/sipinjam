@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Item;
-use Illuminate\Http\Request;
 use App\Models\Category;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
 class ItemController extends Controller
@@ -107,11 +108,15 @@ class ItemController extends Controller
             return view('unitadmin.items.show', compact('item'));
 
         } elseif($user->can('borrower')){
-            // Ensure borrower only see available items
+
             if ($item->status !== 'available') {
                 abort(403, 'Forbidden');
             }
-            return view('borrower.items.show', compact('item'));
+
+            $unitId = $item->unit_id;
+            $unitAdmins = User::where('unit_id', $unitId)->where('role', 'unitadmin')->get();
+
+            return view('borrower.items.show', compact('item', 'unitAdmins'));
         } else {
             abort(403, 'Forbidden');
         }

@@ -63,11 +63,16 @@ class ApprovalController extends Controller
             ]);
         
             $item = $booking->item;
-            
             $item->quantity -= $booking->quantity;
+
             if ($item->quantity == 0) {
                 $item->status = 'empty';
             }
+
+            if ($item->quantity < 0) {
+                return redirect()->route('bookings.index')->with('error', 'Not enough items in stock.');
+            }
+
             $item->save();
         
             if ($booking->save() && $usage->save()) {
@@ -75,6 +80,7 @@ class ApprovalController extends Controller
             } else {
                 return redirect()->route('bookings.index')->with('error', 'Failed to approve booking.');
             }
+            
         } else {
             abort(403, 'Forbidden');
         }

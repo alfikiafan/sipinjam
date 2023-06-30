@@ -18,23 +18,34 @@
       <div class="col-md-4">
         <p><strong>Status:</strong><br>
           <span class="badge bg-primary badge-sm">{{ $item->status }}</span>
-          <p><strong>Category:</strong><br>{{ $item->category->name }}</p>
-          <p><strong>Quantity:</strong><br>{{ $item->quantity }}</p>
-        </div>
-        <div class="col-md-4">
-          <p><strong>Created At:</strong><br>{{ $item->created_at }}</p>
         </p>
-        <p><strong>Admin Unit:</strong><br>
-            <span>
-              @php
-                  $user = App\Models\User::find($item->unit_id);
-              @endphp
-              @if ($user)
-                  {{ $user->name }}
-              @endif
-          </span>
-          </p>
+        <p><strong>Category:</strong><br>{{ $item->category->name }}</p>
+        <p><strong>Brand:</strong><br>{{ $item->brand }}</p>
+      </div>
+      <div class="col-md-4">
+        <p><strong>Serial number:</strong><br>{{ $item->serial_number }}</p>
+        <p><strong>Unit:</strong><br>{{ $item->unit->name }}</p>
+        <p><strong>Amount available:</strong><br>{{ $item->quantity }}</p>
+      </div>
+      <hr>
+      <div class="row gx-4">
+        <p class="text-dark"><strong>Responsible unit admin(s):</strong></p>
+        @foreach ($unitAdmins as $admin)
+        <div class="col-md-4 mb-4 pe-4">
+          <div class="row-auto">
+            <div class="avatar avatar-xl position-relative">
+              <img src="{{ asset($admin->photo) }}" alt="..." class="w-100 border-radius-lg shadow-sm image-hover">
+            </div>
+          </div>
+          <div class="row-auto my-auto">
+            <div class="h-100 me-3">
+              <p class="mb-1"><strong>{{ $admin->name }}</strong></p>
+              <p class="mb-0 text-sm">{{ $admin->email }}</p>
+              <p class="mb-0 text-sm">{{ $admin->phone }}</p>
+            </div>
+          </div>
         </div>
+        @endforeach
       </div>
       <hr>
       <div class="col-md-6 mt-4">
