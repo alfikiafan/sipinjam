@@ -24,6 +24,15 @@
             <span class="d-sm-inline d-none text-muted">({{ Auth::user()->role }})</span>
           </a>
         </li>
+        <li class="nav-item d-xl-none d-flex align-items-center pe-3">
+          <a href="javascript:;" class="nav-link text-body p-0" id="iconNavbarSidenav">
+            <div class="sidenav-toggler-inner">
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+              <i class="sidenav-toggler-line"></i>
+            </div>
+          </a>
+        </li>
         <li class="nav-item d-flex align-items-center">
           <form class="mb-0" action="{{ route('logout') }}" method="POST" style="display: inline;">
             @csrf

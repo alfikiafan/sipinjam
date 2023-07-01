@@ -1,9 +1,9 @@
-<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl my-3 fixed-start ms-3 bg-gradient-primary" id="sidenav-main">
+<aside class="sidenav navbar navbar-vertical navbar-expand-xs border-0 border-radius-xl fixed-start bg-gradient-primary" id="sidenav-main">
   <div class="sidenav-header">
     <i class="fas fa-times p-3 cursor-pointer text-secondary opacity-5 position-absolute end-0 top-0 d-none d-xl-none" aria-hidden="true" id="iconSidenav"></i>
     <a class="align-items-center d-flex m-0 navbar-brand text-wrap" href="{{ route('dashboard.index') }}">
-      <img src="{{ asset('assets/img/logo-ct-dark.png') }}" class="navbar-brand-img h-100" alt="...">
-      <span class="ms-3 font-weight-bold text-white">Sipinjam</span>
+      <img src="{{ asset('assets/img/sipinjam.png') }}" class="navbar-brand-img h-100 invert" alt="...">
+      <span class="ms-3 font-weight-bold text-white font brand-text">Sipinjam</span>
     </a>
   </div>
   <hr class="horizontal dark mt-0">
@@ -128,18 +128,18 @@
       @endcan
     </ul>
   </div>
-  <div class="sidenav-footer my-3 mx-3 ">
+  <div class="sidenav-footer my-3 mx-3" id="documentation">
     <div class="card card-background shadow-none bg-gradient-dark" id="sidenavCard">
       <div class="card-body text-start p-3 w-100">
         <div class="icon icon-shape icon-sm bg-white shadow text-center mb-3 d-flex align-items-center justify-content-center border-radius-md">
           <i class="fas fa-gem text-dark text-gradient text-lg top-0" aria-hidden="true" id="sidenavCardIcon"></i>
         </div>
         <div class="docs-info">
-          <h6 class="text-white up mb-0">Need help?</h6>
+          <h6 class="text-white mb-0">Need help?</h6>
           <p class="text-xs font-weight-bold">Please check our docs</p>
-          <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard" target="_blank" class="btn btn-white btn-sm w-100 mb-0">Documentation</a>
+          <a href="https://www.creative-tim.com/learning-lab/bootstrap/license/soft-ui-dashboard" target="_blank" class="btn bg-gradient-light btn-sm w-100 mb-0 transform-none">Documentation</a>
         </div>
       </div>
     </div>
-  </aside>
+  </div>
 </aside>
