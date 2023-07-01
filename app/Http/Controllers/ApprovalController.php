@@ -97,7 +97,7 @@ class ApprovalController extends Controller
             $booking->status = 'rejected';
             $booking->save();
             
-            return redirect()->route('bookings.index');
+            return redirect()->route('bookings.index')->with('success', 'Booking has been rejected.');
         } else {
             abort(403, 'Forbidden');
         }
@@ -114,7 +114,7 @@ class ApprovalController extends Controller
             $booking->status = 'cancelled';
             $booking->save();
             
-            return redirect()->route('bookings.index');
+            return redirect()->route('bookings.index')->with('success', 'Your booking has been cancelled.');
         } else {
             abort(403, 'Forbidden');
         }

@@ -50,8 +50,31 @@
     display: none;
 }
 
-/* Underline text with primary color */
 .underline {
     text-decoration: underline !important;
     text-decoration-color: #cb0c9f;
+}
+
+.sidenav {
+    border-radius: 0 1rem 1rem 0;
+}
+
+.sidenav.fixed-start + .main-content {
+    margin-left: 15.125rem;
+}
+
+.invert {
+    filter: brightness(0) invert(1);
+}
+
+.navbar-brand img {
+    transform: scale(1.25);
+}
+
+.brand-text {
+    font-size: 1.25rem;
+}
+
+.transform-none {
+    text-transform: none;
 }
