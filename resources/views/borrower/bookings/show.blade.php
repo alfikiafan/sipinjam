@@ -64,7 +64,12 @@
       </div>
       <hr>
       <div class="col-md-6 mt-4">
-        <a href="" class="btn bg-gradient-info" id="backButton">Back</a>
+        <a href="" class="btn bg-gradient-info me-2" id="backButton">Back</a>
+        @if ($booking->status === 'pending')
+        <a href="{{ route('bookings.cancel', ['booking' => $booking->id]) }}" class="btn btn-danger" onclick="return confirm('Are you sure to cancel this booking?')">Cancel Booking</a>
+        @elseif ($booking->status === 'approved')
+        <a href="{{ route('bookings.approval', ['booking' => $booking->id]) }}" class="btn btn-success" target="_blank">Print Approval</a>
+        @endif
       </div>
     </div>
   </div>
