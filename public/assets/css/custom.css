@@ -75,11 +75,6 @@
     font-size: 1.25rem;
 }
 
-.sidenav-footer {
-    position: absolute;
-    bottom: 0;
-}
-
 .transform-none {
     text-transform: none;
 }

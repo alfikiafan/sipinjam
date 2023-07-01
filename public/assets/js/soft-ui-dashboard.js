@@ -637,7 +637,6 @@ if (document.querySelector('.sidenav-toggler')) {
 
 // Toggle Sidenav
 const iconNavbarSidenav = document.getElementById('iconNavbarSidenav');
-const documentation = document.getElementById('documentation');
 const iconSidenav = document.getElementById('iconSidenav');
 const sidenav = document.getElementById('sidenav-main');
 let body = document.getElementsByTagName('body')[0];
@@ -658,14 +657,12 @@ function toggleSidenav() {
       sidenav.classList.remove('bg-white');
     }, 100);
     sidenav.classList.remove('bg-transparent');
-    documentation.style.display = 'block';
 
   } else {
     body.classList.add(className);
     sidenav.classList.add('bg-white');
     sidenav.classList.remove('bg-transparent');
     iconSidenav.classList.remove('d-none');
-    documentation.style.display = 'none';
   }
 }
 
