@@ -1,5 +1,4 @@
 # SIPINJAM - Web-based Borrowing System
-[![License: CC-BY-SA](https://img.shields.io/badge/License-CC--BY--SA-blue.svg)](https://creativecommons.org/licenses/by-sa/4.0/)
 
 Sipinjam is a web-based borrowing system that allows users to manage the borrowing and usage of items within different units. It provides a convenient and efficient way to track item availability, submit booking requests, and manage item usages.
 
@@ -95,7 +94,7 @@ Sipinjam is a web-based borrowing system that allows users to manage the borrowi
 
 ## License
 
-This project is licensed under the [CC-BY-SA License](LICENSE).
+This project is licensed under the [Non-commercial License](LICENSE).
 
 ## Support
 
@@ -105,8 +104,10 @@ If you have any questions or need assistance, please open an issue in the [GitHu
 
 We would like to thank the following contributors for their valuable contributions to this project:
 
-- John Doe (@johndoe)
-- Jane Smith (@janesmith)
+- Alfiki Diastama Afan Firdaus (https://github.com/alfikiafan)
+- Dwi Sinta Anggraini (https://github.com/dwisintangrn)
+- Haqqi Setiadjie (https://github.com/HaqqiEky)
+- Farros Muhammad Iqbaal
 
 ## Credits
 
