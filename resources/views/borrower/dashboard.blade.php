@@ -90,7 +90,7 @@
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('bookings.index') }}">
-            <div class="card h-100 mt-3">
+            <div class="card h-75 mt-3">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -109,9 +109,21 @@
             </div>
         </a>
     </div>
+    <div class="col-xl-6 col-sm-6 mb-xl-0 mb-4">
+        <div class="card my-3 h-75 overflow-hidden"
+            style="background-image: url('{{ asset('assets/img/curved-images/curved14.jpg') }}');">
+            <span class="mask bg-gradient-dark"></span>
+            <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
+                <p class="card-text text-sm mb-2 text-white text-center">To make a booking for item(s), please click here and select from the list of available items.</p>
+                <div class="d-flex justify-content-center">
+                    <a href="{{ route('items.index') }}" class="btn bg-gradient-primary">Book Item</a>
+                </div>
+            </div>
+        </div>
+    </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('bookings.index', ['status' => 'cancelled']) }}">
-            <div class="card h-100 mt-3">
+            <div class="card h-75 mt-3">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -132,7 +144,7 @@
     </div>
 </div>
 
-<div class="row px-3 mt-5">
+<div class="row px-3">
     <div class="col-lg-6 mb-lg-0 mb-4">
         <div class="card h-100">
             <div class="card-body">
@@ -146,7 +158,7 @@
                             <span class="mask bg-gradient-dark"></span>
                             <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                 <h6 class="card-title text-white">Items</h6>
-                                <p class="card-text text-sm mb-2 text-white">List of all available items.</p>
+                                <p class="card-text text-sm mb-2 text-white">See all available items</p>
                                 <a href="{{ route('items.index') }}"
                                     class="text-primary font-weight-bold underline">See More</a>
                             </div>
