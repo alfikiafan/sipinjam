@@ -6,7 +6,7 @@
 <div class="row px-3">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('items.index') }}">
-            <div class="card h-100 mt-3">
+            <div class="card h-100">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -27,7 +27,7 @@
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('bookings.index', ['status' => 'rejected']) }}">
-            <div class="card h-100 mt-3">
+            <div class="card h-100">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -48,7 +48,7 @@
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('bookings.index', ['status' => 'approved']) }}">
-            <div class="card h-100 mt-3">
+            <div class="card h-100">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -69,7 +69,7 @@
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('bookings.index', ['status' => 'pending']) }}">
-            <div class="card h-100 mt-3">
+            <div class="card h-100">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -95,7 +95,7 @@
                     <div class="row">
                         <div class="col-8">
                             <div class="numbers">
-                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Total Your Booking</p>
+                                <p class="text-sm mb-0 text-capitalize font-weight-bold">Your Booking Total</p>
                                 <h5 class="font-weight-bolder mb-0">{{ $Bookings }}</h5>
                             </div>
                         </div>
@@ -146,7 +146,7 @@
                             <span class="mask bg-gradient-dark"></span>
                             <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                 <h6 class="card-title text-white">Items</h6>
-                                <p class="card-text text-sm mb-2 text-white">list of available items.</p>
+                                <p class="card-text text-sm mb-2 text-white">List of all available items.</p>
                                 <a href="{{ route('items.index') }}"
                                     class="text-primary font-weight-bold underline">See More</a>
                             </div>
@@ -156,7 +156,7 @@
                             <span class="mask bg-gradient-dark"></span>
                             <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                 <h6 class="card-title text-white">Bookings</h6>
-                                <p class="card-text text-sm mb-2 text-white">View your bookinks.</p>
+                                <p class="card-text text-sm mb-2 text-white">View your bookings.</p>
                                 <a href="{{ route('bookings.index') }}"
                                     class="text-primary font-weight-bold underline">See More</a>
                             </div>
@@ -179,8 +179,9 @@
 
     <div class="col-md-6">
         <div class="card h-100">
-            <h5 class="font-weight-bolder ps-3">Your Booking Reques</h5>
-
+            <div class="mx-2 mt-4 mb-0">
+                <h5 class="font-weight-bolder ps-3">Your Booking Request</h5>
+            </div>
             <div class="card-header pb-0">
                 <h6>Approved</h6>
             </div>

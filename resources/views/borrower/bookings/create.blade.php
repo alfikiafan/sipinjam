@@ -39,10 +39,10 @@
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
                 </div>  
-                <div class="col-md-4 pe-2">
-                    <p><strong>Unit:</strong><br>{{ $item->unit->name }}</p>
-                    <p><strong>Category:</strong><br>{{ $item->category->name }}</p>
-                    <p><strong>Brand:</strong><br>{{ $item->brand }}</p>
+                <div class="col-md-4 ps-4">
+                    <p class="text-dark"><strong>Unit:</strong><br>{{ $item->unit->name }}</p>
+                    <p class="text-dark"><strong>Category:</strong><br>{{ $item->category->name }}</p>
+                    <p class="text-dark"><strong>Brand:</strong><br>{{ $item->brand }}</p>
                 </div>
                 <div class="col-md-4">
                     <img src="{{ asset($item->photo) }}" alt="Item Photo" class="img-fluid rounded" style="max-height: 150px; width: auto;">
