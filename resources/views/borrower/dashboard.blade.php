@@ -6,7 +6,7 @@
 <div class="row px-3">
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('items.index') }}">
-            <div class="card h-100">
+            <div class="card h-100 mt-3">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
@@ -90,7 +90,7 @@
     </div>
     <div class="col-xl-3 col-sm-6 mb-xl-0 mb-4">
         <a href="{{ route('bookings.index') }}">
-            <div class="card h-100">
+            <div class="card h-100 mt-3">
                 <div class="card-body p-3">
                     <div class="row">
                         <div class="col-8">
