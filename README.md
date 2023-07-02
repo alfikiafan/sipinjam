@@ -108,7 +108,7 @@ We would like to thank the following contributors for their valuable contributio
 - John Doe (@johndoe)
 - Jane Smith (@janesmith)
 
-## 🙌 Credits
+## Credits
 
 Sipinjam is built using several resources and libraries, including:
 
