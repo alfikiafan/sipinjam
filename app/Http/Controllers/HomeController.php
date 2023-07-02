@@ -239,7 +239,72 @@ class HomeController extends Controller
                 'lateUsages',
             ));
         } elseif ($user->can('borrower')) {
-            return view('borrower.dashboard', compact('user'));
+            $Borrower = $user->id;
+            
+            // Menghitung item yang tersedia
+            $itemsAvailable = Item::where('status', 'available')->count();
+
+            // Menghitung total booking yang dimiliki oleh user
+            $Bookings = Booking::where('user_id', $Borrower)->count();
+            
+            // Menghitung booking yang masih dalam status 'pending'
+            $all_pendingBookings = Booking::where('status', 'pending')
+                ->where('user_id', $Borrower)
+                ->count();
+            
+            // Menghitung booking yang masih dalam status 'approved'
+            $all_approvedBookings = Booking::where('status', 'approved')
+                ->where('user_id', $Borrower)
+                ->count();
+            
+            // Menghitung booking yang masih dalam status 'rejected'
+            $all_rejectedBookings = Booking::where('status', 'rejected')
+                ->where('user_id', $Borrower)
+                ->count();
+            
+            // Menghitung booking yang masih dalam status 'cancelled'
+            $all_cancelledBookings = Booking::where('status', 'cancelled')
+                ->where('user_id', $Borrower)
+                ->count();
+            
+            // Mengambil daftar booking yang masih dalam status 'approved'
+            $approvedBookings = Booking::with(['item', 'item.unit', 'item.category'])
+                ->where('user_id', $Borrower)
+                ->where('status', 'approved')
+                ->get();
+                
+
+            // Mengambil daftar booking yang masih dalam status 'pending'
+            $pendingBookings = Booking::with(['item', 'item.unit', 'item.category'])
+                ->where('user_id', $Borrower)
+                ->where('status', 'pending')
+                ->get();
+            
+            // Mengambil daftar booking yang masih dalam status 'cancelled'
+            $cancelledBookings = Booking::with(['item', 'item.unit', 'item.category'])
+                ->where('user_id', $Borrower)
+                ->where('status', 'cancelled')
+                ->get();
+
+            // Mengambil daftar booking yang masih dalam status 'rejected'
+            $rejectedBookings = Booking::with(['item', 'item.unit', 'item.category'])
+                ->where('user_id', $Borrower)
+                ->where('status', 'rejected')
+                ->get();
+
+
+            return view('borrower.dashboard', compact(
+                'itemsAvailable',
+                'Bookings',
+                'all_approvedBookings',
+                'all_pendingBookings',
+                'all_rejectedBookings',
+                'all_cancelledBookings',
+                'approvedBookings',
+                'pendingBookings',
+                'rejectedBookings',
+                'cancelledBookings',
+            ));
 
         } else {
             abort(403, 'Forbidden');
