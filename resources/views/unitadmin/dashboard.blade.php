@@ -236,8 +236,8 @@
                                         alt="item-image"></i>
                             </span>
                             <div class="timeline-content">
-                                <h6 class="text-dark text-sm mb-0">{{ $booking->user->name }}, <span class="text-secondary">{{ $booking->user->email }}</span></h6>
-                                <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $booking->item->name }}</span>, <span class="text-secondary">{{ $booking->created_at }}</span></p>
+                                <h6 class="text-dark text-sm mb-0">{{ $booking->user->name }} | <span class="text-secondary">{{ $booking->user->email }}</span></h6>
+                                <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $booking->item->name }}</span> | <span class="text-secondary">{{ $booking->created_at }}</span></p>
                             </div>
                         </div>
                     </a>
@@ -282,8 +282,8 @@
                                         alt="item-image"></i>
                             </span>
                             <div class="timeline-content">
-                                <h6 class="text-dark text-sm mb-0">{{ $activeUsage->booking->user->name }}, <span class="text-secondary">{{ $activeUsage->booking->user->email }}</span></h6>
-                                <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $activeUsage->booking->item->name }}</span>, <span class="text-secondary">{{ $activeUsage->booking->start_date }}</span></p>
+                                <h6 class="text-dark text-sm mb-0">{{ $activeUsage->booking->user->name }} | <span class="text-secondary">{{ $activeUsage->booking->user->email }}</span></h6>
+                                <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $activeUsage->booking->item->name }}</span> | <span class="text-secondary">{{ $activeUsage->booking->start_date }}</span></p>
                             </div>
                         </div>
                     </a>
@@ -310,8 +310,8 @@
                                     alt="item-image"></i>
                             </span>
                             <div class="timeline-content">
-                                <h6 class="text-dark text-sm mb-0">{{ $lateUsage->booking->user->name }}, <span class="text-secondary">{{ $lateUsage->booking->user->email }}</span></h6>
-                                <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $lateUsage->booking->item->name }}</span>, <span class="text-secondary">{{ $lateUsage->booking->start_date }}</span></p>
+                                <h6 class="text-dark text-sm mb-0">{{ $lateUsage->booking->user->name }} | <span class="text-secondary">{{ $lateUsage->booking->user->email }}</span></h6>
+                                <p class="text-sm mt-1 mb-0"><span class="text-dark">{{ $lateUsage->booking->item->name }}</span> | <span class="text-secondary">{{ $lateUsage->booking->start_date }}</span></p>
                             </div>
                         </div>
                     </a>

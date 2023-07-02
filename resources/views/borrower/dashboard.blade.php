@@ -139,7 +139,7 @@
                 <div class="row">
                     <div class="d-flex flex-column h-100">
                         <h5 class="font-weight-bolder ps-3">Welcome,</h5>
-                        <p class="mb-1 ps-3 text-sm">You are logged in as Unit Admin</p>
+                        <p class="mb-1 ps-3 text-sm">You are logged in as Borrower</p>
                         <p class="mb-1 ps-3 text-sm">Choose a menu below to get started:</p>
                         <div class="card my-3 overflow-hidden"
                             style="background-image: url('{{ asset('assets/img/curved-images/curved14.jpg') }}');">
@@ -179,11 +179,11 @@
 
     <div class="col-md-6">
         <div class="card h-100">
-            <div class="card-header pb-0">
-                <h6>Your Bookings Request</h6>
-            </div>
+            <h5 class="font-weight-bolder ps-3">Your Booking Reques</h5>
 
-            <p class="mb-1 ps-3 text-sm">approved</p>
+            <div class="card-header pb-0">
+                <h6>Approved</h6>
+            </div>
             <div class="card-body">
                 <div class="timeline timeline-one-side">
                     @php
@@ -206,7 +206,9 @@
                 </div> 
             </div>
 
-            <p class="mb-1 ps-3 text-sm">pending</p>
+            <div class="card-header pb-0">
+                <h6>Pending</h6>
+            </div>
             <div class="card-body">
                 <div class="timeline timeline-one-side">
                     @php
@@ -235,11 +237,13 @@
 <div class="row px-3 my-4">
     <div class="col-md-6">
         <div class="card h-100">
-            <p class="mb-1 ps-3 text-sm">approved</p>
+            <div class="card-header pb-0">
+                <h6>Cancelled</h6>
+            </div>
             <div class="card-body">
                 <div class="timeline timeline-one-side">
                     @php
-                        $sortedBookings = $approvedBookings->sortByDesc('created_at')->take(2);;
+                        $sortedBookings = $cancelledBookings->sortByDesc('created_at')->take(2);;
                     @endphp
                     @foreach ($sortedBookings as $booking)
                         <a href="{{ route('bookings.show', ['booking' => $booking->id]) }}">
@@ -261,11 +265,13 @@
     </div>
     <div class="col-md-6">
         <div class="card h-100">
-        <p class="mb-1 ps-3 text-sm">pending</p>
+            <div class="card-header pb-0">
+                <h6>Rejected</h6>
+            </div>  
             <div class="card-body">
                 <div class="timeline timeline-one-side">
                     @php
-                        $sortedBookings = $pendingBookings->sortByDesc('created_at')->take(2);;
+                        $sortedBookings = $rejectedBookings->sortByDesc('created_at')->take(2);;
                     @endphp
                     @foreach ($sortedBookings as $booking)
                         <a href="{{ route('bookings.show', ['booking' => $booking->id]) }}">
