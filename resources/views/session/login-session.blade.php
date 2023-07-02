@@ -14,7 +14,7 @@
       <div class="col-xl-4 col-lg-5 col-md-6 d-flex flex-column mx-auto">
         <div class="card card-plain mt-8">
           <div class="card-header pb-0 text-left bg-transparent">
-            <h3 class="font-weight-bolder text-info text-gradient">Masuk</h3>
+            <h3 class="font-weight-bolder text-info text-gradient">Login</h3>
           </div>
           <div class="card-body">
             <form role="form" method="POST" action="/login">
@@ -35,17 +35,17 @@
               </div>
               <div class="form-check form-switch">
                 <input class="form-check-input" name="rememberMe" type="checkbox" id="rememberMe" checked="">
-                <label class="form-check-label" for="rememberMe">Ingat Saya</label>
+                <label class="form-check-label" for="rememberMe">Remember Me</label>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Masuk</button>
+                <button type="submit" class="btn bg-gradient-info w-100 mt-4 mb-0">Login</button>
               </div>
             </form>
           </div>
           <div class="card-footer text-center pt-0 px-lg-2 px-1">
             <p class="mb-4 text-sm mx-auto">
-              Tidak punya akun?
-              <a href="register" class="text-info text-gradient font-weight-bold">Daftar</a>
+              Don't Have an Account?
+              <a href="register" class="text-info text-gradient font-weight-bold">Regiter Here</a>
             </p>
           </div>
         </div>
