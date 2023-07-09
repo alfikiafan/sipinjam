@@ -66,13 +66,24 @@ Sipinjam is a web-based borrowing system that allows users to manage the borrowi
    DB_PASSWORD=your_password
    ```
 
-7. Run the database migrations:
+7. **Activate GD and Fileinfo Extensions**:
+   - Open your `php.ini` file in your php directory.
+   - Uncomment the lines for the GD extension and the Fileinfo extension by removing the semicolon (;) at the beginning of the lines.
+     ```ini
+     extension=gd
+     extension=fileinfo
+     ```
+   - Save the changes to the `php.ini` file.
+   - This step is used to enable base64 in print-approval pdf.
+   - Restart your web server to apply the changes.
+
+8. Run the database migrations:
 
    ```
    php artisan migrate
    ```
 
-8. Add an administrator account to the database:
+9. Add an administrator account to the database:
 
     Open a MySQL client, such as phpMyAdmin or MySQL Workbench.
 
@@ -84,13 +95,13 @@ Sipinjam is a web-based borrowing system that allows users to manage the borrowi
     INSERT INTO users (name, email, password, role) VALUES ('Admin', 'admin@example.com', 'your_password_hash', 'administrator');
     ```
     Replace 'your_password_hash' with the hashed password for the administrator account. You can generate a password hash using Laravel's bcrypt    function or a tool like bcrypt-generator.com.
-9. Start the development server:
+10. Start the development server:
 
    ```
    php artisan serve
    ```
 
-9. Access the application in your web browser at `http://127.0.0.1:8000/`.
+11. Access the application in your web browser at `http://127.0.0.1:8000/`.
 
 ## License
 
