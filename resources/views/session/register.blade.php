@@ -51,7 +51,7 @@
                 <div class="form-check form-check-info text-left">
                   <input class="form-check-input" type="checkbox" name="agreement" id="flexCheckDefault" checked>
                   <label class="form-check-label" for="flexCheckDefault">
-                   I agree with the <a href="javascript:;" class="text-dark font-weight-bolder">Terms and Conditions</a>
+                    I agree with the <a href="javascript:;" class="text-dark font-weight-bolder" data-bs-toggle="modal" data-bs-target="#terms-and-conditions">Terms and Conditions</a>
                   </label>
                   @error('agreement')
                     <p class="text-danger text-xs mt-2">You must agree to the Terms and Conditions in order to register.</p>
