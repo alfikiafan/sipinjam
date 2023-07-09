@@ -666,6 +666,7 @@ function toggleSidenav() {
   }
 }
 
+
 // Resize navbar color depends on configurator active type of sidenav
 
 let referenceButtons = document.querySelector('[data-class]');
@@ -675,7 +676,7 @@ window.addEventListener("resize", navbarColorOnResize);
 function navbarColorOnResize() {
   if (sidenav) {
     if (window.innerWidth > 1200) {
-      if (referenceButtons) {
+      if (referenceButtons.classList.contains('active') && referenceButtons.getAttribute('data-class') === 'bg-transparent') {
         sidenav.classList.remove('bg-white');
       } else {
         sidenav.classList.add('bg-white');
