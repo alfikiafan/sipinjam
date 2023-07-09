@@ -44,8 +44,8 @@
           </div>
           <div class="card-footer text-center pt-0 px-lg-2 px-1">
             <p class="mb-4 text-sm mx-auto">
-              Don't Have an Account?
-              <a href="register" class="text-info text-gradient font-weight-bold">Regiter Here</a>
+              Don't have an account?
+              <a href="register" class="text-info text-gradient font-weight-bold">Register</a>
             </p>
           </div>
         </div>
