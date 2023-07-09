@@ -314,6 +314,7 @@ select:disabled {
 [type="submit"],
 button {
     -webkit-appearance: button;
+    appearance: button;
 }
 [type="button"]:not(:disabled),
 [type="reset"]:not(:disabled),
@@ -364,6 +365,7 @@ legend + * {
 }
 [type="search"] {
     -webkit-appearance: textfield;
+    appearance: textfield;
     outline-offset: -2px;
 }
 ::-webkit-search-decoration {
@@ -2387,7 +2389,8 @@ textarea.form-control-sm {
     margin-left: -1.73em;
 }
 .form-check-input {
-    color-adjust: exact;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
     background-color: #fff;
     background-position: 50%;
     background-repeat: no-repeat;
@@ -18504,6 +18507,7 @@ p {
     border: 0;
     border-radius: 5px;
     -webkit-box-shadow: 0 8px 26px -4px hsla(0, 0%, 8%, 0.15), 0 8px 9px -5px hsla(0, 0%, 8%, 0.06);
+    box-shadow: 0 8px 26px -4px hsla(0, 0%, 8%, 0.15), 0 8px 9px -5px hsla(0, 0%, 8%, 0.06);
     box-sizing: border-box;
     direction: ltr;
     display: none;
@@ -19357,13 +19361,14 @@ span.flatpickr-weekday {
     cursor: ns-resize;
 }
 .noUi-handle {
-    webkit-transition: 0.3s ease 0s;
+    transition: 0.3s ease 0s;
     background: #fff;
     border: 1px solid #d9d9d9;
     border-radius: 3px;
     box-shadow: inset 0 0 1px #fff, inset 0 1px 7px #ebebeb, 0 3px 6px -3px #bbb;
     cursor: default;
     -o-transform: 0.3s ease 0s;
+    transform: 0.3s ease 0s;
     -moz-transition: 0.3s ease 0s;
     -ms-transition: 0.3s ease 0s;
     transition: 0.3s ease 0s;

@@ -141,7 +141,7 @@
                             <p class="mb-1 ps-3 text-sm">You are logged in as Administrator</p>
                             <p class="mb-1 ps-3 text-sm">Choose a menu below to get started:</p>
                             <div class="card my-3 overflow-hidden"
-                                style="background-image: url('{{ asset('assets/img/curved-images/curved14.jpg') }}');">
+                                style="background-image: url('{{ asset('assets/img/curved2.jpg') }}');">
                                 <span class="mask bg-gradient-dark"></span>
                                 <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                     <h6 class="card-title text-white">Categories</h6>
@@ -151,7 +151,7 @@
                                 </div>
                             </div>
                             <div class="card mb-3 overflow-hidden"
-                                style="background-image: url('{{ asset('assets/img/curved-images/curved14.jpg') }}');">
+                                style="background-image: url('{{ asset('assets/img/curved2.jpg') }}');">
                                 <span class="mask bg-gradient-dark"></span>
                                 <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                     <h6 class="card-title text-white">Unit Admin</h6>
@@ -161,7 +161,7 @@
                                 </div>
                             </div>
                             <div class="card mb-3 overflow-hidden"
-                                style="background-image: url('{{ asset('assets/img/curved-images/curved14.jpg') }}');">
+                                style="background-image: url('{{ asset('assets/img/curved2.jpg') }}');">
                                 <span class="mask bg-gradient-dark"></span>
                                 <div class="card-body overflow-hidden position-relative border-radius-xl p-3">
                                     <h6 class="card-title text-white">Unit</h6>
