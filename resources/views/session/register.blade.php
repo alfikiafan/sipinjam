@@ -8,8 +8,8 @@
       <div class="container">
         <div class="row justify-content-center">
           <div class="col-lg-5 text-center mx-auto">
-            <h1 class="text-white mb-2 mt-5">Sipinjam</h1>
-            <p class="text-lead text-white">Create an account for a simple and safe way to apply for borrowing items online</p>
+            <h1 class="text-white mb-2 mt-5" id="register-heading">Sipinjam</h1>
+            <p class="text-lead text-white" id="register-description">Create an account for a simple and safe way to apply for borrowing items online</p>
           </div>
         </div>
       </div>
@@ -116,9 +116,9 @@
                 </div>
               </div>
               <div class="text-center">
-                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Daftar</button>
+                <button type="submit" class="btn bg-gradient-dark w-100 my-4 mb-2">Register</button>
               </div>
-              <p class="text-sm mt-3 mb-0">Sudah punya akun? <a href="login" class="text-dark font-weight-bolder">Masuk</a></p>
+              <p class="text-sm mt-3 mb-0">Already have an account? <a href="login" class="text-dark font-weight-bolder">Login</a></p>
             </form>
           </div>
         </div>

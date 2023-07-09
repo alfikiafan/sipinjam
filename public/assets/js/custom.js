@@ -1,4 +1,8 @@
 document.addEventListener("DOMContentLoaded", function() {
+    const guestNavbar = document.getElementById('guest-navbar');
+    const modal = document.getElementById('terms-and-conditions');
+    const registerHeading = document.getElementById('register-heading');
+    const registerDescription = document.getElementById('register-description');
     const aboutMe = document.getElementById('about_me');
     const note = document.getElementById("note");
     const description = document.getElementById("description");
@@ -67,6 +71,26 @@ document.addEventListener("DOMContentLoaded", function() {
             if (confirmation) {
                 window.location.href = rejectButton.href;
             }
+        });
+    }
+
+    if (modal && guestNavbar && registerHeading && registerDescription) {
+        modal.addEventListener('show.bs.modal', function () {
+            guestNavbar.style.display = 'none';
+        });
+        
+        modal.addEventListener('hide.bs.modal', function () {
+            guestNavbar.style.display = 'block';
+        });
+
+        modal.addEventListener('show.bs.modal', function () {
+            registerHeading.classList.add('d-none');
+            registerDescription.classList.add('d-none');
+        });
+        
+        modal.addEventListener('hide.bs.modal', function () {
+            registerHeading.classList.remove('d-none');
+            registerDescription.classList.remove('d-none');
         });
     }
 });
