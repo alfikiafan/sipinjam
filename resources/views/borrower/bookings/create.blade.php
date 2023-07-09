@@ -12,24 +12,8 @@
         <form action="{{ route('bookings.store') }}" method="POST">
             @csrf
             <div class="row">
-                <div class="col-md-6">
-                    <input type="hidden" name="item_id" value="{{ $item->id }}">
-                    
-                    <div class="form-group">
-                        <label for="item">Item</label>
-                        <input type="text" class="form-control" id="item" value="{{ $item->name }}" readonly>
-                    </div>
-                    @error('item')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
-                    
-                    <div class="form-group">
-                        <label for="unit">Unit</label>
-                        <input type="text" class="form-control" id="unit" value="{{ $item->Unit->name }}" readonly>
-                    </div>
-                    @error('unit')
-                        <div class="invalid-feedback">{{ $message }}</div>
-                    @enderror
+                <div class="col-md-4">
+                <input type="hidden" name="item_id" value="{{ $item->id }}">
                     
                     <div class="form-group">
                         <label for="quantity">Quantity</label>
@@ -38,8 +22,7 @@
                     @error('quantity')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
-                </div>
-                <div class="col-md-6">
+
                     <div class="form-group">
                         <label for="start_date">Start Date</label>
                         <input type="date" class="form-control" id="start_date" name="start_date" required>
@@ -55,6 +38,16 @@
                     @error('end_date')
                         <div class="invalid-feedback">{{ $message }}</div>
                     @enderror
+                </div>  
+                <div class="col-md-4 ps-4">
+                    <p class="text-dark"><strong>Unit:</strong><br>{{ $item->unit->name }}</p>
+                    <p class="text-dark"><strong>Category:</strong><br>{{ $item->category->name }}</p>
+                    <p class="text-dark"><strong>Brand:</strong><br>{{ $item->brand }}</p>
+                </div>
+                <div class="col-md-4">
+                    <img src="{{ asset($item->photo) }}" alt="Item Photo" class="img-fluid rounded" style="max-height: 150px; width: auto;">
+                    <h5 class="m-0">{{ $item->name }}</h5>
+                    <p>{{ $item->serial_number }}</p>
                 </div>
             </div>
             <button type="submit" class="btn bg-gradient-primary mt-3 mb-0 me-2">Submit</button>

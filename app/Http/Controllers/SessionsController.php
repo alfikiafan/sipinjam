@@ -27,10 +27,10 @@ class SessionsController extends Controller
         if (Auth::attempt($credentials, $remember)) {
             $request->session()->regenerate();
 
-            return redirect('dashboard')->with(['success' => 'Anda berhasil masuk ke sistem.']);
+            return redirect('dashboard')->with(['success' => 'You have successfully logged into the system.']);
         }
 
-        return back()->withErrors(['email' => 'Email atau kata sandi Anda tidak cocok.']);
+        return back()->withErrors(['email' => "Your emails or passwords don't match."]);
     }
 
     public function destroy(Request $request)
@@ -40,6 +40,6 @@ class SessionsController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect('/login')->with(['success' => 'Anda telah keluar dari sistem.']);
+        return redirect('/login')->with(['success' => 'You have logged out of the system.']);
     }
 }

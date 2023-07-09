@@ -179,7 +179,7 @@
             @endcan
         </ul>
     </div>
-    <div class="sidenav-footer mx-3 ">
+    <div class="sidenav-footer m-3">
         <div class="card card-background shadow-none bg-gradient-dark" id="sidenavCard">
             <div class="card-body text-start p-3 w-100">
                 <div
