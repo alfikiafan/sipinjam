@@ -98,13 +98,15 @@
                     <i class="fas fa-pencil-alt"></i>
                   </button>
                 </a>
-                <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
-                    @csrf
-                    @method('DELETE')
-                    <button type="submit" class="btn btn-action mb-0 ms-1 btn-danger" title="Delete this item">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </form>
+                @if ($item->status === 'not available')
+                  <form action="{{ route('items.destroy', ['item' => $item->id]) }}" method="POST" onsubmit="return confirm('Are you sure you want to delete this item?');">
+                      @csrf
+                      @method('DELETE')
+                      <button type="submit" class="btn btn-action mb-0 ms-1 btn-danger" title="Delete this item">
+                          <i class="fas fa-trash"></i>
+                      </button>
+                  </form>
+                @endif
               </div>
             </td>
           </tr>
