@@ -110,7 +110,7 @@
                       <form action="{{ route('usages.set-used', ['usage' => $usage->id]) }}" method="POST">
                           @csrf
                           @method('PUT')
-                          <button type="submit" class="btn btn-action btn-warning mb-0" onclick="return confirm('Are you sure to set the item in this usage to &quot;used&quot;?')" title="Set item(s) in this usage as &quot;used&quot;">
+                          <button type="submit" class="btn btn-action btn-dark mb-0" onclick="return confirm('Are you sure to set the item in this usage to &quot;used&quot;?')" title="Set item(s) in this usage as &quot;used&quot;">
                               <i class="fas fa-check"></i>
                           </button>
                       </form>
