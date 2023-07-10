@@ -83,6 +83,11 @@ class CategoryController extends Controller
 
     public function destroy(Category $category)
     {
+        $items = $category->items;
+        if ($items->count() > 0) {
+            dd($items);
+            return redirect()->route('categories.index')->with('error', 'Category cannot be deleted because there are items with this category.');
+        }
         $category->delete();
 
         return redirect()->route('categories.index')->with('success', 'Category deleted successfully.');

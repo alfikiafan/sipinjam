@@ -23,16 +23,21 @@ class BookingFactory extends Factory
     public function definition(): array
     {
         $faker = Faker::create('id_ID');
-        $itemIds = Item::pluck('id')->toArray();
         $userIds = User::pluck('id')->toArray();
         
         $startDateTime = $faker->dateTimeBetween('-11 months', '-1 month');
         $endDateTime = clone $startDateTime;
         $endDateTime->modify('+1 month');
         
-        $itemId = $faker->randomElement($itemIds);
+        $availableItems = Item::where('status', 'available')
+            ->where('quantity', '>', 0)
+            ->pluck('id')
+            ->all();
+
+        $itemId = $faker->randomElement($availableItems);
+
         $item = Item::find($itemId);
-        $maxQuantity = 50;
+        $maxQuantity = $item->quantity;
 
         $quantity = $faker->numberBetween(1, $maxQuantity);
 

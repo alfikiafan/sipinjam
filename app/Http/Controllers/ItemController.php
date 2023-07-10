@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Item;
 use App\Models\Category;
 use App\Models\User;
+use App\Models\Booking;
+use App\Models\Usage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 
@@ -226,8 +228,25 @@ class ItemController extends Controller
 
     public function destroy(Item $item)
     {
-        $item->delete();
+        $isItemBorrowed = Booking::where('status', 'pending')
+            ->where('item_id', $item->id)
+            ->exists();
 
-        return redirect('/items')->with('success', 'Item deleted successfully.');
+        $isItemInUse = Usage::whereIn('status', ['awaiting use', 'used', 'late'])
+            ->whereHas('booking', function ($query) use ($item) {
+                $query->where('item_id', $item->id);
+            })
+            ->exists();
+
+        if ($item->status == 'not available' && !$isItemBorrowed && !$isItemInUse) {
+            $item->delete();
+            return redirect('/items')->with('success', 'Item deleted successfully.');
+        } elseif ($isItemBorrowed) {
+            return redirect('/items')->with('error', 'Item failed to delete. There is a borrower who is applying for a loan of this item.');
+        } elseif ($isItemInUse) {
+            return redirect('/items')->with('error', 'Item failed to delete. Item is currently in use.');
+        } else {
+            return redirect('/items')->with('error', 'Item failed to delete. You need to change the status to "not available" first.');
+        }
     }
 }

@@ -20,6 +20,7 @@ return new class extends Migration
             $table->string('city')->nullable();
             $table->string('about_me', 500)->nullable();
             $table->foreign('unit_id')->references('id')->on('units')->onDelete('cascade');
+            $table->softDeletes();
         });
     }
 
