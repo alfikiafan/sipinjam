@@ -676,7 +676,7 @@ window.addEventListener("resize", navbarColorOnResize);
 function navbarColorOnResize() {
   if (sidenav) {
     if (window.innerWidth > 1200) {
-      if (referenceButtons.classList.contains('active') && referenceButtons.getAttribute('data-class') === 'bg-transparent') {
+      if (referenceButtons.classList.contains('active')) {
         sidenav.classList.remove('bg-white');
       } else {
         sidenav.classList.add('bg-white');
