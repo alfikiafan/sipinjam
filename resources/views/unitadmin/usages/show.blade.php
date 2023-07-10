@@ -69,7 +69,7 @@
         <form action="{{ route('usages.set-used', ['usage' => $usage->id]) }}" method="POST" class="d-inline">
           @csrf
           @method('PUT')
-          <button type="submit" class="btn bg-gradient-warning btn-warning" onclick="return confirm('Are you sure to set the item in this usage to &quot;used&quot;?')" title="Set item(s) in this usage as &quot;used&quot;">Set as Used</button>
+          <button type="submit" class="btn bg-gradient-dark" onclick="return confirm('Are you sure to set the item in this usage to &quot;used&quot;?')" title="Set item(s) in this usage as &quot;used&quot;">Set as Used</button>
         </form>
       @endif
     </div>
