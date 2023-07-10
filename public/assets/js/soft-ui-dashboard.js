@@ -676,10 +676,12 @@ window.addEventListener("resize", navbarColorOnResize);
 function navbarColorOnResize() {
   if (sidenav) {
     if (window.innerWidth > 1200) {
-      if (referenceButtons.classList.contains('active')) {
-        sidenav.classList.remove('bg-white');
-      } else {
-        sidenav.classList.add('bg-white');
+      if (referenceButtons) {
+        if (referenceButtons.classList.contains('active')) {
+          sidenav.classList.remove('bg-white');
+        } else {
+          sidenav.classList.add('bg-white');
+        }
       }
     } else {
       sidenav.classList.add('bg-white');
