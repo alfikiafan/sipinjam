@@ -34,14 +34,24 @@
           <p class="m-0">Serial: {{ $usage->booking->item->serial_number }}</p>
         </div>
         <div class="col-md-4">
+        <p><strong>Status:</strong><br>
+          @if ($usage->status === 'used')
+            <span class="badge bg-info badge-sm">{{ $usage->status }}</span>
+            @elseif ($usage->status === 'late')
+            <span class="badge bg-warning badge-sm">{{ $usage->status }}</span>
+            @else
+            <span class="badge bg-danger badge-sm">{{ $usage->status }}</span>
+            @endif
+        </p>
           <p><strong>Category:</strong><br> {{ $usage->booking->item->category->name }}</p>
           <p><strong>Quantity:</strong><br> {{ $usage->booking->quantity }}</p>
-          <p><strong>Approved at:</strong><br> {{ $usage->created_at }}</p>
+          <p><strong>Booked at:</strong><br> {{ $usage->booking->created_at }}</p>
         </div>
         <div class="col-md-4">
           <p><strong>Start Date:</strong><br> {{ $usage->booking->start_date }}</p>
           <p><strong>End Date:</strong><br> {{ $usage->booking->end_date }}</p>
           <p><strong>Due Date:</strong><br> {{ $usage->due_date }}</p>
+          <p><strong>Approved at:</strong><br> {{ $usage->created_at }}</p>
         </div>
       </div>
       <hr>
