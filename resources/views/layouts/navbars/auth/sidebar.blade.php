@@ -189,7 +189,7 @@
                 </div>
                 <div class="docs-info">
                     <h6 class="text-white mb-0">Need help?</h6>
-                    <p class="text-xs font-weight-bold">Please check the manuak</p>
+                    <p class="text-xs font-weight-bold">Please check the manual</p>
                     <a href="https://drive.google.com/file/d/1fvsc_-yQX00Rf4P9Q4RS4F0BIgUrVxRV/view?usp=sharing"
                         target="_blank" class="btn bg-gradient-light btn-sm w-100 mb-0">Manual Book</a>
                 </div>
